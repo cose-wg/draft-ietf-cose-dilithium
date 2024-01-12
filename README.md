@@ -2,16 +2,16 @@
 
 This is the working area for the IETF [COSE Working Group](https://datatracker.ietf.org/wg/cose/documents/) Internet-Draft, "JOSE and COSE Encoding for Dilithium".
 
-* [Editor's Copy](https://OR13.github.io/draft-ietf-cose-dilithium/#go.draft-ietf-cose-dilithium.html)
+* [Editor's Copy](https://cose-wg.github.io/draft-ietf-cose-dilithium/#go.draft-ietf-cose-dilithium.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-cose-dilithium)
 * [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium)
-* [Compare Editor's Copy to Working Group Draft](https://OR13.github.io/draft-ietf-cose-dilithium/#go.draft-ietf-cose-dilithium.diff)
+* [Compare Editor's Copy to Working Group Draft](https://cose-wg.github.io/draft-ietf-cose-dilithium/#go.draft-ietf-cose-dilithium.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/OR13/draft-ietf-cose-dilithium/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/cose-wg/draft-ietf-cose-dilithium/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.

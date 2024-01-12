@@ -1,5 +1,5 @@
 ---
-title: "JOSE and COSE Encoding for Dilithium"
+title: "ML-DSA for JOSE and COSE"
 abbrev: "jose-cose-dilithium"
 category: std
 
@@ -22,8 +22,8 @@ venue:
   type: "Working Group"
   mail: "cose@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/cose/"
-  github: "OR13/draft-ietf-cose-dilithium"
-  latest: "https://OR13.github.io/draft-ietf-cose-dilithium/draft-ietf-cose-dilithium.html"
+  github: "cose-wg/draft-ietf-cose-dilithium"
+  latest: "https://cose-wg.github.io/draft-ietf-cose-dilithium/draft-ietf-cose-dilithium.html"
 
 author:
  -
