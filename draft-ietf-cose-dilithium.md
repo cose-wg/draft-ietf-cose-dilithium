@@ -55,7 +55,11 @@ normative:
 
 
 informative:
-  FIPS.204:
+
+  FIPS-204:
+    title: "Module-Lattice-Based Digital Signature Standard"
+    target: https://csrc.nist.gov/pubs/fips/204/ipd
+
   NIST-PQC-2022:
     title: "Selected Algorithms 2022"
     target: https://csrc.nist.gov/Projects/post-quantum-cryptography/selected-algorithms-2022
@@ -67,7 +71,7 @@ This document describes JOSE and COSE serializations for ML-DSA,
 which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based suite.
 
 This document does not define any new cryptography, only seralizations
-of existing cryptographic systems described in {{FIPS.204}}.
+of existing cryptographic systems described in {{FIPS-204}}.
 
 Note to RFC Editor: This document should not proceed to AUTH48 until NIST
 completes paramater tuning and selection as a part of the
@@ -78,7 +82,7 @@ standardization process.
 
 # Introduction
 
-ML-DSA is derived from Version 3.1 of CRYSTALS-DILITHIUM, as noted in {{FIPS.204}}.
+ML-DSA is derived from Version 3.1 of CRYSTALS-DILITHIUM, as noted in {{FIPS-204}}.
 
 CRYSTALS-DILITHIUM is one of the post quantum cryptography algorithms selected in {{NIST-PQC-2022}}.
 
@@ -129,7 +133,37 @@ TODO Security
 
 # IANA Considerations
 
-This document has no IANA actions.
+## Additions to Existing Registries
+
+#### New COSE Algorithms
+
+* Name: ML-DSA-44
+* Label: TBD (requested assignment -48)
+* Value type: int
+* Value registry: {{-IANA.cose.algorithms}}
+* Description: CBOR Object Signing Algorithm for ML-DSA-44
+
+#### New COSE Key Types
+
+* Name: ML-DSA
+* Label: TBD (requested assignment 7)
+* Value type: int
+* Value registry: {{-IANA.cose.key-types}}
+* Description: COSE Key Type for the ML-DSA Algorithm Family
+
+
+#### New JOSE Algorithms
+
+* Name: ML-DSA-44
+* Value registry: {{-IANA.jose.algorithms}}
+* Description: JSON Web Signature Algorithm for ML-DSA-44
+
+#### New JOSE Key Types
+
+* Name: ML-DSA
+* Value registry: {{-IANA.jose.key-types}}
+* Description: JSON Web Key Type for the ML-DSA Algorithm Family.
+
 
 --- back
 
