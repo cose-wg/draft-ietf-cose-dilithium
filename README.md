@@ -1,6 +1,6 @@
-# JOSE and COSE Encoding for Dilithium
+# ML-DSA for JOSE and COSE
 
-This is the working area for the IETF [COSE Working Group](https://datatracker.ietf.org/wg/cose/documents/) Internet-Draft, "JOSE and COSE Encoding for Dilithium".
+This is the working area for the IETF [COSE Working Group](https://datatracker.ietf.org/wg/cose/documents/) Internet-Draft, "ML-DSA for JOSE and COSE".
 
 * [Editor's Copy](https://cose-wg.github.io/draft-ietf-cose-dilithium/#go.draft-ietf-cose-dilithium.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-cose-dilithium)
