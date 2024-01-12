@@ -48,11 +48,8 @@ author:
     email: "christine.cloostermans@nxp.com"
 
 normative:
-  IANA.jose#web-signature-encryption-algorithms: IANA.jose.algorithms
-  IANA.jose#web-key-types: IANA.jose.key-types
-  IANA.cose#algorithms: IANA.cose.algorithms
-  IANA.cose#key-type: IANA.cose.key-types
-
+  IANA.jose: IANA.jose
+  IANA.cose: IANA.cose
 
 informative:
 
@@ -94,14 +91,14 @@ CRYSTALS-DILITHIUM is one of the post quantum cryptography algorithms selected i
 
 The ML-DSA Signature Scheme is paramaterized to support different security level.
 
-This document requests the registration of the following algorithms in {{-IANA.jose.algorithms}}:
+This document requests the registration of the following algorithms in {{-IANA.jose}}:
 
 | Name       | alg | Description
 |---
 | ML-DSA-44  | ML-DSA-44     | JSON Web Signature Algorithm for ML-DSA-44
 {: #jose-algorithms align="left" title="JOSE algorithms for ML-DSA"}
 
-This document requests the registration of the following algorithms in {{-IANA.cose.algorithms}}:
+This document requests the registration of the following algorithms in {{-IANA.cose}}:
 
 | Name       | alg | Description
 |---
@@ -112,14 +109,14 @@ This document requests the registration of the following algorithms in {{-IANA.c
 
 Private and Public Keys are produced to enable the sign and verify opertaions for each of the ML-DSA Algorithms.
 
-This document requests the registration of the following key types in {{-IANA.jose.key-types}}:
+This document requests the registration of the following key types in {{-IANA.jose}}:
 
 | Name    | kty | Description
 |---
 | ML-DSA  | ML-DSA     | JSON Web Key Type for the ML-DSA Algorithm Family.
 {: #jose-key-type align="left" title="JSON Web Key Type for ML-DSA"}
 
-This document requests the registration of the following algorithms in {{-IANA.cose.key-types}}:
+This document requests the registration of the following algorithms in {{-IANA.cose}}:
 
 | Name       | kty | Description
 |---
@@ -140,7 +137,7 @@ TODO Security
 * Name: ML-DSA-44
 * Label: TBD (requested assignment -48)
 * Value type: int
-* Value registry: {{-IANA.cose.algorithms}}
+* Value registry: {{-IANA.cose}}
 * Description: CBOR Object Signing Algorithm for ML-DSA-44
 
 #### New COSE Key Types
@@ -148,20 +145,20 @@ TODO Security
 * Name: ML-DSA
 * Label: TBD (requested assignment 7)
 * Value type: int
-* Value registry: {{-IANA.cose.key-types}}
+* Value registry: {{-IANA.cose}}
 * Description: COSE Key Type for the ML-DSA Algorithm Family
 
 
 #### New JOSE Algorithms
 
 * Name: ML-DSA-44
-* Value registry: {{-IANA.jose.algorithms}}
+* Value registry: {{-IANA.jose}} Algorithms
 * Description: JSON Web Signature Algorithm for ML-DSA-44
 
 #### New JOSE Key Types
 
 * Name: ML-DSA
-* Value registry: {{-IANA.jose.key-types}}
+* Value registry: {{-IANA.jose}} Algorithms
 * Description: JSON Web Key Type for the ML-DSA Algorithm Family.
 
 
