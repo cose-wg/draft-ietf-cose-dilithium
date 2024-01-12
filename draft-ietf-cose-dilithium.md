@@ -1,7 +1,7 @@
 ---
 title: "JOSE and COSE Encoding for Dilithium"
 abbrev: "jose-cose-dilithium"
-category: info
+category: std
 
 docname: draft-ietf-cose-dilithium-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
@@ -138,7 +138,7 @@ TODO Security
 
 ## Additions to Existing Registries
 
-#### New COSE Algorithms
+### New COSE Algorithms
 
 * Name: ML-DSA-44
 * Label: TBD (requested assignment -48)
@@ -160,7 +160,7 @@ TODO Security
 * Value registry: {{-IANA.cose}}
 * Description: CBOR Object Signing Algorithm for ML-DSA-87
 
-#### New COSE Key Types
+### New COSE Key Types
 
 * Name: ML-DSA
 * Label: TBD (requested assignment 7)
@@ -169,7 +169,7 @@ TODO Security
 * Description: COSE Key Type for the ML-DSA Algorithm Family
 
 
-#### New JOSE Algorithms
+### New JOSE Algorithms
 
 * Name: ML-DSA-44
 * Value registry: {{-IANA.jose}} Algorithms
@@ -185,7 +185,7 @@ TODO Security
 * Value registry: {{-IANA.jose}} Algorithms
 * Description: JSON Web Signature Algorithm for ML-DSA-87
 
-#### New JOSE Key Types
+### New JOSE Key Types
 
 * Name: ML-DSA
 * Value registry: {{-IANA.jose}} Algorithms
@@ -228,7 +228,7 @@ TODO
 
 ~~~json
 {
-  "alg": "ML-DSA-44",
+  "alg": "ML-DSA-44"
 }
 ~~~
 {: #ML-DSA-44-jose-protected-header title="Example ML-DSA-44 Decoded Protected Header"}
