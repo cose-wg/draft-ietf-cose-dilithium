@@ -1060,7 +1060,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <time datetime="2024-01-12" class="published">12 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Informational</dd>
+<dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2024-07-15">15 July 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
@@ -1187,6 +1187,15 @@ standardization process.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
                     <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-new-cose-algorithms" class="internal xref">New COSE Algorithms</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.2">
+                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-new-cose-key-types" class="internal xref">New COSE Key Types</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.3">
+                    <p id="section-toc.1-1.6.2.1.2.3.1"><a href="#section-6.1.3" class="auto internal xref">6.1.3</a>.  <a href="#name-new-jose-algorithms" class="internal xref">New JOSE Algorithms</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.4">
+                    <p id="section-toc.1-1.6.2.1.2.4.1"><a href="#section-6.1.4" class="auto internal xref">6.1.4</a>.  <a href="#name-new-jose-key-types" class="internal xref">New JOSE Key Types</a></p>
 </li>
                 </ul>
 </li>
@@ -1465,84 +1474,84 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
               <p id="section-6.1.1-1.15.1">Description: CBOR Object Signing Algorithm for ML-DSA-87<a href="#section-6.1.1-1.15.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
+</section>
+</div>
 <div id="new-cose-key-types">
-<section id="section-6.1.1.1">
-            <h5 id="name-new-cose-key-types">
-<a href="#section-6.1.1.1" class="section-number selfRef">6.1.1.1. </a><a href="#name-new-cose-key-types" class="section-name selfRef">New COSE Key Types</a>
-            </h5>
+<section id="section-6.1.2">
+          <h4 id="name-new-cose-key-types">
+<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-new-cose-key-types" class="section-name selfRef">New COSE Key Types</a>
+          </h4>
 <ul class="normal">
-<li class="normal" id="section-6.1.1.1-1.1">
-                <p id="section-6.1.1.1-1.1.1">Name: ML-DSA<a href="#section-6.1.1.1-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.2-1.1">
+              <p id="section-6.1.2-1.1.1">Name: ML-DSA<a href="#section-6.1.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.1-1.2">
-                <p id="section-6.1.1.1-1.2.1">Label: TBD (requested assignment 7)<a href="#section-6.1.1.1-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-1.2">
+              <p id="section-6.1.2-1.2.1">Label: TBD (requested assignment 7)<a href="#section-6.1.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.1-1.3">
-                <p id="section-6.1.1.1-1.3.1">Value type: int<a href="#section-6.1.1.1-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-1.3">
+              <p id="section-6.1.2-1.3.1">Value type: int<a href="#section-6.1.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.1-1.4">
-                <p id="section-6.1.1.1-1.4.1">Value registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-6.1.1.1-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-1.4">
+              <p id="section-6.1.2-1.4.1">Value registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-6.1.2-1.4.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.1-1.5">
-                <p id="section-6.1.1.1-1.5.1">Description: COSE Key Type for the ML-DSA Algorithm Family<a href="#section-6.1.1.1-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-1.5">
+              <p id="section-6.1.2-1.5.1">Description: COSE Key Type for the ML-DSA Algorithm Family<a href="#section-6.1.2-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+          </ul>
 </section>
 </div>
 <div id="new-jose-algorithms">
-<section id="section-6.1.1.2">
-            <h5 id="name-new-jose-algorithms">
-<a href="#section-6.1.1.2" class="section-number selfRef">6.1.1.2. </a><a href="#name-new-jose-algorithms" class="section-name selfRef">New JOSE Algorithms</a>
-            </h5>
+<section id="section-6.1.3">
+          <h4 id="name-new-jose-algorithms">
+<a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-new-jose-algorithms" class="section-name selfRef">New JOSE Algorithms</a>
+          </h4>
 <ul class="normal">
-<li class="normal" id="section-6.1.1.2-1.1">
-                <p id="section-6.1.1.2-1.1.1">Name: ML-DSA-44<a href="#section-6.1.1.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.3-1.1">
+              <p id="section-6.1.3-1.1.1">Name: ML-DSA-44<a href="#section-6.1.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.2-1.2">
-                <p id="section-6.1.1.2-1.2.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.1.2-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.2">
+              <p id="section-6.1.3-1.2.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.2-1.3">
-                <p id="section-6.1.1.2-1.3.1">Description: JSON Web Signature Algorithm for ML-DSA-44<a href="#section-6.1.1.2-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.3">
+              <p id="section-6.1.3-1.3.1">Description: JSON Web Signature Algorithm for ML-DSA-44<a href="#section-6.1.3-1.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.2-1.4">
-                <p id="section-6.1.1.2-1.4.1">Name: ML-DSA-65<a href="#section-6.1.1.2-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.4">
+              <p id="section-6.1.3-1.4.1">Name: ML-DSA-65<a href="#section-6.1.3-1.4.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.2-1.5">
-                <p id="section-6.1.1.2-1.5.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.1.2-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.5">
+              <p id="section-6.1.3-1.5.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.3-1.5.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.2-1.6">
-                <p id="section-6.1.1.2-1.6.1">Description: JSON Web Signature Algorithm for ML-DSA-65<a href="#section-6.1.1.2-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.6">
+              <p id="section-6.1.3-1.6.1">Description: JSON Web Signature Algorithm for ML-DSA-65<a href="#section-6.1.3-1.6.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.2-1.7">
-                <p id="section-6.1.1.2-1.7.1">Name: ML-DSA-87<a href="#section-6.1.1.2-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.7">
+              <p id="section-6.1.3-1.7.1">Name: ML-DSA-87<a href="#section-6.1.3-1.7.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.2-1.8">
-                <p id="section-6.1.1.2-1.8.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.1.2-1.8.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.8">
+              <p id="section-6.1.3-1.8.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.3-1.8.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.2-1.9">
-                <p id="section-6.1.1.2-1.9.1">Description: JSON Web Signature Algorithm for ML-DSA-87<a href="#section-6.1.1.2-1.9.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.9">
+              <p id="section-6.1.3-1.9.1">Description: JSON Web Signature Algorithm for ML-DSA-87<a href="#section-6.1.3-1.9.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+          </ul>
 </section>
 </div>
 <div id="new-jose-key-types">
-<section id="section-6.1.1.3">
-            <h5 id="name-new-jose-key-types">
-<a href="#section-6.1.1.3" class="section-number selfRef">6.1.1.3. </a><a href="#name-new-jose-key-types" class="section-name selfRef">New JOSE Key Types</a>
-            </h5>
+<section id="section-6.1.4">
+          <h4 id="name-new-jose-key-types">
+<a href="#section-6.1.4" class="section-number selfRef">6.1.4. </a><a href="#name-new-jose-key-types" class="section-name selfRef">New JOSE Key Types</a>
+          </h4>
 <ul class="normal">
-<li class="normal" id="section-6.1.1.3-1.1">
-                <p id="section-6.1.1.3-1.1.1">Name: ML-DSA<a href="#section-6.1.1.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.4-1.1">
+              <p id="section-6.1.4-1.1.1">Name: ML-DSA<a href="#section-6.1.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.3-1.2">
-                <p id="section-6.1.1.3-1.2.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.1.3-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.4-1.2">
+              <p id="section-6.1.4-1.2.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-6.1.1.3-1.3">
-                <p id="section-6.1.1.3-1.3.1">Description: JSON Web Key Type for the ML-DSA Algorithm Family.<a href="#section-6.1.1.3-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.4-1.3">
+              <p id="section-6.1.4-1.3.1">Description: JSON Web Key Type for the ML-DSA Algorithm Family.<a href="#section-6.1.4-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
-</section>
-</div>
+          </ul>
 </section>
 </div>
 </section>
@@ -1662,7 +1671,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <div class="lang-json sourcecode" id="appendix-A.1.3-1.1">
 <pre>
 {
-  "alg": "ML-DSA-44",
+  "alg": "ML-DSA-44"
 }
 </pre>
 </div>
