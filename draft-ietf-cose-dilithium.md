@@ -26,7 +26,7 @@ venue:
 author:
  -
     fullname: "Orie Steele"
-    organization: Your Organization Here
+    organization: Transmute
     email: "orie@transmute.industries"
 
 normative:
@@ -36,7 +36,7 @@ informative:
 
 --- abstract
 
-TODO Abstract
+Test test test
 
 
 --- middle
