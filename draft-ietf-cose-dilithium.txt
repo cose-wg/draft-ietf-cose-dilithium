@@ -26,7 +26,7 @@ Abstract
 
    This document does not define any new cryptography, only
    seralizations of existing cryptographic systems described in
-   [FIPS.204].
+   [FIPS-204].
 
    Note to RFC Editor: This document should not proceed to AUTH48 until
    NIST completes paramater tuning and selection as a part of the PQC
@@ -89,6 +89,8 @@ Table of Contents
    4.  The ML-DSA Key Type
    5.  Security Considerations
    6.  IANA Considerations
+     6.1.  Additions to Existing Registries
+       6.1.1.  New COSE Algorithms
    7.  References
      7.1.  Normative References
      7.2.  Informative References
@@ -107,7 +109,7 @@ Table of Contents
 1.  Introduction
 
    ML-DSA is derived from Version 3.1 of CRYSTALS-DILITHIUM, as noted in
-   [FIPS.204].
+   [FIPS-204].
 
    CRYSTALS-DILITHIUM is one of the post quantum cryptography algorithms
    selected in [NIST-PQC-2022].
@@ -126,7 +128,7 @@ Table of Contents
    security level.
 
    This document requests the registration of the following algorithms
-   in [IANA.jose_web-signature-encryption-algorithms]:
+   in [IANA.jose]:
 
    +===========+===========+=========================+
    | Name      | alg       | Description             |
@@ -138,7 +140,7 @@ Table of Contents
            Table 1: JOSE algorithms for ML-DSA
 
    This document requests the registration of the following algorithms
-   in [IANA.cose_algorithms]:
+   in [IANA.cose]:
 
    +===========+=================+=========================+
    | Name      | alg             | Description             |
@@ -155,7 +157,7 @@ Table of Contents
    opertaions for each of the ML-DSA Algorithms.
 
    This document requests the registration of the following key types in
-   [IANA.jose_web-key-types]:
+   [IANA.jose]:
 
    +========+========+===========================+
    | Name   | kty    | Description               |
@@ -167,7 +169,7 @@ Table of Contents
         Table 3: JSON Web Key Type for ML-DSA
 
    This document requests the registration of the following algorithms
-   in [IANA.cose_key-type]:
+   in [IANA.cose]:
 
    +========+==============================+==========================+
    | Name   | kty                          | Description              |
@@ -184,23 +186,59 @@ Table of Contents
 
 6.  IANA Considerations
 
-   This document has no IANA actions.
+6.1.  Additions to Existing Registries
+
+6.1.1.  New COSE Algorithms
+
+   *  Name: ML-DSA-44
+
+   *  Label: TBD (requested assignment -48)
+
+   *  Value type: int
+
+   *  Value registry: [IANA.cose]
+
+   *  Description: CBOR Object Signing Algorithm for ML-DSA-44
+
+6.1.1.1.  New COSE Key Types
+
+   *  Name: ML-DSA
+
+   *  Label: TBD (requested assignment 7)
+
+   *  Value type: int
+
+   *  Value registry: [IANA.cose]
+
+   *  Description: COSE Key Type for the ML-DSA Algorithm Family
+
+6.1.1.2.  New JOSE Algorithms
+
+   *  Name: ML-DSA-44
+
+   *  Value registry: [IANA.jose] Algorithms
+
+   *  Description: JSON Web Signature Algorithm for ML-DSA-44
+
+6.1.1.3.  New JOSE Key Types
+
+   *  Name: ML-DSA
+
+   *  Value registry: [IANA.jose] Algorithms
+
+   *  Description: JSON Web Key Type for the ML-DSA Algorithm Family.
 
 7.  References
 
 7.1.  Normative References
 
-   [IANA.cose_algorithms]
-              "*** BROKEN REFERENCE ***".
+   [IANA.cose]
+              IANA, "CBOR Object Signing and Encryption (COSE)",
+              <http://www.iana.org/assignments/cose>.
 
-   [IANA.cose_key-type]
-              "*** BROKEN REFERENCE ***".
-
-   [IANA.jose_web-key-types]
-              "*** BROKEN REFERENCE ***".
-
-   [IANA.jose_web-signature-encryption-algorithms]
-              "*** BROKEN REFERENCE ***".
+   [IANA.jose]
+              IANA, "JSON Object Signing and Encryption (JOSE)",
+              <http://www.iana.org/assignments/jose>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -213,7 +251,8 @@ Table of Contents
 
 7.2.  Informative References
 
-   [FIPS.204] "*** BROKEN REFERENCE ***".
+   [FIPS-204] "Module-Lattice-Based Digital Signature Standard", n.d.,
+              <https://csrc.nist.gov/pubs/fips/204/ipd>.
 
    [NIST-PQC-2022]
               "Selected Algorithms 2022", n.d.,
