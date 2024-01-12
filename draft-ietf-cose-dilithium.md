@@ -64,16 +64,11 @@ informative:
 
 --- abstract
 
-This document describes JOSE and COSE serializations for ML-DSA,
-which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based suite.
+This document describes JOSE and COSE serializations for ML-DSA, which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based suite.
 
-This document does not define any new cryptography, only seralizations
-of existing cryptographic systems described in {{FIPS-204}}.
+This document does not define any new cryptography, only seralizations of existing cryptographic systems described in {{FIPS-204}}.
 
-Note to RFC Editor: This document should not proceed to AUTH48 until NIST
-completes paramater tuning and selection as a part of the
-[PQC](https://csrc.nist.gov/projects/post-quantum-cryptography)
-standardization process.
+Note to RFC Editor: This document should not proceed to AUTH48 until NIST completes paramater tuning and selection as a part of the [PQC](https://csrc.nist.gov/projects/post-quantum-cryptography) standardization process.
 
 --- middle
 
