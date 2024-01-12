@@ -10,8 +10,7 @@ This is the working area for the IETF [COSE Working Group](https://datatracker.i
 
 ## Contributing
 
-See the
-[guidelines for contributions](https://github.com/cose-wg/draft-ietf-cose-dilithium/blob/main/CONTRIBUTING.md).
+See the [guidelines for contributions](https://github.com/cose-wg/draft-ietf-cose-dilithium/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.

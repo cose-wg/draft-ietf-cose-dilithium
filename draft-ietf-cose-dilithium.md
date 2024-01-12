@@ -64,7 +64,7 @@ informative:
 
 --- abstract
 
-This document describes JOSE and COSE serializations for ML-DSA, which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based suite.
+This document describes JOSE and COSE serializations for ML-DSA, which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based digital signature scheme.
 
 This document does not define any new cryptography, only seralizations of existing cryptographic systems described in {{FIPS-204}}.
 
