@@ -128,64 +128,152 @@ This document requests the registration of the following algorithms in {{-IANA.c
 
 TODO Security
 
-
 # IANA Considerations
 
 ## Additions to Existing Registries
 
 ### New COSE Algorithms
 
-* Name: ML-DSA-44
-* Label: TBD (requested assignment -48)
-* Value type: int
-* Value registry: {{-IANA.cose}}
-* Description: CBOR Object Signing Algorithm for ML-DSA-44
+IANA is requested to add the following entries to the COSE Algorithms Registry.
+The following completed registration templates are provided as described in RFC9053 and RFC9054.
 
+#### ML-DSA-44
+
+* Name: ML-DSA-44
+* Value: TBD (requested assignment -48)
+* Description: CBOR Object Signing Algorithm for ML-DSA-44
+* Capabilities: [kty]
+* Reference: RFC XXXX
+* Recommended: Yes
+
+#### ML-DSA-65
 
 * Name: ML-DSA-65
-* Label: TBD (requested assignment -49)
-* Value type: int
-* Value registry: {{-IANA.cose}}
+* Value: TBD (requested assignment -49)
 * Description: CBOR Object Signing Algorithm for ML-DSA-65
+* Capabilities: [kty]
+* Reference: RFC XXXX
+* Recommended: Yes
 
+
+#### ML-DSA-87
 
 * Name: ML-DSA-87
-* Label: TBD (requested assignment -50)
-* Value type: int
-* Value registry: {{-IANA.cose}}
+* Value: TBD (requested assignment -50)
 * Description: CBOR Object Signing Algorithm for ML-DSA-87
+* Capabilities: [kty]
+* Reference: RFC XXXX
+* Recommended: Yes
 
 ### New COSE Key Types
 
-* Name: ML-DSA
-* Label: TBD (requested assignment 7)
-* Value type: int
-* Value registry: {{-IANA.cose}}
-* Description: COSE Key Type for the ML-DSA Algorithm Family
+IANA is requested to add the following entries to the COSE Key Types Registry.
+The following completed registration templates are provided as described in RFC9053.
 
+#### ML-DSA
+
+* Name: ML-DSA
+* Value: TBD (requested assignment 7)
+* Description: COSE Key Type for the ML-DSA Algorithm Family
+* Capabilities: [kty(7)]
+* Reference: RFC XXXX
+
+### New COSE Key Type Parameters
+
+IANA is requested to add the following entries to the COSE Key Type Parameters.
+The following completed registration templates are provided as described in RFC9053.
+
+### ML-DSA Public Key
+
+* Key Type: TBD (requested assignment 7)
+* Name: public_key
+* Label: -1
+* CBOR Type: bstr
+* Description: Public key
+* Reference: RFC XXXX
+
+### ML-DSA Secret Key
+
+* Key Type: TBD (requested assignment 7)
+* Name: secret_key
+* Label: -2
+* CBOR Type: bstr
+* Description: Secret (or private) key.
+* Reference: RFC XXXX
 
 ### New JOSE Algorithms
 
-* Name: ML-DSA-44
+IANA is requested to add the following entries to the JSON Web Signature and Encryption Algorithms Registry.
+The following completed registration templates are provided as described in RFC7518.
+
+#### ML-DSA-44
+
+* Algorithm Name: ML-DSA-44
+* Algorithm Description: ML-DSA-44 as described in FIPS 204.
+* Algorithm Usage Location(s): alg
+* JOSE Implementation Requirements: Optional
+* Change Controller: IETF
 * Value registry: {{-IANA.jose}} Algorithms
-* Description: JSON Web Signature Algorithm for ML-DSA-44
+* Specification Document(s): RFC XXXX
+* Algorithm Analysis Documents(s): https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf
 
+#### ML-DSA-65
 
-* Name: ML-DSA-65
+* Algorithm Name: ML-DSA-65
+* Algorithm Description: ML-DSA-65 as described in FIPS 204.
+* Algorithm Usage Location(s): alg
+* JOSE Implementation Requirements: Optional
+* Change Controller: IETF
 * Value registry: {{-IANA.jose}} Algorithms
-* Description: JSON Web Signature Algorithm for ML-DSA-65
+* Specification Document(s): RFC XXXX
+* Algorithm Analysis Documents(s): https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf
 
+#### ML-DSA-87
 
-* Name: ML-DSA-87
+* Algorithm Name: ML-DSA-87
+* Algorithm Description: ML-DSA-87 as described in FIPS 204.
+* Algorithm Usage Location(s): alg
+* JOSE Implementation Requirements: Optional
+* Change Controller: IETF
 * Value registry: {{-IANA.jose}} Algorithms
-* Description: JSON Web Signature Algorithm for ML-DSA-87
+* Specification Document(s): RFC XXXX
+* Algorithm Analysis Documents(s): https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf
 
 ### New JOSE Key Types
 
-* Name: ML-DSA
-* Value registry: {{-IANA.jose}} Algorithms
-* Description: JSON Web Key Type for the ML-DSA Algorithm Family.
+IANA is requested to add the following entries to the JSON Web Key Types Registry.
+The following completed registration templates are provided as described in RFC7518 RFC7638.
 
+#### ML-DSA
+
+* "kty" Parameter Value: ML-DSA
+* Key Type Description: Module-Lattice-Based Digital Signature Algorithm
+* JOSE Implementation Requirements: Optional
+* Change Controller: IETF
+* Specification Document(s): RFC XXXX
+
+### New JSON Web Key Parameters
+
+IANA is requested to add the following entries to the JSON Web Key Parameters Registry.
+The following completed registration templates are provided as described in RFC7517, and RFC7638.
+
+#### ML-DSA Public Key
+
+* Parameter Name: pub
+* Parameter Description: Public or verification key
+* Used with "kty" Value(s): ML-DSA
+* Parameter Information Class: Public
+* Change Controller: IETF
+* Specification Document(s): RFC XXXX
+
+#### ML-DSA Secret Key
+
+* Parameter Name: priv
+* Parameter Description: Secret, private or signing key
+* Used with "kty" Value(s): ML-DSA
+* Parameter Information Class: Private
+* Change Controller: IETF
+* Specification Document(s): RFC XXXX
 
 --- back
 
@@ -220,7 +308,6 @@ TODO
 
 ### JSON Web Signature
 
-
 ~~~json
 {
   "alg": "ML-DSA-44"
@@ -245,8 +332,8 @@ eyJpc3MiOiJ1cm46d...XVpZDo0NTYifQ\
 {                                   / COSE Key                /
   1: 7,                             / ML-DSA Key Type         /
   3: -48,                           / ML-DSA-44 Algorithm     /
-  -13: h'7803c0f9...3f6e2c70',      / ML-DSA Private Key      /
-  -14: h'7803c0f9...3bba7abd',      / ML-DSA Public Key       /
+  -1: h'7803c0f9...3f6e2c70',       / ML-DSA Private Key      /
+  -2: h'7803c0f9...3bba7abd',       / ML-DSA Public Key       /
 }
 ~~~~
 {: #ML-DSA-44-private-cose-key title="Example ML-DSA-44 Private COSE Key"}
@@ -255,7 +342,7 @@ eyJpc3MiOiJ1cm46d...XVpZDo0NTYifQ\
 {                                   / COSE Key                /
   1: 7,                             / ML-DSA Key Type         /
   3: -48,                           / ML-DSA-44 Algorithm     /
-  -13: h'7803c0f9...3f6e2c70'       / ML-DSA Private Key      /
+  -2: h'7803c0f9...3f6e2c70'        / ML-DSA Private Key      /
 }
 ~~~~
 {: #ML-DSA-44-public-cose-key title="Example ML-DSA-44 Public COSE Key"}
@@ -266,23 +353,16 @@ TODO
 
 ### COSE Sign 1
 
-
 ~~~~ cbor-diag
-{                               / Protected                 /
-  1: -48                        / Algorithm                 /
-}
-~~~~
-{: #ML-DSA-44-cose-protected-header-diagnostic title="Example ML-DSA-44 COSE Protected Header"}
-
-
-~~~~ cbor-diag
-18(                                 / COSE Sign 1            /
-    [
-      h'a10139d902',                / Protected              /
-      {},                           / Unprotected            /
-      h'66616b65',                  / Payload                /
-      h'53e855e8...0f263549'        / Signature              /
-    ]
+/ cose-sign1 / 18(
+  [
+    / protected / <<
+      / algorithm / 1 : -49 / ML-DSA-65 /
+    >>
+    / unprotected / {},
+    / payload / h'66616b65',
+    / signature / h'53e855e8...0f263549'
+  ]
 )
 ~~~~
 {: #ML-DSA-44-cose-sign-1-diagnostic title="Example ML-DSA-44 COSE Sign 1"}
