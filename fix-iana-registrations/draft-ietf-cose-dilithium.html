@@ -15,7 +15,7 @@
        This document does not define any new cryptography, only seralizations of existing cryptographic systems described in  . 
        Note to RFC Editor: This document should not proceed to AUTH48 until NIST completes paramater tuning and selection as a part of the  PQC  standardization process. 
     " name="description">
-<meta content="xml2rfc 3.19.0" name="generator">
+<meta content="xml2rfc 3.21.0" name="generator">
 <meta content="JOSE" name="keyword">
 <meta content="COSE" name="keyword">
 <meta content="PQC" name="keyword">
@@ -23,20 +23,20 @@
 <meta content="ML-DSA" name="keyword">
 <meta content="draft-ietf-cose-dilithium-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.19.0
-    Python 3.11.6
+  xml2rfc 3.21.0
+    Python 3.11.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 4.1.0
+    platformdirs 4.2.1
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
     setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.12
+    wcwidth 0.2.13
 -->
 <link href="draft-ietf-cose-dilithium.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1035,11 +1035,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">jose-cose-dilithium</td>
-<td class="right">January 2024</td>
+<td class="right">May 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Prorock, et al.</td>
-<td class="center">Expires 15 July 2024</td>
+<td class="center">Expires 27 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1052,12 +1052,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cose-dilithium-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-12" class="published">12 January 2024</time>
+<time datetime="2024-05-26" class="published">26 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-15">15 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-27">27 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1125,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1182,10 +1182,22 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-new-cose-key-types" class="internal xref">New COSE Key Types</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.3">
-                    <p id="section-toc.1-1.6.2.1.2.3.1"><a href="#section-6.1.3" class="auto internal xref">6.1.3</a>.  <a href="#name-new-jose-algorithms" class="internal xref">New JOSE Algorithms</a></p>
+                    <p id="section-toc.1-1.6.2.1.2.3.1"><a href="#section-6.1.3" class="auto internal xref">6.1.3</a>.  <a href="#name-new-cose-key-type-parameter" class="internal xref">New COSE Key Type Parameters</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.4">
-                    <p id="section-toc.1-1.6.2.1.2.4.1"><a href="#section-6.1.4" class="auto internal xref">6.1.4</a>.  <a href="#name-new-jose-key-types" class="internal xref">New JOSE Key Types</a></p>
+                    <p id="section-toc.1-1.6.2.1.2.4.1"><a href="#section-6.1.4" class="auto internal xref">6.1.4</a>.  <a href="#name-ml-dsa-public-key" class="internal xref">ML-DSA Public Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.5">
+                    <p id="section-toc.1-1.6.2.1.2.5.1"><a href="#section-6.1.5" class="auto internal xref">6.1.5</a>.  <a href="#name-ml-dsa-secret-key" class="internal xref">ML-DSA Secret Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.6">
+                    <p id="section-toc.1-1.6.2.1.2.6.1"><a href="#section-6.1.6" class="auto internal xref">6.1.6</a>.  <a href="#name-new-jose-algorithms" class="internal xref">New JOSE Algorithms</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.7">
+                    <p id="section-toc.1-1.6.2.1.2.7.1"><a href="#section-6.1.7" class="auto internal xref">6.1.7</a>.  <a href="#name-new-jose-key-types" class="internal xref">New JOSE Key Types</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.8">
+                    <p id="section-toc.1-1.6.2.1.2.8.1"><a href="#section-6.1.8" class="auto internal xref">6.1.8</a>.  <a href="#name-new-json-web-key-parameters" class="internal xref">New JSON Web Key Parameters</a></p>
 </li>
                 </ul>
 </li>
@@ -1417,53 +1429,89 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-new-cose-algorithms">
 <a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-new-cose-algorithms" class="section-name selfRef">New COSE Algorithms</a>
           </h4>
+<p id="section-6.1.1-1">IANA is requested to add the following entries to the COSE Algorithms Registry.
+The following completed registration templates are provided as described in RFC9053 and RFC9054.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<div id="ml-dsa-44">
+<section id="section-6.1.1.1">
+            <h5 id="name-ml-dsa-44">
+<a href="#section-6.1.1.1" class="section-number selfRef">6.1.1.1. </a><a href="#name-ml-dsa-44" class="section-name selfRef">ML-DSA-44</a>
+            </h5>
 <ul class="normal">
-<li class="normal" id="section-6.1.1-1.1">
-              <p id="section-6.1.1-1.1.1">Name: ML-DSA-44<a href="#section-6.1.1-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.1.1-1.1">
+                <p id="section-6.1.1.1-1.1.1">Name: ML-DSA-44<a href="#section-6.1.1.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.2">
-              <p id="section-6.1.1-1.2.1">Label: TBD (requested assignment -48)<a href="#section-6.1.1-1.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.1-1.2">
+                <p id="section-6.1.1.1-1.2.1">Value: TBD (requested assignment -48)<a href="#section-6.1.1.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.3">
-              <p id="section-6.1.1-1.3.1">Value type: int<a href="#section-6.1.1-1.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.1-1.3">
+                <p id="section-6.1.1.1-1.3.1">Description: CBOR Object Signing Algorithm for ML-DSA-44<a href="#section-6.1.1.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.4">
-              <p id="section-6.1.1-1.4.1">Value registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-6.1.1-1.4.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.1-1.4">
+                <p id="section-6.1.1.1-1.4.1">Capabilities: [kty]<a href="#section-6.1.1.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.5">
-              <p id="section-6.1.1-1.5.1">Description: CBOR Object Signing Algorithm for ML-DSA-44<a href="#section-6.1.1-1.5.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.1-1.5">
+                <p id="section-6.1.1.1-1.5.1">Reference: RFC XXXX<a href="#section-6.1.1.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.6">
-              <p id="section-6.1.1-1.6.1">Name: ML-DSA-65<a href="#section-6.1.1-1.6.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.1-1.6">
+                <p id="section-6.1.1.1-1.6.1">Recommended: Yes<a href="#section-6.1.1.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.7">
-              <p id="section-6.1.1-1.7.1">Label: TBD (requested assignment -49)<a href="#section-6.1.1-1.7.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="ml-dsa-65">
+<section id="section-6.1.1.2">
+            <h5 id="name-ml-dsa-65">
+<a href="#section-6.1.1.2" class="section-number selfRef">6.1.1.2. </a><a href="#name-ml-dsa-65" class="section-name selfRef">ML-DSA-65</a>
+            </h5>
+<ul class="normal">
+<li class="normal" id="section-6.1.1.2-1.1">
+                <p id="section-6.1.1.2-1.1.1">Name: ML-DSA-65<a href="#section-6.1.1.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.8">
-              <p id="section-6.1.1-1.8.1">Value type: int<a href="#section-6.1.1-1.8.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.2-1.2">
+                <p id="section-6.1.1.2-1.2.1">Value: TBD (requested assignment -49)<a href="#section-6.1.1.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.9">
-              <p id="section-6.1.1-1.9.1">Value registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-6.1.1-1.9.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.2-1.3">
+                <p id="section-6.1.1.2-1.3.1">Description: CBOR Object Signing Algorithm for ML-DSA-65<a href="#section-6.1.1.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.10">
-              <p id="section-6.1.1-1.10.1">Description: CBOR Object Signing Algorithm for ML-DSA-65<a href="#section-6.1.1-1.10.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.2-1.4">
+                <p id="section-6.1.1.2-1.4.1">Capabilities: [kty]<a href="#section-6.1.1.2-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.11">
-              <p id="section-6.1.1-1.11.1">Name: ML-DSA-87<a href="#section-6.1.1-1.11.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.2-1.5">
+                <p id="section-6.1.1.2-1.5.1">Reference: RFC XXXX<a href="#section-6.1.1.2-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.12">
-              <p id="section-6.1.1-1.12.1">Label: TBD (requested assignment -50)<a href="#section-6.1.1-1.12.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.2-1.6">
+                <p id="section-6.1.1.2-1.6.1">Recommended: Yes<a href="#section-6.1.1.2-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.13">
-              <p id="section-6.1.1-1.13.1">Value type: int<a href="#section-6.1.1-1.13.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="ml-dsa-87">
+<section id="section-6.1.1.3">
+            <h5 id="name-ml-dsa-87">
+<a href="#section-6.1.1.3" class="section-number selfRef">6.1.1.3. </a><a href="#name-ml-dsa-87" class="section-name selfRef">ML-DSA-87</a>
+            </h5>
+<ul class="normal">
+<li class="normal" id="section-6.1.1.3-1.1">
+                <p id="section-6.1.1.3-1.1.1">Name: ML-DSA-87<a href="#section-6.1.1.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.14">
-              <p id="section-6.1.1-1.14.1">Value registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-6.1.1-1.14.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.3-1.2">
+                <p id="section-6.1.1.3-1.2.1">Value: TBD (requested assignment -50)<a href="#section-6.1.1.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-1.15">
-              <p id="section-6.1.1-1.15.1">Description: CBOR Object Signing Algorithm for ML-DSA-87<a href="#section-6.1.1-1.15.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.1.3-1.3">
+                <p id="section-6.1.1.3-1.3.1">Description: CBOR Object Signing Algorithm for ML-DSA-87<a href="#section-6.1.1.3-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          </ul>
+              <li class="normal" id="section-6.1.1.3-1.4">
+                <p id="section-6.1.1.3-1.4.1">Capabilities: [kty]<a href="#section-6.1.1.3-1.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.1.3-1.5">
+                <p id="section-6.1.1.3-1.5.1">Reference: RFC XXXX<a href="#section-6.1.1.3-1.5.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.1.3-1.6">
+                <p id="section-6.1.1.3-1.6.1">Recommended: Yes<a href="#section-6.1.1.3-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</section>
+</div>
 </section>
 </div>
 <div id="new-cose-key-types">
@@ -1471,77 +1519,299 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-new-cose-key-types">
 <a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-new-cose-key-types" class="section-name selfRef">New COSE Key Types</a>
           </h4>
+<p id="section-6.1.2-1">IANA is requested to add the following entries to the COSE Key Types Registry.
+The following completed registration templates are provided as described in RFC9053.<a href="#section-6.1.2-1" class="pilcrow">¶</a></p>
+<div id="ml-dsa">
+<section id="section-6.1.2.1">
+            <h5 id="name-ml-dsa">
+<a href="#section-6.1.2.1" class="section-number selfRef">6.1.2.1. </a><a href="#name-ml-dsa" class="section-name selfRef">ML-DSA</a>
+            </h5>
 <ul class="normal">
-<li class="normal" id="section-6.1.2-1.1">
-              <p id="section-6.1.2-1.1.1">Name: ML-DSA<a href="#section-6.1.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.2.1-1.1">
+                <p id="section-6.1.2.1-1.1.1">Name: ML-DSA<a href="#section-6.1.2.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.2-1.2">
-              <p id="section-6.1.2-1.2.1">Label: TBD (requested assignment 7)<a href="#section-6.1.2-1.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.2.1-1.2">
+                <p id="section-6.1.2.1-1.2.1">Value: TBD (requested assignment 7)<a href="#section-6.1.2.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.2-1.3">
-              <p id="section-6.1.2-1.3.1">Value type: int<a href="#section-6.1.2-1.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.2.1-1.3">
+                <p id="section-6.1.2.1-1.3.1">Description: COSE Key Type for the ML-DSA Algorithm Family<a href="#section-6.1.2.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.2-1.4">
-              <p id="section-6.1.2-1.4.1">Value registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-6.1.2-1.4.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.2.1-1.4">
+                <p id="section-6.1.2.1-1.4.1">Capabilities: [kty(7)]<a href="#section-6.1.2.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.2-1.5">
-              <p id="section-6.1.2-1.5.1">Description: COSE Key Type for the ML-DSA Algorithm Family<a href="#section-6.1.2-1.5.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.2.1-1.5">
+                <p id="section-6.1.2.1-1.5.1">Reference: RFC XXXX<a href="#section-6.1.2.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="new-cose-key-type-parameters">
+<section id="section-6.1.3">
+          <h4 id="name-new-cose-key-type-parameter">
+<a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-new-cose-key-type-parameter" class="section-name selfRef">New COSE Key Type Parameters</a>
+          </h4>
+<p id="section-6.1.3-1">IANA is requested to add the following entries to the COSE Key Type Parameters.
+The following completed registration templates are provided as described in RFC9053.<a href="#section-6.1.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="ml-dsa-public-key">
+<section id="section-6.1.4">
+          <h4 id="name-ml-dsa-public-key">
+<a href="#section-6.1.4" class="section-number selfRef">6.1.4. </a><a href="#name-ml-dsa-public-key" class="section-name selfRef">ML-DSA Public Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.4-1.1">
+              <p id="section-6.1.4-1.1.1">Key Type: TBD (requested assignment 7)<a href="#section-6.1.4-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.2">
+              <p id="section-6.1.4-1.2.1">Name: public_key<a href="#section-6.1.4-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.3">
+              <p id="section-6.1.4-1.3.1">Label: -1<a href="#section-6.1.4-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.4">
+              <p id="section-6.1.4-1.4.1">CBOR Type: bstr<a href="#section-6.1.4-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.5">
+              <p id="section-6.1.4-1.5.1">Description: Public key<a href="#section-6.1.4-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.6">
+              <p id="section-6.1.4-1.6.1">Reference: RFC XXXX<a href="#section-6.1.4-1.6.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="ml-dsa-secret-key">
+<section id="section-6.1.5">
+          <h4 id="name-ml-dsa-secret-key">
+<a href="#section-6.1.5" class="section-number selfRef">6.1.5. </a><a href="#name-ml-dsa-secret-key" class="section-name selfRef">ML-DSA Secret Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.5-1.1">
+              <p id="section-6.1.5-1.1.1">Key Type: TBD (requested assignment 7)<a href="#section-6.1.5-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.2">
+              <p id="section-6.1.5-1.2.1">Name: secret_key<a href="#section-6.1.5-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.3">
+              <p id="section-6.1.5-1.3.1">Label: -2<a href="#section-6.1.5-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.4">
+              <p id="section-6.1.5-1.4.1">CBOR Type: bstr<a href="#section-6.1.5-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.5">
+              <p id="section-6.1.5-1.5.1">Description: Secret (or private) key.<a href="#section-6.1.5-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.6">
+              <p id="section-6.1.5-1.6.1">Reference: RFC XXXX<a href="#section-6.1.5-1.6.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="new-jose-algorithms">
-<section id="section-6.1.3">
+<section id="section-6.1.6">
           <h4 id="name-new-jose-algorithms">
-<a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-new-jose-algorithms" class="section-name selfRef">New JOSE Algorithms</a>
+<a href="#section-6.1.6" class="section-number selfRef">6.1.6. </a><a href="#name-new-jose-algorithms" class="section-name selfRef">New JOSE Algorithms</a>
           </h4>
+<p id="section-6.1.6-1">IANA is requested to add the following entries to the JSON Web Signature and Encryption Algorithms Registry.
+The following completed registration templates are provided as described in RFC7518.<a href="#section-6.1.6-1" class="pilcrow">¶</a></p>
+<div id="ml-dsa-44-1">
+<section id="section-6.1.6.1">
+            <h5 id="name-ml-dsa-44-2">
+<a href="#section-6.1.6.1" class="section-number selfRef">6.1.6.1. </a><a href="#name-ml-dsa-44-2" class="section-name selfRef">ML-DSA-44</a>
+            </h5>
 <ul class="normal">
-<li class="normal" id="section-6.1.3-1.1">
-              <p id="section-6.1.3-1.1.1">Name: ML-DSA-44<a href="#section-6.1.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.6.1-1.1">
+                <p id="section-6.1.6.1-1.1.1">Algorithm Name: ML-DSA-44<a href="#section-6.1.6.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.3-1.2">
-              <p id="section-6.1.3-1.2.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.3-1.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.6.1-1.2">
+                <p id="section-6.1.6.1-1.2.1">Algorithm Description: ML-DSA-44 as described in FIPS 204.<a href="#section-6.1.6.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.3-1.3">
-              <p id="section-6.1.3-1.3.1">Description: JSON Web Signature Algorithm for ML-DSA-44<a href="#section-6.1.3-1.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.6.1-1.3">
+                <p id="section-6.1.6.1-1.3.1">Algorithm Usage Location(s): alg<a href="#section-6.1.6.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.3-1.4">
-              <p id="section-6.1.3-1.4.1">Name: ML-DSA-65<a href="#section-6.1.3-1.4.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.6.1-1.4">
+                <p id="section-6.1.6.1-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.6.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.3-1.5">
-              <p id="section-6.1.3-1.5.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.3-1.5.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.6.1-1.5">
+                <p id="section-6.1.6.1-1.5.1">Change Controller: IETF<a href="#section-6.1.6.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.3-1.6">
-              <p id="section-6.1.3-1.6.1">Description: JSON Web Signature Algorithm for ML-DSA-65<a href="#section-6.1.3-1.6.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.6.1-1.6">
+                <p id="section-6.1.6.1-1.6.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.6.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.3-1.7">
-              <p id="section-6.1.3-1.7.1">Name: ML-DSA-87<a href="#section-6.1.3-1.7.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.6.1-1.7">
+                <p id="section-6.1.6.1-1.7.1">Specification Document(s): RFC XXXX<a href="#section-6.1.6.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.3-1.8">
-              <p id="section-6.1.3-1.8.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.3-1.8.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.6.1-1.8">
+                <p id="section-6.1.6.1-1.8.1">Algorithm Analysis Documents(s): https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf<a href="#section-6.1.6.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.3-1.9">
-              <p id="section-6.1.3-1.9.1">Description: JSON Web Signature Algorithm for ML-DSA-87<a href="#section-6.1.3-1.9.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="ml-dsa-65-1">
+<section id="section-6.1.6.2">
+            <h5 id="name-ml-dsa-65-2">
+<a href="#section-6.1.6.2" class="section-number selfRef">6.1.6.2. </a><a href="#name-ml-dsa-65-2" class="section-name selfRef">ML-DSA-65</a>
+            </h5>
+<ul class="normal">
+<li class="normal" id="section-6.1.6.2-1.1">
+                <p id="section-6.1.6.2-1.1.1">Algorithm Name: ML-DSA-65<a href="#section-6.1.6.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          </ul>
+              <li class="normal" id="section-6.1.6.2-1.2">
+                <p id="section-6.1.6.2-1.2.1">Algorithm Description: ML-DSA-65 as described in FIPS 204.<a href="#section-6.1.6.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.2-1.3">
+                <p id="section-6.1.6.2-1.3.1">Algorithm Usage Location(s): alg<a href="#section-6.1.6.2-1.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.2-1.4">
+                <p id="section-6.1.6.2-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.6.2-1.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.2-1.5">
+                <p id="section-6.1.6.2-1.5.1">Change Controller: IETF<a href="#section-6.1.6.2-1.5.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.2-1.6">
+                <p id="section-6.1.6.2-1.6.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.6.2-1.6.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.2-1.7">
+                <p id="section-6.1.6.2-1.7.1">Specification Document(s): RFC XXXX<a href="#section-6.1.6.2-1.7.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.2-1.8">
+                <p id="section-6.1.6.2-1.8.1">Algorithm Analysis Documents(s): https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf<a href="#section-6.1.6.2-1.8.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</section>
+</div>
+<div id="ml-dsa-87-1">
+<section id="section-6.1.6.3">
+            <h5 id="name-ml-dsa-87-2">
+<a href="#section-6.1.6.3" class="section-number selfRef">6.1.6.3. </a><a href="#name-ml-dsa-87-2" class="section-name selfRef">ML-DSA-87</a>
+            </h5>
+<ul class="normal">
+<li class="normal" id="section-6.1.6.3-1.1">
+                <p id="section-6.1.6.3-1.1.1">Algorithm Name: ML-DSA-87<a href="#section-6.1.6.3-1.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.3-1.2">
+                <p id="section-6.1.6.3-1.2.1">Algorithm Description: ML-DSA-87 as described in FIPS 204.<a href="#section-6.1.6.3-1.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.3-1.3">
+                <p id="section-6.1.6.3-1.3.1">Algorithm Usage Location(s): alg<a href="#section-6.1.6.3-1.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.3-1.4">
+                <p id="section-6.1.6.3-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.6.3-1.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.3-1.5">
+                <p id="section-6.1.6.3-1.5.1">Change Controller: IETF<a href="#section-6.1.6.3-1.5.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.3-1.6">
+                <p id="section-6.1.6.3-1.6.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.6.3-1.6.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.3-1.7">
+                <p id="section-6.1.6.3-1.7.1">Specification Document(s): RFC XXXX<a href="#section-6.1.6.3-1.7.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.6.3-1.8">
+                <p id="section-6.1.6.3-1.8.1">Algorithm Analysis Documents(s): https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf<a href="#section-6.1.6.3-1.8.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</section>
+</div>
 </section>
 </div>
 <div id="new-jose-key-types">
-<section id="section-6.1.4">
+<section id="section-6.1.7">
           <h4 id="name-new-jose-key-types">
-<a href="#section-6.1.4" class="section-number selfRef">6.1.4. </a><a href="#name-new-jose-key-types" class="section-name selfRef">New JOSE Key Types</a>
+<a href="#section-6.1.7" class="section-number selfRef">6.1.7. </a><a href="#name-new-jose-key-types" class="section-name selfRef">New JOSE Key Types</a>
           </h4>
+<p id="section-6.1.7-1">IANA is requested to add the following entries to the JSON Web Key Types Registry.
+The following completed registration templates are provided as described in RFC7518 RFC7638.<a href="#section-6.1.7-1" class="pilcrow">¶</a></p>
+<div id="ml-dsa-1">
+<section id="section-6.1.7.1">
+            <h5 id="name-ml-dsa-2">
+<a href="#section-6.1.7.1" class="section-number selfRef">6.1.7.1. </a><a href="#name-ml-dsa-2" class="section-name selfRef">ML-DSA</a>
+            </h5>
 <ul class="normal">
-<li class="normal" id="section-6.1.4-1.1">
-              <p id="section-6.1.4-1.1.1">Name: ML-DSA<a href="#section-6.1.4-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.7.1-1.1">
+                <p id="section-6.1.7.1-1.1.1">"kty" Parameter Value: ML-DSA<a href="#section-6.1.7.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.4-1.2">
-              <p id="section-6.1.4-1.2.1">Value registry: <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span> Algorithms<a href="#section-6.1.4-1.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.7.1-1.2">
+                <p id="section-6.1.7.1-1.2.1">Key Type Description: Module-Lattice-Based Digital Signature Algorithm<a href="#section-6.1.7.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.4-1.3">
-              <p id="section-6.1.4-1.3.1">Description: JSON Web Key Type for the ML-DSA Algorithm Family.<a href="#section-6.1.4-1.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-6.1.7.1-1.3">
+                <p id="section-6.1.7.1-1.3.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.7.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          </ul>
+              <li class="normal" id="section-6.1.7.1-1.4">
+                <p id="section-6.1.7.1-1.4.1">Change Controller: IETF<a href="#section-6.1.7.1-1.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.7.1-1.5">
+                <p id="section-6.1.7.1-1.5.1">Specification Document(s): RFC XXXX<a href="#section-6.1.7.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="new-json-web-key-parameters">
+<section id="section-6.1.8">
+          <h4 id="name-new-json-web-key-parameters">
+<a href="#section-6.1.8" class="section-number selfRef">6.1.8. </a><a href="#name-new-json-web-key-parameters" class="section-name selfRef">New JSON Web Key Parameters</a>
+          </h4>
+<p id="section-6.1.8-1">IANA is requested to add the following entries to the JSON Web Key Parameters Registry.
+The following completed registration templates are provided as described in RFC7517, and RFC7638.<a href="#section-6.1.8-1" class="pilcrow">¶</a></p>
+<div id="ml-dsa-public-key-1">
+<section id="section-6.1.8.1">
+            <h5 id="name-ml-dsa-public-key-2">
+<a href="#section-6.1.8.1" class="section-number selfRef">6.1.8.1. </a><a href="#name-ml-dsa-public-key-2" class="section-name selfRef">ML-DSA Public Key</a>
+            </h5>
+<ul class="normal">
+<li class="normal" id="section-6.1.8.1-1.1">
+                <p id="section-6.1.8.1-1.1.1">Parameter Name: pub<a href="#section-6.1.8.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.1-1.2">
+                <p id="section-6.1.8.1-1.2.1">Parameter Description: Public or verification key<a href="#section-6.1.8.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.1-1.3">
+                <p id="section-6.1.8.1-1.3.1">Used with "kty" Value(s): ML-DSA<a href="#section-6.1.8.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.1-1.4">
+                <p id="section-6.1.8.1-1.4.1">Parameter Information Class: Public<a href="#section-6.1.8.1-1.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.1-1.5">
+                <p id="section-6.1.8.1-1.5.1">Change Controller: IETF<a href="#section-6.1.8.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.1-1.6">
+                <p id="section-6.1.8.1-1.6.1">Specification Document(s): RFC XXXX<a href="#section-6.1.8.1-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</section>
+</div>
+<div id="ml-dsa-secret-key-1">
+<section id="section-6.1.8.2">
+            <h5 id="name-ml-dsa-secret-key-2">
+<a href="#section-6.1.8.2" class="section-number selfRef">6.1.8.2. </a><a href="#name-ml-dsa-secret-key-2" class="section-name selfRef">ML-DSA Secret Key</a>
+            </h5>
+<ul class="normal">
+<li class="normal" id="section-6.1.8.2-1.1">
+                <p id="section-6.1.8.2-1.1.1">Parameter Name: priv<a href="#section-6.1.8.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.2-1.2">
+                <p id="section-6.1.8.2-1.2.1">Parameter Description: Secret, private or signing key<a href="#section-6.1.8.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.2-1.3">
+                <p id="section-6.1.8.2-1.3.1">Used with "kty" Value(s): ML-DSA<a href="#section-6.1.8.2-1.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.2-1.4">
+                <p id="section-6.1.8.2-1.4.1">Parameter Information Class: Private<a href="#section-6.1.8.2-1.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.2-1.5">
+                <p id="section-6.1.8.2-1.5.1">Change Controller: IETF<a href="#section-6.1.8.2-1.5.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.8.2-1.6">
+                <p id="section-6.1.8.2-1.6.1">Specification Document(s): RFC XXXX<a href="#section-6.1.8.2-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</section>
+</div>
 </section>
 </div>
 </section>
@@ -1705,8 +1975,8 @@ eyJpc3MiOiJ1cm46d...XVpZDo0NTYifQ\
 {                                   / COSE Key                /
   1: 7,                             / ML-DSA Key Type         /
   3: -48,                           / ML-DSA-44 Algorithm     /
-  -13: h'7803c0f9...3f6e2c70',      / ML-DSA Private Key      /
-  -14: h'7803c0f9...3bba7abd',      / ML-DSA Public Key       /
+  -1: h'7803c0f9...3f6e2c70',       / ML-DSA Private Key      /
+  -2: h'7803c0f9...3bba7abd',       / ML-DSA Public Key       /
 }
 </pre>
 </div>
@@ -1721,7 +1991,7 @@ eyJpc3MiOiJ1cm46d...XVpZDo0NTYifQ\
 {                                   / COSE Key                /
   1: 7,                             / ML-DSA Key Type         /
   3: -48,                           / ML-DSA-44 Algorithm     /
-  -13: h'7803c0f9...3f6e2c70'       / ML-DSA Private Key      /
+  -2: h'7803c0f9...3f6e2c70'        / ML-DSA Private Key      /
 }
 </pre>
 </div>
@@ -1744,34 +2014,23 @@ eyJpc3MiOiJ1cm46d...XVpZDo0NTYifQ\
           <h4 id="name-cose-sign-1">
 <a href="#appendix-A.2.3" class="section-number selfRef">A.2.3. </a><a href="#name-cose-sign-1" class="section-name selfRef">COSE Sign 1</a>
           </h4>
-<span id="name-example-ml-dsa-44-cose-prot"></span><div id="ML-DSA-44-cose-protected-header-diagnostic">
+<span id="name-example-ml-dsa-44-cose-sign"></span><div id="ML-DSA-44-cose-sign-1-diagnostic">
 <figure id="figure-7">
             <div class="lang-cbor-diag sourcecode" id="appendix-A.2.3-1.1">
 <pre>
-{                               / Protected                 /
-  1: -48                        / Algorithm                 /
-}
-</pre>
-</div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-example-ml-dsa-44-cose-prot" class="selfRef">Example ML-DSA-44 COSE Protected Header</a>
-            </figcaption></figure>
-</div>
-<span id="name-example-ml-dsa-44-cose-sign"></span><div id="ML-DSA-44-cose-sign-1-diagnostic">
-<figure id="figure-8">
-            <div class="lang-cbor-diag sourcecode" id="appendix-A.2.3-2.1">
-<pre>
-18(                                 / COSE Sign 1            /
-    [
-      h'a10139d902',                / Protected              /
-      {},                           / Unprotected            /
-      h'66616b65',                  / Payload                /
-      h'53e855e8...0f263549'        / Signature              /
-    ]
+/ cose-sign1 / 18(
+  [
+    / protected / &lt;&lt;
+      / algorithm / 1 : -49 / ML-DSA-65 /
+    &gt;&gt;
+    / unprotected / {},
+    / payload / h'66616b65',
+    / signature / h'53e855e8...0f263549'
+  ]
 )
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
 <a href="#name-example-ml-dsa-44-cose-sign" class="selfRef">Example ML-DSA-44 COSE Sign 1</a>
             </figcaption></figure>
 </div>
