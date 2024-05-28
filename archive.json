@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-26T01:04:25.792093+00:00",
+  "timestamp": "2024-05-28T00:59:59.573386+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -50,5 +50,32 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOLEMDO85wmS7_",
+      "title": "Fix IANA registration requests",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/1",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This pull request uses the registration templates as required by the relevant RFCs.",
+      "createdAt": "2024-05-26T20:20:07Z",
+      "updatedAt": "2024-05-26T20:20:07Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "bcd284e54c930f7f1e24c4453749b4ee3cfa1808",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "fix-iana-registrations",
+      "headRefOid": "93d446fd9644466263e49f83ba3968ec673f36ff",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
