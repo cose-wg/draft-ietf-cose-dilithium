@@ -20,9 +20,11 @@ Expires: 4 December 2024                                       Transmute
 
 Abstract
 
-   This document describes JOSE and COSE serializations for ML-DSA,
-   which was derived from Dilithium, a Post-Quantum Cryptography (PQC)
-   based digital signature scheme.
+   This document describes JSON Object Signing and Encryption (JOSE) and
+   CBOR Object Signing and Encryption (COSE) serializations for Module-
+   Lattice-Based Digital Signature Standard (ML-DSA), which was derived
+   from Dilithium, a Post-Quantum Cryptography (PQC) based digital
+   signature scheme.
 
    This document does not define any new cryptography, only
    seralizations of existing cryptographic systems described in
@@ -115,13 +117,12 @@ Table of Contents
 
 1.  Introduction
 
-   ML-DSA is derived from Version 3.1 of CRYSTALS-DILITHIUM, as noted in
-   [FIPS-204].
+   As noted in [FIPS-204], ML-DSA is derived from Version 3.1 of
+   CRYSTALS-DILITHIUM, and is believed to be secure even against
+   adversaries in possession of a large-scale quantum computer.
 
    CRYSTALS-DILITHIUM is one of the post quantum cryptography algorithms
    selected in [NIST-PQC-2022].
-
-   TODO: Add complete examples for ML-DSA-44, ML-DSA-65, ML-DSA-87.
 
 2.  Terminology
 
@@ -134,7 +135,7 @@ Table of Contents
 3.  The ML-DSA Algorithm Family
 
    The ML-DSA Signature Scheme is paramaterized to support different
-   security level.
+   security levels.
 
    This document requests the registration of the following algorithms
    in [IANA.jose]:
@@ -174,8 +175,8 @@ Table of Contents
 
 4.  The ML-DSA Key Type
 
-   Private and Public Keys are produced to enable the sign and verify
-   opertaions for each of the ML-DSA Algorithms.
+   The ML-DSA Key Type is used to express Public and Private Keys for
+   use with ML-DSA Algorithms.
 
    This document requests the registration of the following key types in
    [IANA.jose]:
@@ -203,7 +204,11 @@ Table of Contents
 
 5.  Security Considerations
 
-   TODO Security
+   The security considerations of [RFC7515], [RFC7517] and [RFC9053]
+   applies to this specification as well.
+
+   A detailed security analysis of ML-DSA is beyond the scope of this
+   specification, see [FIPS-204] for additional details.
 
 6.  IANA Considerations
 
@@ -443,9 +448,21 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
+   [RFC7515]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web
+              Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, May
+              2015, <https://www.rfc-editor.org/rfc/rfc7515>.
+
+   [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
+              DOI 10.17487/RFC7517, May 2015,
+              <https://www.rfc-editor.org/rfc/rfc7517>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9053]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Initial Algorithms", RFC 9053, DOI 10.17487/RFC9053,
+              August 2022, <https://www.rfc-editor.org/rfc/rfc9053>.
 
 7.2.  Informative References
 
@@ -542,7 +559,9 @@ A.2.3.  COSE Sign 1
 
 Acknowledgments
 
-   TODO acknowledge.
+   We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden,
+   Anders Rundgren, David Waite, and Russ Housley for their review
+   feedback.
 
 Authors' Addresses
 
