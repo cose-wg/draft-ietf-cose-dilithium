@@ -142,7 +142,7 @@ The following completed registration templates are provided as described in RFC9
 * Name: ML-DSA-44
 * Value: TBD (requested assignment -48)
 * Description: CBOR Object Signing Algorithm for ML-DSA-44
-* Capabilities: [kty]
+* Capabilities: `[kty]`
 * Reference: RFC XXXX
 * Recommended: Yes
 
@@ -151,7 +151,7 @@ The following completed registration templates are provided as described in RFC9
 * Name: ML-DSA-65
 * Value: TBD (requested assignment -49)
 * Description: CBOR Object Signing Algorithm for ML-DSA-65
-* Capabilities: [kty]
+* Capabilities: `[kty]`
 * Reference: RFC XXXX
 * Recommended: Yes
 
@@ -161,7 +161,7 @@ The following completed registration templates are provided as described in RFC9
 * Name: ML-DSA-87
 * Value: TBD (requested assignment -50)
 * Description: CBOR Object Signing Algorithm for ML-DSA-87
-* Capabilities: [kty]
+* Capabilities: `[kty]`
 * Reference: RFC XXXX
 * Recommended: Yes
 
@@ -175,7 +175,7 @@ The following completed registration templates are provided as described in RFC9
 * Name: ML-DSA
 * Value: TBD (requested assignment 7)
 * Description: COSE Key Type for the ML-DSA Algorithm Family
-* Capabilities: [kty(7)]
+* Capabilities: `[kty(7)]`
 * Reference: RFC XXXX
 
 ### New COSE Key Type Parameters
