@@ -50,6 +50,9 @@ author:
 normative:
   IANA.jose: IANA.jose
   IANA.cose: IANA.cose
+  RFC7515: JWS
+  RFC7517: JWK
+  RFC9053: COSE
 
 informative:
 
@@ -64,7 +67,7 @@ informative:
 
 --- abstract
 
-This document describes JOSE and COSE serializations for ML-DSA, which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based digital signature scheme.
+This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based digital signature scheme.
 
 This document does not define any new cryptography, only seralizations of existing cryptographic systems described in {{FIPS-204}}.
 
@@ -74,11 +77,9 @@ Note to RFC Editor: This document should not proceed to AUTH48 until NIST comple
 
 # Introduction
 
-ML-DSA is derived from Version 3.1 of CRYSTALS-DILITHIUM, as noted in {{FIPS-204}}.
+As noted in {{FIPS-204}}, ML-DSA is derived from Version 3.1 of CRYSTALS-DILITHIUM, and is believed to be secure even against adversaries in possession of a large-scale quantum computer.
 
 CRYSTALS-DILITHIUM is one of the post quantum cryptography algorithms selected in {{NIST-PQC-2022}}.
-
-TODO: Add complete examples for `ML-DSA-44`, `ML-DSA-65`, `ML-DSA-87`.
 
 # Terminology
 
@@ -86,7 +87,7 @@ TODO: Add complete examples for `ML-DSA-44`, `ML-DSA-65`, `ML-DSA-87`.
 
 # The ML-DSA Algorithm Family
 
-The ML-DSA Signature Scheme is paramaterized to support different security level.
+The ML-DSA Signature Scheme is paramaterized to support different security levels.
 
 This document requests the registration of the following algorithms in {{-IANA.jose}}:
 
@@ -108,7 +109,7 @@ This document requests the registration of the following algorithms in {{-IANA.c
 
 # The ML-DSA Key Type
 
-Private and Public Keys are produced to enable the sign and verify opertaions for each of the ML-DSA Algorithms.
+The ML-DSA Key Type is used to express Public and Private Keys for use with ML-DSA Algorithms.
 
 This document requests the registration of the following key types in {{-IANA.jose}}:
 
@@ -126,7 +127,9 @@ This document requests the registration of the following algorithms in {{-IANA.c
 
 # Security Considerations
 
-TODO Security
+The security considerations of {{-JWS}}, {{-JWK}} and {{-COSE}} applies to this specification as well.
+
+A detailed security analysis of ML-DSA is beyond the scope of this specification, see {{FIPS-204}} for additional details.
 
 # IANA Considerations
 
@@ -371,4 +374,5 @@ TODO
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite,
+and Russ Housley for their review feedback.
