@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-13T01:06:46.355912+00:00",
+  "timestamp": "2024-08-15T01:02:35.492243+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -49,7 +49,32 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 4,
+      "id": "I_kwDOLEMDO86S6YXh",
+      "title": "FIPS Update ",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/4",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Need 2 implementations and to confirm test vectors ",
+      "createdAt": "2024-08-14T02:45:19Z",
+      "updatedAt": "2024-08-14T15:08:13Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Perhaps: https://github.com/C2SP/wycheproof/pull/112 ",
+          "createdAt": "2024-08-14T15:08:12Z",
+          "updatedAt": "2024-08-14T15:08:12Z"
+        }
+      ]
+    }
+  ],
   "pulls": [
     {
       "number": 1,
