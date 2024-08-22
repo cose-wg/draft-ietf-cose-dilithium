@@ -359,9 +359,9 @@ eyJpc3MiOiJ1cm46d...XVpZDo0NTYifQ\
 ### Key Pair
 
 ~~~~ cbor-diag
-{                                   / COSE Key                /
+{                                   / COSE Key             /
   1: 7,                             / AKP Key Type         /
-  3: -48,                           / ML-DSA-44 Algorithm     /
+  3: -48,                           / ML-DSA-44 Algorithm  /
   -1: h'7803c0f9...3f6e2c70',       / AKP Private Key      /
   -2: h'7803c0f9...3bba7abd',       / AKP Public Key       /
 }
@@ -369,10 +369,10 @@ eyJpc3MiOiJ1cm46d...XVpZDo0NTYifQ\
 {: #ML-DSA-44-private-cose-key title="Example ML-DSA-44 Private COSE Key"}
 
 ~~~~ cbor-diag
-{                                   / COSE Key                /
+{                                   / COSE Key             /
   1: 7,                             / AKP Key Type         /
-  3: -48,                           / ML-DSA-44 Algorithm     /
-  -2: h'7803c0f9...3f6e2c70'        / AKP Private Key      /
+  3: -48,                           / ML-DSA-44 Algorithm  /
+  -2: h'7803c0f9...3f6e2c70'        / AKP Public Key       /
 }
 ~~~~
 {: #ML-DSA-44-public-cose-key title="Example ML-DSA-44 Public COSE Key"}
