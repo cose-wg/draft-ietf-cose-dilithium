@@ -386,9 +386,9 @@ TODO
 ~~~~ cbor-diag
 / cose-sign1 / 18(
   [
-    / protected / <<
+    / protected / <<{
       / algorithm / 1 : -49 / ML-DSA-65 /
-    >>
+    }>>
     / unprotected / {},
     / payload / h'66616b65',
     / signature / h'53e855e8...0f263549'
