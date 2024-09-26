@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-24T01:12:59.137164+00:00",
+  "timestamp": "2024-09-26T01:12:24.444239+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -73,6 +73,22 @@
           "updatedAt": "2024-08-14T15:08:12Z"
         }
       ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOLEMDO86X6IZd",
+      "title": "LAMPs private key representations",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/6",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/spasm/KPg3lbPeNms2H5PNDBt0iJByuE0/\r\n\r\nWe should use the same seeds they use in our test vectors.",
+      "createdAt": "2024-09-25T17:36:01Z",
+      "updatedAt": "2024-09-25T17:36:01Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
