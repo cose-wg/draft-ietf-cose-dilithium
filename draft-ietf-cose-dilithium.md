@@ -87,6 +87,11 @@ To reduce implementation burden, the key type and thumbprint computations for ML
 
 {::boilerplate bcp14-tagged}
 
+# ML-DSA Private Key
+
+Note that FIPS 204 defines 2 expressions for private keys, a seed, and a private key that is expanded from the seed.
+For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
+
 # The ML-DSA Algorithm Family
 
 The ML-DSA Signature Scheme is paramaterized to support different security levels.
