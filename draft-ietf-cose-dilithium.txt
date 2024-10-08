@@ -5,14 +5,14 @@
 CBOR Object Signing and Encryption                            M. Prorock
 Internet-Draft                                                  mesur.io
 Intended status: Standards Track                               O. Steele
-Expires: 4 December 2024                                       Transmute
+Expires: 11 April 2025                                         Transmute
                                                              R. Misoczki
                                                                   Google
                                                               M. Osborne
                                                                      IBM
                                                          C. Cloostermans
                                                                      NXP
-                                                             2 June 2024
+                                                          8 October 2024
 
 
                         ML-DSA for JOSE and COSE
@@ -67,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 December 2024.
+   This Internet-Draft will expire on 11 April 2025.
 
 Copyright Notice
 
@@ -87,22 +87,24 @@ Table of Contents
 
    1.  Introduction
    2.  Terminology
-   3.  The ML-DSA Algorithm Family
-   4.  The ML-DSA Key Type
-   5.  Security Considerations
-   6.  IANA Considerations
-     6.1.  Additions to Existing Registries
-       6.1.1.  New COSE Algorithms
-       6.1.2.  New COSE Key Types
-       6.1.3.  New COSE Key Type Parameters
-       6.1.4.  ML-DSA Public Key
-       6.1.5.  ML-DSA Secret Key
-       6.1.6.  New JOSE Algorithms
-       6.1.7.  New JOSE Key Types
-       6.1.8.  New JSON Web Key Parameters
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   3.  ML-DSA Private Key
+   4.  The ML-DSA Algorithm Family
+   5.  The Algorithm Key Type
+   6.  The Algorithm Key Type Thumbprint
+   7.  Security Considerations
+   8.  IANA Considerations
+     8.1.  Additions to Existing Registries
+       8.1.1.  New COSE Algorithms
+       8.1.2.  New COSE Key Types
+       8.1.3.  New COSE Key Type Parameters
+       8.1.4.  ML-DSA Public Key
+       8.1.5.  ML-DSA Private Key
+       8.1.6.  New JOSE Algorithms
+       8.1.7.  New JOSE Key Types
+       8.1.8.  New JSON Web Key Parameters
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Appendix A.  Examples
      A.1.  JOSE
        A.1.1.  Key Pair
@@ -117,12 +119,11 @@ Table of Contents
 
 1.  Introduction
 
-   As noted in [FIPS-204], ML-DSA is derived from Version 3.1 of
-   CRYSTALS-DILITHIUM, and is believed to be secure even against
-   adversaries in possession of a large-scale quantum computer.
-
-   CRYSTALS-DILITHIUM is one of the post quantum cryptography algorithms
-   selected in [NIST-PQC-2022].
+   This document describes how to use ML-DSA keys and signatures as
+   described in [FIPS-204] with JOSE and COSE.  To reduce implementation
+   burden, the key type and thumbprint computations for ML-DSA are
+   generic, and suitable for use with other algorithms such as SLH-DSA
+   as described in [I-D.draft-ietf-cose-sphincs-plus].
 
 2.  Terminology
 
@@ -132,7 +133,14 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  The ML-DSA Algorithm Family
+3.  ML-DSA Private Key
+
+   Note that FIPS 204 defines 2 expressions for private keys, a seed,
+   and a private key that is expanded from the seed.  For the algorithms
+   defined in this document, the private key is always the seed, and
+   never the expanded expression.
+
+4.  The ML-DSA Algorithm Family
 
    The ML-DSA Signature Scheme is paramaterized to support different
    security levels.
@@ -173,36 +181,73 @@ Table of Contents
 
               Table 2: COSE algorithms for ML-DSA
 
-4.  The ML-DSA Key Type
+5.  The Algorithm Key Type
 
-   The ML-DSA Key Type is used to express Public and Private Keys for
-   use with ML-DSA Algorithms.
+   The Algorithm Key Pair (AKP) Type is used to express Public and
+   Private Keys for use with Algorithms.  When this key type is used the
+   "alg" JSON Web Key Parameter or COSE Key Common Parameter is
+   REQUIRED.
 
    This document requests the registration of the following key types in
    [IANA.jose]:
 
-   +========+========+===========================+
-   | Name   | kty    | Description               |
-   +========+========+===========================+
-   | ML-DSA | ML-DSA | JSON Web Key Type for the |
-   |        |        | ML-DSA Algorithm Family.  |
-   +--------+--------+---------------------------+
+   +====================+=====+=========================+
+   | Name               | kty | Description             |
+   +====================+=====+=========================+
+   | Algorithm Key Pair | AKP | JSON Web Key Type for   |
+   |                    |     | the Algorithm Key Pair. |
+   +--------------------+-----+-------------------------+
 
-        Table 3: JSON Web Key Type for ML-DSA
+         Table 3: Algorithm Key Pair Type for JOSE
 
    This document requests the registration of the following algorithms
    in [IANA.cose]:
 
-   +========+==============================+==========================+
-   | Name   | kty                          | Description              |
-   +========+==============================+==========================+
-   | ML-DSA | TBD (requested assignment 7) | COSE Key Type for the    |
-   |        |                              | ML-DSA Algorithm Family. |
-   +--------+------------------------------+--------------------------+
+   +======+==============================+=======================+
+   | Name | kty                          | Description           |
+   +======+==============================+=======================+
+   | AKP  | TBD (requested assignment 7) | COSE Key Type for the |
+   |      |                              | Algorithm Key Pair.   |
+   +------+------------------------------+-----------------------+
 
-                    Table 4: COSE Key Type for ML-DSA
+              Table 4: Algorithm Key Pair Type for COSE
 
-5.  Security Considerations
+6.  The Algorithm Key Type Thumbprint
+
+   When computing the COSE Key Thumbprint as described in
+   [I-D.draft-ietf-cose-key-thumbprint], the required parameters for
+   algorithm key pairs are:
+
+   *  "kty" (label: 1, data type: int, value: 7)
+
+   *  "alg" (label: 3, data type: int, value: int)
+
+   *  "pub" (label: -1, value: bstr)
+
+   The COSE Key Thumbprint is produced according to the process
+   described in Section 3 of [I-D.draft-ietf-cose-key-thumbprint].
+
+   When computing the JWK Thumbprint as described in [RFC7638], the
+   required parameters for algorithm key pairs are:
+
+   *  "kty"
+
+   *  "alg"
+
+   *  "pub"
+
+   Their lexicographic order, per Section 3.3 of [RFC7638], is:
+
+   *  "alg"
+
+   *  "kty"
+
+   *  "pub"
+
+   The JWK Key Thumbprint is produced according to the process described
+   in Section 3 of [RFC7638].
+
+7.  Security Considerations
 
    The security considerations of [RFC7515], [RFC7517] and [RFC9053]
    applies to this specification as well.
@@ -210,17 +255,17 @@ Table of Contents
    A detailed security analysis of ML-DSA is beyond the scope of this
    specification, see [FIPS-204] for additional details.
 
-6.  IANA Considerations
+8.  IANA Considerations
 
-6.1.  Additions to Existing Registries
+8.1.  Additions to Existing Registries
 
-6.1.1.  New COSE Algorithms
+8.1.1.  New COSE Algorithms
 
    IANA is requested to add the following entries to the COSE Algorithms
    Registry.  The following completed registration templates are
    provided as described in RFC9053 and RFC9054.
 
-6.1.1.1.  ML-DSA-44
+8.1.1.1.  ML-DSA-44
 
    *  Name: ML-DSA-44
 
@@ -234,7 +279,7 @@ Table of Contents
 
    *  Recommended: Yes
 
-6.1.1.2.  ML-DSA-65
+8.1.1.2.  ML-DSA-65
 
    *  Name: ML-DSA-65
 
@@ -248,7 +293,7 @@ Table of Contents
 
    *  Recommended: Yes
 
-6.1.1.3.  ML-DSA-87
+8.1.1.3.  ML-DSA-87
 
    *  Name: ML-DSA-87
 
@@ -262,31 +307,31 @@ Table of Contents
 
    *  Recommended: Yes
 
-6.1.2.  New COSE Key Types
+8.1.2.  New COSE Key Types
 
    IANA is requested to add the following entries to the COSE Key Types
    Registry.  The following completed registration templates are
    provided as described in RFC9053.
 
-6.1.2.1.  ML-DSA
+8.1.2.1.  AKP
 
-   *  Name: ML-DSA
+   *  Name: AKP
 
    *  Value: TBD (requested assignment 7)
 
-   *  Description: COSE Key Type for the ML-DSA Algorithm Family
+   *  Description: COSE Key Type for Algorithm Key Pairs
 
    *  Capabilities: [kty(7)]
 
    *  Reference: RFC XXXX
 
-6.1.3.  New COSE Key Type Parameters
+8.1.3.  New COSE Key Type Parameters
 
    IANA is requested to add the following entries to the COSE Key Type
    Parameters.  The following completed registration templates are
    provided as described in RFC9053.
 
-6.1.4.  ML-DSA Public Key
+8.1.4.  ML-DSA Public Key
 
    *  Key Type: TBD (requested assignment 7)
 
@@ -300,28 +345,28 @@ Table of Contents
 
    *  Reference: RFC XXXX
 
-6.1.5.  ML-DSA Secret Key
+8.1.5.  ML-DSA Private Key
 
    *  Key Type: TBD (requested assignment 7)
 
-   *  Name: secret_key
+   *  Name: private_key
 
    *  Label: -2
 
    *  CBOR Type: bstr
 
-   *  Description: Secret (or private) key.
+   *  Description: Private key.
 
    *  Reference: RFC XXXX
 
-6.1.6.  New JOSE Algorithms
+8.1.6.  New JOSE Algorithms
 
    IANA is requested to add the following entries to the JSON Web
    Signature and Encryption Algorithms Registry.  The following
    completed registration templates are provided as described in
    RFC7518.
 
-6.1.6.1.  ML-DSA-44
+8.1.6.1.  ML-DSA-44
 
    *  Algorithm Name: ML-DSA-44
 
@@ -337,10 +382,9 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-   *  Algorithm Analysis Documents(s):
-      https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf
+   *  Algorithm Analysis Documents(s): [FIPS-204]
 
-6.1.6.2.  ML-DSA-65
+8.1.6.2.  ML-DSA-65
 
    *  Algorithm Name: ML-DSA-65
 
@@ -356,10 +400,9 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-   *  Algorithm Analysis Documents(s):
-      https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf
+   *  Algorithm Analysis Documents(s): [FIPS-204]
 
-6.1.6.3.  ML-DSA-87
+8.1.6.3.  ML-DSA-87
 
    *  Algorithm Name: ML-DSA-87
 
@@ -375,21 +418,19 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-   *  Algorithm Analysis Documents(s):
-      https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf
+   *  Algorithm Analysis Documents(s): [FIPS-204]
 
-6.1.7.  New JOSE Key Types
+8.1.7.  New JOSE Key Types
 
    IANA is requested to add the following entries to the JSON Web Key
    Types Registry.  The following completed registration templates are
    provided as described in RFC7518 RFC7638.
 
-6.1.7.1.  ML-DSA
+8.1.7.1.  AKP
 
-   *  "kty" Parameter Value: ML-DSA
+   *  "kty" Parameter Value: AKP
 
-   *  Key Type Description: Module-Lattice-Based Digital Signature
-      Algorithm
+   *  Key Type Description: Algorithm Key Pair
 
    *  JOSE Implementation Requirements: Optional
 
@@ -397,19 +438,19 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-6.1.8.  New JSON Web Key Parameters
+8.1.8.  New JSON Web Key Parameters
 
    IANA is requested to add the following entries to the JSON Web Key
    Parameters Registry.  The following completed registration templates
    are provided as described in RFC7517, and RFC7638.
 
-6.1.8.1.  ML-DSA Public Key
+8.1.8.1.  AKP Public Key
 
    *  Parameter Name: pub
 
    *  Parameter Description: Public or verification key
 
-   *  Used with "kty" Value(s): ML-DSA
+   *  Used with "kty" Value(s): AKP
 
    *  Parameter Information Class: Public
 
@@ -417,13 +458,13 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-6.1.8.2.  ML-DSA Secret Key
+8.1.8.2.  AKP Private Key
 
    *  Parameter Name: priv
 
-   *  Parameter Description: Secret, private or signing key
+   *  Parameter Description: Private or signing key
 
-   *  Used with "kty" Value(s): ML-DSA
+   *  Used with "kty" Value(s): AKP
 
    *  Parameter Information Class: Private
 
@@ -431,17 +472,32 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-7.  References
+9.  References
 
-7.1.  Normative References
+9.1.  Normative References
+
+   [I-D.draft-ietf-cose-key-thumbprint]
+              Isobe, K., Tschofenig, H., and O. Steele, "CBOR Object
+              Signing and Encryption (COSE) Key Thumbprint", Work in
+              Progress, Internet-Draft, draft-ietf-cose-key-thumbprint-
+              06, 6 September 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
+              key-thumbprint-06>.
+
+   [I-D.draft-ietf-cose-sphincs-plus]
+              Prorock, M., Steele, O., Misoczki, R., Osborne, M., and C.
+              Cloostermans, "SLH-DSA for JOSE and COSE", Work in
+              Progress, Internet-Draft, draft-ietf-cose-sphincs-plus-04,
+              8 July 2024, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-cose-sphincs-plus-04>.
 
    [IANA.cose]
               IANA, "CBOR Object Signing and Encryption (COSE)",
-              <http://www.iana.org/assignments/cose>.
+              <https://www.iana.org/assignments/cose>.
 
    [IANA.jose]
               IANA, "JSON Object Signing and Encryption (JOSE)",
-              <http://www.iana.org/assignments/jose>.
+              <https://www.iana.org/assignments/jose>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -456,6 +512,10 @@ Table of Contents
               DOI 10.17487/RFC7517, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7517>.
 
+   [RFC7638]  Jones, M. and N. Sakimura, "JSON Web Key (JWK)
+              Thumbprint", RFC 7638, DOI 10.17487/RFC7638, September
+              2015, <https://www.rfc-editor.org/rfc/rfc7638>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
@@ -464,10 +524,10 @@ Table of Contents
               Initial Algorithms", RFC 9053, DOI 10.17487/RFC9053,
               August 2022, <https://www.rfc-editor.org/rfc/rfc9053>.
 
-7.2.  Informative References
+9.2.  Informative References
 
    [FIPS-204] "Module-Lattice-Based Digital Signature Standard", n.d.,
-              <https://csrc.nist.gov/pubs/fips/204/ipd>.
+              <https://doi.org/10.6028/NIST.FIPS.204>.
 
    [NIST-PQC-2022]
               "Selected Algorithms 2022", n.d.,
@@ -481,7 +541,7 @@ A.1.  JOSE
 A.1.1.  Key Pair
 
    {
-     "kty": "ML-DSA",
+     "kty": "AKP",
      "alg": "ML-DSA-44",
      "pub": "V53SIdVF...uvw2nuCQ",
      "priv": "V53SIdVF...cDKLbsBY"
@@ -490,7 +550,7 @@ A.1.1.  Key Pair
               Figure 1: Example ML-DSA-44 Private JSON Web Key
 
    {
-     "kty": "ML-DSA",
+     "kty": "AKP",
      "alg": "ML-DSA-44",
      "pub": "V53SIdVF...uvw2nuCQ"
    }
@@ -521,19 +581,19 @@ A.2.  COSE
 
 A.2.1.  Key Pair
 
-   {                                   / COSE Key                /
-     1: 7,                             / ML-DSA Key Type         /
-     3: -48,                           / ML-DSA-44 Algorithm     /
-     -1: h'7803c0f9...3f6e2c70',       / ML-DSA Private Key      /
-     -2: h'7803c0f9...3bba7abd',       / ML-DSA Public Key       /
+   {                                   / COSE Key             /
+     1: 7,                             / AKP Key Type         /
+     3: -48,                           / ML-DSA-44 Algorithm  /
+     -1: h'7803c0f9...3f6e2c70',       / AKP Private Key      /
+     -2: h'7803c0f9...3bba7abd',       / AKP Public Key       /
    }
 
                 Figure 5: Example ML-DSA-44 Private COSE Key
 
-   {                                   / COSE Key                /
-     1: 7,                             / ML-DSA Key Type         /
-     3: -48,                           / ML-DSA-44 Algorithm     /
-     -2: h'7803c0f9...3f6e2c70'        / ML-DSA Private Key      /
+   {                                   / COSE Key             /
+     1: 7,                             / AKP Key Type         /
+     3: -48,                           / ML-DSA-44 Algorithm  /
+     -2: h'7803c0f9...3f6e2c70'        / AKP Public Key       /
    }
 
                 Figure 6: Example ML-DSA-44 Public COSE Key
@@ -546,9 +606,9 @@ A.2.3.  COSE Sign 1
 
    / cose-sign1 / 18(
      [
-       / protected / <<
+       / protected / <<{
          / algorithm / 1 : -49 / ML-DSA-65 /
-       >>
+       }>>
        / unprotected / {},
        / payload / h'66616b65',
        / signature / h'53e855e8...0f263549'
