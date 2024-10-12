@@ -38,13 +38,13 @@ func TestSign(t *testing.T) {
 	if verify_error != nil {
 		t.Fatalf("Verification failed")
 	}
-	if string(verified.header["alg"]) != "ML-DSA-44" {
+	if string(verified.Header["alg"]) != "ML-DSA-44" {
 		t.Fatalf("Invalid Header Algorithm")
 	}
-	if string(verified.header["kid"]) != "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o" {
+	if string(verified.Header["kid"]) != "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o" {
 		t.Fatalf("Invalid Header Key Identifier")
 	}
-	if string(verified.payload) != "It’s a dangerous business, Frodo, going out your door." {
+	if string(verified.Payload) != "It’s a dangerous business, Frodo, going out your door." {
 		t.Fatalf("Invalid Signature")
 	}
 

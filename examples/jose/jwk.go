@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/cloudflare/circl/sign"
 	"github.com/cloudflare/circl/sign/schemes"
 )
 
@@ -47,6 +48,27 @@ func PublicKeyFromPrivateKey(jwk string) (string, error) {
 	}
 	var public_key = fmt.Sprintf(`{"kty":"%s","alg":"%s","pub":"%s"}`, key["kty"], key["alg"], key["pub"])
 	return public_key, err
+}
+
+func SuiteFromJWK(jwk string) (sign.Scheme, sign.PublicKey, sign.PrivateKey, error) {
+	var key map[string]string
+	err := json.Unmarshal([]byte(jwk), &key)
+	if err != nil {
+		return nil, nil, nil, errors.New("Failed to parse JSON")
+	}
+	suite := schemes.ByName(key["alg"])
+	if key["priv"] != "" {
+		suite := schemes.ByName(key["alg"])
+		seed, err := base64.RawURLEncoding.DecodeString(key["priv"])
+		if err != nil {
+			return nil, nil, nil, errors.New("Failed to decode jwk.priv, malformed seed")
+		}
+		pub, priv := suite.DeriveKey(seed[:])
+		return suite, pub, priv, nil
+	}
+	binary_pub, err := base64.RawURLEncoding.DecodeString(key["pub"])
+	pub, _ := suite.UnmarshalBinaryPublicKey(binary_pub)
+	return suite, pub, nil, nil
 }
 
 // see: https://datatracker.ietf.org/doc/html/rfc7638

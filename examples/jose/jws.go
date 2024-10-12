@@ -21,8 +21,23 @@ type JWSPayload struct {
 }
 
 type JWSVerification struct {
-	header  map[string]string
-	payload []byte
+	Header  map[string]string
+	Payload []byte
+}
+
+func ToBeSignedFromJWS(jws string) []byte {
+	components := strings.Split(jws, ".")
+	var to_be_signed_bytes = []byte(components[0] + "." + components[1])
+	return to_be_signed_bytes
+}
+
+func SignatureFromJWS(jws string) ([]byte, error) {
+	components := strings.Split(jws, ".")
+	sig, err := base64.RawURLEncoding.DecodeString(components[2])
+	if err != nil {
+		return nil, errors.New("Failed to decode signature from JWS")
+	}
+	return sig, nil
 }
 
 func CompactSign(private_key string, payload []byte) (string, error) {
@@ -42,18 +57,18 @@ func CompactSign(private_key string, payload []byte) (string, error) {
 		Alg: jwk["alg"],
 		Kid: jwk["kid"],
 	})
-	var to_be_signed_bytes = base64.RawURLEncoding.EncodeToString(header) + "." + base64.RawURLEncoding.EncodeToString(payload)
-	var signature = suite.Sign(priv, []byte(to_be_signed_bytes), nil)
+	var to_be_signed_bytes = ToBeSignedFromJWS(base64.RawURLEncoding.EncodeToString(header) + "." + base64.RawURLEncoding.EncodeToString(payload))
+	var signature = suite.Sign(priv, to_be_signed_bytes, nil)
 	var encoded_signature = base64.RawURLEncoding.EncodeToString(signature)
-	var jws = to_be_signed_bytes + "." + encoded_signature
+	var jws = string(to_be_signed_bytes) + "." + encoded_signature
 	return jws, nil
 }
 
 func CompactVerify(public_key string, jws string) (JWSVerification, error) {
 	var payload []byte
 	var verified = JWSVerification{
-		header:  make(map[string]string),
-		payload: payload,
+		Header:  make(map[string]string),
+		Payload: payload,
 	}
 	var jwk map[string]string
 	err := json.Unmarshal([]byte(public_key), &jwk)
@@ -71,8 +86,8 @@ func CompactVerify(public_key string, jws string) (JWSVerification, error) {
 		return verified, malformed_public_key_error
 	}
 	components := strings.Split(jws, ".")
-	var to_be_signed_bytes = []byte(components[0] + "." + components[1])
-	signature, signature_encoding_error := base64.RawURLEncoding.DecodeString(components[2])
+	var to_be_signed_bytes = ToBeSignedFromJWS(jws)
+	signature, signature_encoding_error := SignatureFromJWS(jws)
 	if signature_encoding_error != nil {
 		return verified, signature_encoding_error
 	}
@@ -84,16 +99,16 @@ func CompactVerify(public_key string, jws string) (JWSVerification, error) {
 	if decode_header_error != nil {
 		return verified, errors.New("JWS Header is not encoded as base64url")
 	}
-	var jws_header map[string]string
-	decode_header_error = json.Unmarshal(decoded_header, &jws_header)
+	var header map[string]string
+	decode_header_error = json.Unmarshal(decoded_header, &header)
 	if decode_header_error != nil {
 		return verified, errors.New("Failed to parse JWS header")
 	}
-	decoded_payload, decode_payload_error := base64.RawURLEncoding.DecodeString(components[1])
+	payload, decode_payload_error := base64.RawURLEncoding.DecodeString(components[1])
 	if decode_payload_error != nil {
 		return verified, errors.New("JWS Payload is not encoded as base64url")
 	}
-	verified.header = jws_header
-	verified.payload = decoded_payload
+	verified.Header = header
+	verified.Payload = payload
 	return verified, nil
 }
