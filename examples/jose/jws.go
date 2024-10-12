@@ -66,10 +66,7 @@ func CompactSign(private_key string, payload []byte) (string, error) {
 
 func CompactVerify(public_key string, jws string) (JWSVerification, error) {
 	var payload []byte
-	var verified = JWSVerification{
-		Header:  make(map[string]string),
-		Payload: payload,
-	}
+	var verified = JWSVerification{}
 	var jwk map[string]string
 	err := json.Unmarshal([]byte(public_key), &jwk)
 	if err != nil {
