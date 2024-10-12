@@ -11,37 +11,46 @@ import (
 )
 
 type PrivateAlgorithmKeyPair struct {
+	Kid  string `json:"kid"`
 	Kty  string `json:"kty"`
 	Alg  string `json:"alg"`
 	Pub  string `json:"pub"`
 	Priv string `json:"priv"`
 }
 
-type JWSHeader struct {
-	Alg string `json:"alg"`
-}
-
-type JWSPayload struct {
-	Iss string `json:"iss"`
-	Sub string `json:"sub"`
-	Iat int64  `json:"iat"`
-}
-
-func generateKey(alg string, seed []byte) (string, error) {
+func GenerateKey(alg string, seed []byte) (string, error) {
 	suite := schemes.ByName(alg)
 	pub, _ := suite.DeriveKey(seed[:])
 	pub_bytes, _ := pub.MarshalBinary()
-	encoded, err := json.Marshal(PrivateAlgorithmKeyPair{
+	jwk, err := json.Marshal(PrivateAlgorithmKeyPair{
 		Kty:  "AKP",
 		Alg:  alg,
 		Pub:  base64.RawURLEncoding.EncodeToString(pub_bytes),
 		Priv: base64.RawURLEncoding.EncodeToString(seed[:]),
 	})
-	return string(encoded), err
+	kid, _ := CalculateJwkThumbprint(string(jwk))
+	jwk_with_thumbprint, err := json.Marshal(PrivateAlgorithmKeyPair{
+		Kid:  kid,
+		Kty:  "AKP",
+		Alg:  alg,
+		Pub:  base64.RawURLEncoding.EncodeToString(pub_bytes),
+		Priv: base64.RawURLEncoding.EncodeToString(seed[:]),
+	})
+	return string(jwk_with_thumbprint), err
+}
+
+func PublicKeyFromPrivateKey(jwk string) (string, error) {
+	var key map[string]string
+	err := json.Unmarshal([]byte(jwk), &key)
+	if err != nil {
+		return "", errors.New("Failed to parse JSON")
+	}
+	var public_key = fmt.Sprintf(`{"kty":"%s","alg":"%s","pub":"%s"}`, key["kty"], key["alg"], key["pub"])
+	return public_key, err
 }
 
 // see: https://datatracker.ietf.org/doc/html/rfc7638
-func calculateJwkThumbprint(jwk string) (string, error) {
+func CalculateJwkThumbprint(jwk string) (string, error) {
 	var key map[string]string
 	err := json.Unmarshal([]byte(jwk), &key)
 	if err != nil {
