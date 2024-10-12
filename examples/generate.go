@@ -9,21 +9,16 @@ import (
 	"time"
 
 	"github.com/cloudflare/circl/sign/schemes"
+
+	"github.com/cose-wg/draft-ietf-cose-dilithium/example/jose"
 )
 
-type PrivateAlgorithmKeyPair struct {
-	Kty  string `json:"kty"`
-	Alg  string `json:"alg"`
-	Pub  string `json:"pub"`
-	Priv string `json:"priv"`
-}
-
 type TestVector struct {
-	PrivateKey PrivateAlgorithmKeyPair `json:"private_key"`
-	Jws        string                  `json:"jws"`
-	TbsBytes   string                  `json:"to_be_signed"`
-	Signature  string                  `json:"signature"`
-	PublicKey  string                  `json:"public_key"`
+	PrivateKey jose.PrivateAlgorithmKeyPair `json:"private_key"`
+	Jws        string                       `json:"jws"`
+	TbsBytes   string                       `json:"to_be_signed"`
+	Signature  string                       `json:"signature"`
+	PublicKey  string                       `json:"public_key"`
 }
 
 type TestVectors struct {
@@ -33,19 +28,9 @@ type TestVectors struct {
 	MLDSA87 TestVector `json:"ML-DSA-87"`
 }
 
-type JWSHeader struct {
-	Alg string `json:"alg"`
-}
-
-type JWSPayload struct {
-	Iss string `json:"iss"`
-	Sub string `json:"sub"`
-	Iat int64  `json:"iat"`
-}
-
 func main() {
 	var seed [32]byte // zero seed
-	var p, _ = json.Marshal(JWSPayload{
+	var p, _ = json.Marshal(jose.JWSPayload{
 		Iss: "https://issuer.example",
 		Sub: "https://subject.example",
 		Iat: time.Now().Unix(),
@@ -57,7 +42,7 @@ func main() {
 	ml_dsa_44_pub, ml_dsa_44_priv := ml_dsa_44.DeriveKey(seed[:])
 	ml_dsa_44_public_key, _ := ml_dsa_44_pub.MarshalBinary()
 
-	var m1h, _ = json.Marshal(JWSHeader{
+	var m1h, _ = json.Marshal(jose.JWSHeader{
 		Alg: "ML-DSA-44",
 	})
 
@@ -71,7 +56,7 @@ func main() {
 	ml_dsa_65_pub, ml_dsa_65_priv := ml_dsa_65.DeriveKey(seed[:])
 	ml_dsa_65_public_key, _ := ml_dsa_65_pub.MarshalBinary()
 
-	var m2h, _ = json.Marshal(JWSHeader{
+	var m2h, _ = json.Marshal(jose.JWSHeader{
 		Alg: "ML-DSA-87",
 	})
 
@@ -85,7 +70,7 @@ func main() {
 	ml_dsa_87_pub, ml_dsa_87_priv := ml_dsa_87.DeriveKey(seed[:])
 	ml_dsa_87_public_key, _ := ml_dsa_87_pub.MarshalBinary()
 
-	var m3h, _ = json.Marshal(JWSHeader{
+	var m3h, _ = json.Marshal(jose.JWSHeader{
 		Alg: "ML-DSA-87",
 	})
 
@@ -96,7 +81,7 @@ func main() {
 	b, _ := json.MarshalIndent(TestVectors{
 		Seed: hex.EncodeToString(seed[:]),
 		MLDSA44: TestVector{
-			PrivateKey: PrivateAlgorithmKeyPair{
+			PrivateKey: jose.PrivateAlgorithmKeyPair{
 				Kty:  "AKP",
 				Alg:  "ML-DSA-44",
 				Pub:  base64.RawURLEncoding.EncodeToString(ml_dsa_44_public_key),
@@ -108,7 +93,7 @@ func main() {
 			PublicKey: hex.EncodeToString(ml_dsa_44_public_key),
 		},
 		MLDSA65: TestVector{
-			PrivateKey: PrivateAlgorithmKeyPair{
+			PrivateKey: jose.PrivateAlgorithmKeyPair{
 				Kty:  "AKP",
 				Alg:  "ML-DSA-65",
 				Pub:  base64.RawURLEncoding.EncodeToString(ml_dsa_65_public_key),
@@ -120,7 +105,7 @@ func main() {
 			PublicKey: hex.EncodeToString(ml_dsa_65_public_key),
 		},
 		MLDSA87: TestVector{
-			PrivateKey: PrivateAlgorithmKeyPair{
+			PrivateKey: jose.PrivateAlgorithmKeyPair{
 				Kty:  "AKP",
 				Alg:  "ML-DSA-87",
 				Pub:  base64.RawURLEncoding.EncodeToString(ml_dsa_87_public_key),
