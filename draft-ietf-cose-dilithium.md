@@ -66,7 +66,7 @@ informative:
   NIST-PQC-2022:
     title: "Selected Algorithms 2022"
     target: https://csrc.nist.gov/Projects/post-quantum-cryptography/selected-algorithms-2022
-
+---
 
 --- abstract
 
@@ -87,12 +87,12 @@ To reduce implementation burden, the key type and thumbprint computations for ML
 
 {::boilerplate bcp14-tagged}
 
-# ML-DSA Private Key
+# ML-DSA Private Keys
 
 Note that FIPS 204 defines 2 expressions for private keys, a seed, and a private key that is expanded from the seed.
 For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
 
-# The ML-DSA Algorithm Family
+# ML-DSA Algorithms
 
 The ML-DSA Signature Scheme is paramaterized to support different security levels.
 
@@ -114,7 +114,7 @@ This document requests the registration of the following algorithms in {{-IANA.c
 | ML-DSA-87  | TBD (requested assignment -50)     | CBOR Object Signing Algorithm for ML-DSA-87
 {: #cose-algorithms align="left" title="COSE algorithms for ML-DSA"}
 
-# The Algorithm Key Type
+# Algorithm Key Pair Type
 
 The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
 When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED.
@@ -126,6 +126,18 @@ This document requests the registration of the following key types in {{-IANA.jo
 | Algorithm Key Pair  | AKP     | JSON Web Key Type for the Algorithm Key Pair.
 {: #jose-key-type align="left" title="Algorithm Key Pair Type for JOSE"}
 
+~~~
+{
+   "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
+   "kty": "AKP",
+   "alg": "ML-DSA-44",
+   "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
+   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+}
+~~~
+{: #json-web-key-example align="left" title="The all zeros ML-DSA-44 JSON Web Key"}
+
+
 This document requests the registration of the following algorithms in {{-IANA.cose}}:
 
 | Name       | kty | Description
@@ -133,7 +145,18 @@ This document requests the registration of the following algorithms in {{-IANA.c
 | AKP  | TBD (requested assignment 7)     | COSE Key Type for the Algorithm Key Pair.
 {: #cose-key-type align="left" title="Algorithm Key Pair Type for COSE"}
 
-# The Algorithm Key Type Thumbprint
+~~~
+{
+   / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
+   / kty /   1: 7, / AKP /
+   / alg /   3: -48, / ML-DSA-44 /
+   / pub  / -1: h'ba71f9f64e11baeb58...c3830546b9dd8db0d',
+   / priv / -2: h'00000000000000...0000000000000000'
+}
+~~~
+{: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
+
+# AKP Thumbprints
 
 When computing the COSE Key Thumbprint as described in {{-COSE-KID}}, the required parameters for algorithm key pairs are:
 
@@ -156,6 +179,8 @@ Their lexicographic order, per {{Section 3.3 of -JOSE-KID}}, is:
 - "pub"
 
 The JWK Key Thumbprint is produced according to the process described in {{Section 3 of -JOSE-KID}}.
+
+See the `kid` values in the JSON Web Key and COSE Key examples in the appendix for examples of AKP thumbprints.
 
 # Security Considerations
 
@@ -316,92 +341,37 @@ The following completed registration templates are provided as described in RFC7
 
 ## JOSE
 
-### Key Pair
+~~~~~~~~~~
+{::include ./examples/jose/examples/ML_DSA_44.jose.json}
+~~~~~~~~~~
+{: #jose_example_ML_DSA_44 title="ML_DSA_44"}
 
-~~~json
-{
-  "kty": "AKP",
-  "alg": "ML-DSA-44",
-  "pub": "V53SIdVF...uvw2nuCQ",
-  "priv": "V53SIdVF...cDKLbsBY"
-}
-~~~
-{: #ML-DSA-44-private-jwk title="Example ML-DSA-44 Private JSON Web Key"}
+~~~~~~~~~~
+{::include ./examples/jose/examples/ML_DSA_65.jose.json}
+~~~~~~~~~~
+{: #jose_example_ML_DSA_65 title="ML_DSA_65"}
 
-~~~json
-{
-  "kty": "AKP",
-  "alg": "ML-DSA-44",
-  "pub": "V53SIdVF...uvw2nuCQ"
-}
-~~~
-{: #ML-DSA-44-public-jwk title="Example ML-DSA-44 Public JSON Web Key"}
-
-### Thumbprint URI
-
-TODO
-
-### JSON Web Signature
-
-~~~json
-{
-  "alg": "ML-DSA-44"
-}
-~~~
-{: #ML-DSA-44-jose-protected-header title="Example ML-DSA-44 Decoded Protected Header"}
-
-~~~
-eyJhbGciOiJ...LCJraWQiOiI0MiJ9\
-.\
-eyJpc3MiOiJ1cm46d...XVpZDo0NTYifQ\
-.\
-5MSEgQ0dZB4SeLC...AAAAAABIhMUE
-~~~
-{: #ML-DSA-44-jose-jws title="Example ML-DSA-44 Compact JSON Web Signature"}
+~~~~~~~~~~
+{::include ./examples/jose/examples/ML_DSA_87.jose.json}
+~~~~~~~~~~
+{: #jose_example_ML_DSA_87 title="ML_DSA_87"}
 
 ## COSE
 
-### Key Pair
+~~~~~~~~~~
+{::include ./examples/cose/examples/ML_DSA_44.cose.json}
+~~~~~~~~~~
+{: #cose_example_ML_DSA_44 title="ML_DSA_44"}
 
-~~~~ cbor-diag
-{                                   / COSE Key             /
-  1: 7,                             / AKP Key Type         /
-  3: -48,                           / ML-DSA-44 Algorithm  /
-  -1: h'7803c0f9...3f6e2c70',       / AKP Private Key      /
-  -2: h'7803c0f9...3bba7abd',       / AKP Public Key       /
-}
-~~~~
-{: #ML-DSA-44-private-cose-key title="Example ML-DSA-44 Private COSE Key"}
+~~~~~~~~~~
+{::include ./examples/cose/examples/ML_DSA_65.cose.json}
+~~~~~~~~~~
+{: #cose_example_ML_DSA_65 title="ML_DSA_65"}
 
-~~~~ cbor-diag
-{                                   / COSE Key             /
-  1: 7,                             / AKP Key Type         /
-  3: -48,                           / ML-DSA-44 Algorithm  /
-  -2: h'7803c0f9...3f6e2c70'        / AKP Public Key       /
-}
-~~~~
-{: #ML-DSA-44-public-cose-key title="Example ML-DSA-44 Public COSE Key"}
-
-### Thumbprint URI
-
-TODO
-
-### COSE Sign 1
-
-~~~~ cbor-diag
-/ cose-sign1 / 18(
-  [
-    / protected / <<{
-      / algorithm / 1 : -49 / ML-DSA-65 /
-    }>>
-    / unprotected / {},
-    / payload / h'66616b65',
-    / signature / h'53e855e8...0f263549'
-  ]
-)
-~~~~
-{: #ML-DSA-44-cose-sign-1-diagnostic title="Example ML-DSA-44 COSE Sign 1"}
-
+~~~~~~~~~~
+{::include ./examples/cose/examples/ML_DSA_87.cose.json}
+~~~~~~~~~~
+{: #cose_example_ML_DSA_87 title="ML_DSA_87"}
 
 # Acknowledgments
 {:numbered="false"}
