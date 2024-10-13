@@ -14,12 +14,6 @@ type JWSHeader struct {
 	Kid string `json:"kid"`
 }
 
-type JWSPayload struct {
-	Iss string `json:"iss"`
-	Sub string `json:"sub"`
-	Iat int64  `json:"iat"`
-}
-
 type JWSVerification struct {
 	Header  map[string]string
 	Payload []byte
