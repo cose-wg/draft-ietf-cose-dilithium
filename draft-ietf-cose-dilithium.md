@@ -87,11 +87,6 @@ To reduce implementation burden, the key type and thumbprint computations for ML
 
 {::boilerplate bcp14-tagged}
 
-# ML-DSA Private Keys
-
-Note that FIPS 204 defines 2 expressions for private keys, a seed, and a private key that is expanded from the seed.
-For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
-
 # ML-DSA Algorithms
 
 The ML-DSA Signature Scheme is paramaterized to support different security levels.
@@ -155,6 +150,12 @@ This document requests the registration of the following algorithms in {{-IANA.c
 }
 ~~~
 {: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
+
+# ML-DSA Private Keys
+
+Note that FIPS 204 defines 2 expressions for private keys, a seed, and a private key that is expanded from the seed.
+For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
+The AKP Key Type MAY be used with algorithms not defined in this specification, and those algorithms MAY encode their private keys differently.
 
 # AKP Thumbprints
 
@@ -258,7 +259,7 @@ The following completed registration templates are provided as described in RFC9
 * Name: private_key
 * Label: -2
 * CBOR Type: bstr
-* Description: Private key.
+* Description: Private key or seed used to derive a private key.
 * Reference: RFC XXXX
 
 ### New JOSE Algorithms
@@ -320,7 +321,7 @@ The following completed registration templates are provided as described in RFC7
 #### AKP Public Key
 
 * Parameter Name: pub
-* Parameter Description: Public or verification key
+* Parameter Description: Public key
 * Used with "kty" Value(s): AKP
 * Parameter Information Class: Public
 * Change Controller: IETF
@@ -329,7 +330,7 @@ The following completed registration templates are provided as described in RFC7
 #### AKP Private Key
 
 * Parameter Name: priv
-* Parameter Description: Private or signing key
+* Parameter Description: Private key or seed used to derive a private key.
 * Used with "kty" Value(s): AKP
 * Parameter Information Class: Private
 * Change Controller: IETF
