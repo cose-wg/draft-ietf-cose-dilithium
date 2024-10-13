@@ -87,9 +87,9 @@ Table of Contents
 
    1.  Introduction
    2.  Terminology
-   3.  ML-DSA Private Keys
-   4.  ML-DSA Algorithms
-   5.  Algorithm Key Pair Type
+   3.  ML-DSA Algorithms
+   4.  Algorithm Key Pair Type
+   5.  ML-DSA Private Keys
    6.  AKP Thumbprints
    7.  Security Considerations
    8.  IANA Considerations
@@ -127,14 +127,7 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  ML-DSA Private Keys
-
-   Note that FIPS 204 defines 2 expressions for private keys, a seed,
-   and a private key that is expanded from the seed.  For the algorithms
-   defined in this document, the private key is always the seed, and
-   never the expanded expression.
-
-4.  ML-DSA Algorithms
+3.  ML-DSA Algorithms
 
    The ML-DSA Signature Scheme is paramaterized to support different
    security levels.
@@ -175,7 +168,7 @@ Table of Contents
 
               Table 2: COSE algorithms for ML-DSA
 
-5.  Algorithm Key Pair Type
+4.  Algorithm Key Pair Type
 
    The Algorithm Key Pair (AKP) Type is used to express Public and
    Private Keys for use with Algorithms.  When this key type is used the
@@ -225,6 +218,15 @@ Table of Contents
    }
 
                  Figure 2: The all zeros ML-DSA-44 COSE Key
+
+5.  ML-DSA Private Keys
+
+   Note that FIPS 204 defines 2 expressions for private keys, a seed,
+   and a private key that is expanded from the seed.  For the algorithms
+   defined in this document, the private key is always the seed, and
+   never the expanded expression.  The AKP Key Type MAY be used with
+   algorithms not defined in this specification, and those algorithms
+   MAY encode their private keys differently.
 
 6.  AKP Thumbprints
 
@@ -372,7 +374,7 @@ Table of Contents
 
    *  CBOR Type: bstr
 
-   *  Description: Private key.
+   *  Description: Private key or seed used to derive a private key.
 
    *  Reference: RFC XXXX
 
@@ -465,7 +467,7 @@ Table of Contents
 
    *  Parameter Name: pub
 
-   *  Parameter Description: Public or verification key
+   *  Parameter Description: Public key
 
    *  Used with "kty" Value(s): AKP
 
@@ -479,7 +481,8 @@ Table of Contents
 
    *  Parameter Name: priv
 
-   *  Parameter Description: Private or signing key
+   *  Parameter Description: Private key or seed used to derive a
+      private key.
 
    *  Used with "kty" Value(s): AKP
 
