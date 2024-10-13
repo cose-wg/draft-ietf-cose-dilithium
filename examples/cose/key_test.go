@@ -43,8 +43,8 @@ func TestCalculateCoseKeyThumbprint(t *testing.T) {
 	var k2, _ = GenerateKey(ML_DSA_44, seed[:])
 	var t2, _ = CalculateCoseKeyThumbprint(k2)
 	var t2h = hex.EncodeToString(t2)
-	if t2h != "1e1d556de7bec8153526f951c9a4534dedbe9b1ec2384f5bcaffce67a34d9071" {
-		t.Fatalf(`COSE Key thumbprint calculated incorrectly (%s), want 1e1d556de7bec8153526f951c9a4534dedbe9b1ec2384f5bcaffce67a34d9071`, t2h)
+	if t2h != "b8969ab4b37da9f0684e42647eb8a0be8b5b661ebf5d76f0583bf5b8d3a8059a" {
+		t.Fatalf(`COSE Key thumbprint calculated incorrectly (%s), want b8969ab4b37da9f0684e42647eb8a0be8b5b661ebf5d76f0583bf5b8d3a8059a`, t2h)
 	}
 
 }

@@ -73,9 +73,9 @@ func SuiteToAlgorithm(alg string) (cose.Algorithm, error) {
 	case "ML-DSA-44":
 		return ML_DSA_44, nil
 	case "ML-DSA-65":
-		return 65, nil
+		return ML_DSA_65, nil
 	case "ML-DSA-87":
-		return 87, nil
+		return ML_DSA_87, nil
 	default:
 		return 0, errors.New("Unknown algorithm")
 	}

@@ -13,9 +13,9 @@ const (
 	KTY       = 1
 	EC2       = 2
 	AKP       = 7
-	ML_DSA_44 = 48
-	ML_DSA_65 = 49
-	ML_DSA_87 = 50
+	ML_DSA_44 = -48
+	ML_DSA_65 = -49
+	ML_DSA_87 = -50
 )
 
 type EC2Key struct {

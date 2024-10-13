@@ -45,7 +45,7 @@ func TestSign1_0(t *testing.T) {
 	if verified.Header.Alg != ML_DSA_44 {
 		t.Fatalf("Invalid header alg")
 	}
-	if hex.EncodeToString(verified.Header.Kid) != "1e1d556de7bec8153526f951c9a4534dedbe9b1ec2384f5bcaffce67a34d9071" {
+	if hex.EncodeToString(verified.Header.Kid) != "b8969ab4b37da9f0684e42647eb8a0be8b5b661ebf5d76f0583bf5b8d3a8059a" {
 		t.Fatalf("Invalid kid, want %s", hex.EncodeToString(verified.Header.Kid))
 	}
 	tbs, _ := ToBeSignedFromSign1(signature)
@@ -84,7 +84,7 @@ func TestSign1_1(t *testing.T) {
 	if verified.Header.Alg != ML_DSA_65 {
 		t.Fatalf("Invalid header alg")
 	}
-	if hex.EncodeToString(verified.Header.Kid) != "70441d0a63c84f46b12fc57930752fea6094a9d6aef7c178fbbfe94d082a53a5" {
+	if hex.EncodeToString(verified.Header.Kid) != "b788acf242f1f1d6532926d816e76e1636874267f2a48c84c4e65789ab80cc02" {
 		t.Fatalf("Invalid kid, want %s", hex.EncodeToString(verified.Header.Kid))
 	}
 	tbs, _ := ToBeSignedFromSign1(signature)
@@ -124,7 +124,7 @@ func TestSign1_2(t *testing.T) {
 	if verified.Header.Alg != ML_DSA_87 {
 		t.Fatalf("Invalid header alg")
 	}
-	if hex.EncodeToString(verified.Header.Kid) != "ec33254bfde443b897b86fa44b6f5a5bd664a1f44b423ee77af13ae7a24ee5e4" {
+	if hex.EncodeToString(verified.Header.Kid) != "d9bc439f97bd6d4093e68f0f3fcf09c9a97adf888ed7308dd565247a166cb4fa" {
 		t.Fatalf("Invalid kid, want %s", hex.EncodeToString(verified.Header.Kid))
 	}
 	tbs, _ := ToBeSignedFromSign1(signature)
