@@ -14,7 +14,7 @@ func TestGenerateKey(t *testing.T) {
 	if err != nil {
 		t.Fatalf(`Failed to serialize JWK`)
 	}
-	var decoded PrivateAlgorithmKeyPair
+	var decoded AKPKey
 	json.Unmarshal([]byte(jwk), &decoded)
 
 	if decoded.Alg != alg {

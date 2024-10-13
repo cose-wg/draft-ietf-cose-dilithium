@@ -15,7 +15,7 @@ const (
 	AKP       = 7
 	ML_DSA_44 = 48
 	ML_DSA_65 = 49
-	ML_DSA_50 = 50
+	ML_DSA_87 = 50
 )
 
 type EC2Key struct {
@@ -40,19 +40,11 @@ type AKPKey struct {
 }
 
 func GenerateKey(alg cose.Algorithm, seed []byte) ([]byte, error) {
-	var err error
 	var pub_bytes []byte
-	switch alg {
-	case ML_DSA_44:
-		suite := schemes.ByName("ML-DSA-44")
-		pub, _ := suite.DeriveKey(seed[:])
-		pub_bytes, err = pub.MarshalBinary()
-		if err != nil {
-			return nil, errors.New(`Failed to marshal public key bytes`)
-		}
-	default:
-		return nil, errors.New(`Unsupported algorithm`)
-	}
+	name, _ := AlgorithmToSuite(alg)
+	suite := schemes.ByName(name)
+	pub, _ := suite.DeriveKey(seed[:])
+	pub_bytes, _ = pub.MarshalBinary()
 	private_key, encode_private_key_error := cbor.Marshal(AKPKey{
 		Kty:  AKP,
 		Alg:  alg,

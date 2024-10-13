@@ -59,13 +59,108 @@ func AlgorithmToSuite(alg cose.Algorithm) (string, error) {
 	switch alg {
 	case ML_DSA_44:
 		return "ML-DSA-44", nil
-	case ML_DSA_50:
-		return "ML-DSA-50", nil
 	case ML_DSA_65:
 		return "ML-DSA-65", nil
+	case ML_DSA_87:
+		return "ML-DSA-87", nil
 	default:
 		return "", errors.New(("Unknown algorithm"))
 	}
+}
+
+func SuiteToAlgorithm(alg string) (cose.Algorithm, error) {
+	switch alg {
+	case "ML-DSA-44":
+		return ML_DSA_44, nil
+	case "ML-DSA-65":
+		return 65, nil
+	case "ML-DSA-87":
+		return 87, nil
+	default:
+		return 0, errors.New("Unknown algorithm")
+	}
+}
+
+func deterministicBinaryString(data cbor.RawMessage) (cbor.RawMessage, error) {
+
+	decOpts := cbor.DecOptions{
+		DupMapKey:   cbor.DupMapKeyEnforcedAPF, // duplicated key not allowed
+		IndefLength: cbor.IndefLengthForbidden, // no streaming
+		IntDec:      cbor.IntDecConvertSigned,  // decode CBOR uint/int to Go int64
+	}
+	decMode, _ := decOpts.DecMode()
+	if len(data) == 0 {
+		return nil, io.EOF
+	}
+	if data[0]>>5 != 2 { // major type 2: bstr
+		return nil, errors.New("cbor: require bstr type")
+	}
+
+	// fast path: return immediately if bstr is already deterministic
+	if err := decMode.Wellformed(data); err != nil {
+		return nil, err
+	}
+	ai := data[0] & 0x1f
+	if ai < 24 {
+		return data, nil
+	}
+	switch ai {
+	case 24:
+		if data[1] >= 24 {
+			return data, nil
+		}
+	case 25:
+		if data[1] != 0 {
+			return data, nil
+		}
+	case 26:
+		if data[1] != 0 || data[2] != 0 {
+			return data, nil
+		}
+	case 27:
+		if data[1] != 0 || data[2] != 0 || data[3] != 0 || data[4] != 0 {
+			return data, nil
+		}
+	}
+
+	// slow path: convert by re-encoding
+	// error checking is not required since `data` has been validataed
+	var s []byte
+	_ = decMode.Unmarshal(data, &s)
+	return cbor.Marshal(s)
+}
+
+func ToBeSignedFromSign1(signature []byte) ([]byte, error) {
+	var sign1 cose.Sign1Message
+	sign1.UnmarshalCBOR(signature)
+	var external []byte = nil
+	var protected cbor.RawMessage
+	protected, err := sign1.Headers.MarshalProtected()
+	if err != nil {
+		return nil, err
+	}
+	protected, err = deterministicBinaryString(protected)
+	if err != nil {
+		return nil, err
+	}
+	if external == nil {
+		external = []byte{}
+	}
+	sigStructure := []any{
+		"Signature1",  // context
+		protected,     // body_protected
+		external,      // external_aad
+		sign1.Payload, // payload
+	}
+	// create the value ToBeSigned by encoding the Sig_structure to a byte
+	// string.
+	return cbor.Marshal(sigStructure)
+}
+
+func SignatureFromSign1(signature []byte) ([]byte, error) {
+	var sign1 cose.Sign1Message
+	sign1.UnmarshalCBOR(signature)
+	return sign1.Signature, nil
 }
 
 func Sign1(private_key []byte, header Header, payload []byte) ([]byte, error) {
@@ -98,10 +193,11 @@ func VerifySign1(public_key []byte, signature []byte) (Sign1Verification, error)
 	pub, _ := suite.UnmarshalBinaryPublicKey(key.Pub)
 	var sign1 cose.Sign1Message
 	sign1.UnmarshalCBOR(signature)
-	var verifier cose.Verifier = &keyVerifier{
+	var kv = keyVerifier{
 		alg: key.Alg,
 		key: pub,
 	}
+	var verifier cose.Verifier = &kv
 	verify_error := sign1.Verify(nil, verifier)
 	if verify_error != nil {
 		return verified, verify_error

@@ -11,7 +11,13 @@ import (
 	"github.com/cloudflare/circl/sign/schemes"
 )
 
-type PrivateAlgorithmKeyPair struct {
+const (
+	ML_DSA_44 = "ML-DSA-44"
+	ML_DSA_65 = "ML-DSA-65"
+	ML_DSA_87 = "ML-DSA-87"
+)
+
+type AKPKey struct {
 	Kid  string `json:"kid"`
 	Kty  string `json:"kty"`
 	Alg  string `json:"alg"`
@@ -23,14 +29,14 @@ func GenerateKey(alg string, seed []byte) (string, error) {
 	suite := schemes.ByName(alg)
 	pub, _ := suite.DeriveKey(seed[:])
 	pub_bytes, _ := pub.MarshalBinary()
-	jwk, err := json.Marshal(PrivateAlgorithmKeyPair{
+	jwk, err := json.Marshal(AKPKey{
 		Kty:  "AKP",
 		Alg:  alg,
 		Pub:  base64.RawURLEncoding.EncodeToString(pub_bytes),
 		Priv: base64.RawURLEncoding.EncodeToString(seed[:]),
 	})
 	kid, _ := CalculateJwkThumbprint(string(jwk))
-	jwk_with_thumbprint, err := json.Marshal(PrivateAlgorithmKeyPair{
+	jwk_with_thumbprint, err := json.Marshal(AKPKey{
 		Kid:  kid,
 		Kty:  "AKP",
 		Alg:  alg,
@@ -38,6 +44,12 @@ func GenerateKey(alg string, seed []byte) (string, error) {
 		Priv: base64.RawURLEncoding.EncodeToString(seed[:]),
 	})
 	return string(jwk_with_thumbprint), err
+}
+
+func DecodeKey(jwk string) (AKPKey, error) {
+	var key AKPKey
+	err := json.Unmarshal([]byte(jwk), &key)
+	return key, err
 }
 
 func PublicKeyFromPrivateKey(jwk string) (string, error) {
