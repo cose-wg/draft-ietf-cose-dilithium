@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-13T01:17:32.427828+00:00",
+  "timestamp": "2024-10-15T01:13:43.745963+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "Need 2 implementations and to confirm test vectors ",
       "createdAt": "2024-08-14T02:45:19Z",
-      "updatedAt": "2024-08-14T15:08:13Z",
+      "updatedAt": "2024-10-13T18:55:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -71,6 +71,13 @@
           "body": "Perhaps: https://github.com/C2SP/wycheproof/pull/112 ",
           "createdAt": "2024-08-14T15:08:12Z",
           "updatedAt": "2024-08-14T15:08:12Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This is addressed in https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/8",
+          "createdAt": "2024-10-13T18:55:08Z",
+          "updatedAt": "2024-10-13T18:55:08Z"
         }
       ]
     },
@@ -86,9 +93,17 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/spasm/KPg3lbPeNms2H5PNDBt0iJByuE0/\r\n\r\nWe should use the same seeds they use in our test vectors.",
       "createdAt": "2024-09-25T17:36:01Z",
-      "updatedAt": "2024-09-25T17:36:01Z",
+      "updatedAt": "2024-10-13T18:54:59Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This is addressed in https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/8",
+          "createdAt": "2024-10-13T18:54:58Z",
+          "updatedAt": "2024-10-13T18:54:58Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -229,6 +244,32 @@
       "mergeCommit": {
         "oid": "a998f9b3db239847acae2c5438b0f655e3997daa"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOLEMDO85-dH2o",
+      "title": "Add Examples",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/8",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR refactors the example generation to support both JOSE and COSE, adds thumbprint computation and adds test vectors generated to the appendix",
+      "createdAt": "2024-10-13T18:32:49Z",
+      "updatedAt": "2024-10-13T18:47:17Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "a998f9b3db239847acae2c5438b0f655e3997daa",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "thumbprints",
+      "headRefOid": "b1c47beec71098873f6203569df8c4030acc4f8c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
