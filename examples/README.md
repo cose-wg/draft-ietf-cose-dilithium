@@ -1,9 +1,16 @@
 
+🔥 The code in this repository has not been audited or reviewed.
+
+This code is for generating example spec text, and is likely to be incorrect.
+
 ### Generate Examples
 
 ```
-go run generate.go
-cat ./examples.json | jq
+cd cose
+go test
+
+cd jose
+go test
 ```
 
 ### Credits
