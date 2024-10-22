@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T01:18:57.021873+00:00",
+  "timestamp": "2024-10-22T01:13:53.376765+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOLEMDO86S6YXh",
       "title": "FIPS Update ",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Need 2 implementations and to confirm test vectors ",
       "createdAt": "2024-08-14T02:45:19Z",
-      "updatedAt": "2024-10-13T18:55:09Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-20T13:54:18Z",
+      "closedAt": "2024-10-20T13:54:18Z",
       "comments": [
         {
           "author": "OR13",
@@ -86,15 +86,15 @@
       "id": "I_kwDOLEMDO86X6IZd",
       "title": "LAMPs private key representations",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/spasm/KPg3lbPeNms2H5PNDBt0iJByuE0/\r\n\r\nWe should use the same seeds they use in our test vectors.",
       "createdAt": "2024-09-25T17:36:01Z",
-      "updatedAt": "2024-10-13T18:54:59Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-20T13:54:14Z",
+      "closedAt": "2024-10-20T13:54:14Z",
       "comments": [
         {
           "author": "OR13",
@@ -252,24 +252,26 @@
       "id": "PR_kwDOLEMDO85-dH2o",
       "title": "Add Examples",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/8",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This PR refactors the example generation to support both JOSE and COSE, adds thumbprint computation and adds test vectors generated to the appendix",
       "createdAt": "2024-10-13T18:32:49Z",
-      "updatedAt": "2024-10-13T18:47:17Z",
+      "updatedAt": "2024-10-20T13:54:06Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "a998f9b3db239847acae2c5438b0f655e3997daa",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "thumbprints",
       "headRefOid": "b1c47beec71098873f6203569df8c4030acc4f8c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-20T13:54:06Z",
+      "mergedAt": "2024-10-20T13:54:06Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "10fb8a8081217f7d2a577155e2f7590aaf3bd058"
+      },
       "comments": [],
       "reviews": []
     }
