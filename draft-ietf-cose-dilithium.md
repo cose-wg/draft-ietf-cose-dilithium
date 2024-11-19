@@ -153,7 +153,7 @@ This document requests the registration of the following algorithms in {{-IANA.c
 
 # ML-DSA Private Keys
 
-Note that FIPS 204 defines 2 expressions for private keys, a seed, and a private key that is expanded from the seed.
+Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
 The AKP Key Type MAY be used with algorithms not defined in this specification, and those algorithms MAY encode their private keys differently.
 
