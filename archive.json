@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-21T01:16:22.852737+00:00",
+  "timestamp": "2024-11-24T01:21:24.528772+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -124,7 +124,7 @@
     {
       "number": 11,
       "id": "I_kwDOLEMDO86flEmp",
-      "title": "WGLC 1 from Russ Housley",
+      "title": "WGLC 1 Feedback from Russ Housley",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/11",
       "state": "OPEN",
       "author": "OR13",
@@ -133,7 +133,23 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/cose/txSj_agzl-rbChZsET2T6gWu7ms/",
       "createdAt": "2024-11-20T21:43:01Z",
-      "updatedAt": "2024-11-20T21:43:01Z",
+      "updatedAt": "2024-11-21T13:21:28Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOLEMDO86ftVLl",
+      "title": "WGLC 1 Feedback from Lucas Prabel",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/12",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/cose/04ROpwVJpkKbV62JJHim3eGNopo/",
+      "createdAt": "2024-11-21T13:21:14Z",
+      "updatedAt": "2024-11-21T13:21:14Z",
       "closedAt": null,
       "comments": []
     }
