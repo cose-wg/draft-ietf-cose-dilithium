@@ -11,9 +11,7 @@
 <meta content="Michael Osborne" name="author">
 <meta content="Christine Cloostermans" name="author">
 <meta content="
-       This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based digital signature scheme. 
-       This document does not define any new cryptography, only seralizations of existing cryptographic systems described in  . 
-       Note to RFC Editor: This document should not proceed to AUTH48 until NIST completes paramater tuning and selection as a part of the  PQC  standardization process. 
+       This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC) digital signature scheme defined in FIPS 204. 
     " name="description">
 <meta content="xml2rfc 3.25.0" name="generator">
 <meta content="JOSE" name="keyword">
@@ -1105,9 +1103,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">ML-DSA for JOSE and COSE</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based digital signature scheme.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">This document does not define any new cryptography, only seralizations of existing cryptographic systems described in <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span>.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
-<p id="section-abstract-3">Note to RFC Editor: This document should not proceed to AUTH48 until NIST completes paramater tuning and selection as a part of the <a href="https://csrc.nist.gov/projects/post-quantum-cryptography">PQC</a> standardization process.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC) digital signature scheme defined in FIPS 204.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1270,8 +1266,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">This document describes how to use ML-DSA keys and signatures as described in <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span> with JOSE and COSE.
-To reduce implementation burden, the key type and thumbprint computations for ML-DSA are generic, and suitable for use with other algorithms such as SLH-DSA as described in <span>[<a href="#I-D.draft-ietf-cose-sphincs-plus" class="cite xref">I-D.draft-ietf-cose-sphincs-plus</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This document describes how to use ML-DSA keys and signatures as described in <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span> with JOSE and COSE.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
@@ -1378,6 +1373,7 @@ When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a hr
 <a href="#name-the-all-zeros-ml-dsa-44-cos" class="selfRef">The all zeros ML-DSA-44 COSE Key</a>
         </figcaption></figure>
 </div>
+<p id="section-3-11">The AKP key type and thumbprint computation for the AKP key type is generic, and suitable for use with algorithms other than ML-DSA.<a href="#section-3-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ml-dsa-private-keys">
@@ -1387,7 +1383,6 @@ When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a hr
       </h2>
 <p id="section-4-1">Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
-The AKP Key Type <span class="bcp14">MAY</span> be used with algorithms not defined in this specification, and those algorithms <span class="bcp14">MAY</span> encode their private keys differently.
 This definition mirrors the one used in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-05#section-6" class="relref">Section 6</a> of [<a href="#I-D.draft-ietf-lamps-dilithium-certificates" class="cite xref">I-D.draft-ietf-lamps-dilithium-certificates</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1994,10 +1989,6 @@ The following completed registration templates are provided as described in RFC7
 <dt id="I-D.draft-ietf-cose-key-thumbprint">[I-D.draft-ietf-cose-key-thumbprint]</dt>
         <dd>
 <span class="refAuthor">Isobe, K.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) Key Thumbprint"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-key-thumbprint-06</span>, <time datetime="2024-09-06" class="refDate">6 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-key-thumbprint-06">https://datatracker.ietf.org/doc/html/draft-ietf-cose-key-thumbprint-06</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.draft-ietf-cose-sphincs-plus">[I-D.draft-ietf-cose-sphincs-plus]</dt>
-        <dd>
-<span class="refAuthor">Prorock, M.</span>, <span class="refAuthor">Steele, O.</span>, <span class="refAuthor">Misoczki, R.</span>, <span class="refAuthor">Osborne, M.</span>, and <span class="refAuthor">C. Cloostermans</span>, <span class="refTitle">"SLH-DSA for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-sphincs-plus-05</span>, <time datetime="2024-10-20" class="refDate">20 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-sphincs-plus-05">https://datatracker.ietf.org/doc/html/draft-ietf-cose-sphincs-plus-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.cose">[IANA.cose]</dt>
         <dd>
