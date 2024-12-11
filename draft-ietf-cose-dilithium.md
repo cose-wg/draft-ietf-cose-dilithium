@@ -114,7 +114,7 @@ An example truncated private key for use with ML-DSA-44 in JWK format is provide
 ~~~
 {: #json-web-key-example align="left" title="The all zeros ML-DSA-44 JSON Web Key"}
 
-This document requests the registration of the following algorithms in {{-IANA.cose}}:
+This document requests the registration of the following key type in {{-IANA.cose}}:
 
 | Name       | kty | Description
 |---
@@ -140,19 +140,19 @@ The AKP key type and thumbprint computation for the AKP key type is generic, and
 # ML-DSA Private Keys
 
 Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
-For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
+For the algorithms defined in this document, the "priv" parameter is always the seed, and never the expanded expression.
 This definition mirrors the one used in {{Section 6 of -ML-DSA-CERTS}}.
 
 # ML-DSA Algorithms
 
-The ML-DSA Signature Scheme is paramaterized to support different security levels.
+The ML-DSA Signature Scheme is parameterized to support different security levels.
 
 In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA
 with the parameter choices given in Table 1 of FIPS-204.
 
 This document requests the registration of the following algorithms in {{-IANA.jose}}:
 
-| Name       | alg | Description
+| Name       | value | Description
 |---
 | ML-DSA-44  | ML-DSA-44     | JSON Web Signature Algorithm for ML-DSA-44
 | ML-DSA-65  | ML-DSA-65     | JSON Web Signature Algorithm for ML-DSA-65
@@ -161,7 +161,7 @@ This document requests the registration of the following algorithms in {{-IANA.j
 
 This document requests the registration of the following algorithms in {{-IANA.cose}}:
 
-| Name       | alg | Description
+| Name       | value | Description
 |---
 | ML-DSA-44  | TBD (requested assignment -48)     | CBOR Object Signing Algorithm for ML-DSA-44
 | ML-DSA-65  | TBD (requested assignment -49)     | CBOR Object Signing Algorithm for ML-DSA-65
@@ -227,6 +227,10 @@ Table 2 of FIPS-204 describes the size of keys and signatures.
 ML-DSA might not be the best choice for use cases that require small keys or signatures.
 Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
 
+## Regarding HashML-DSA
+
+This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of FIPS-204.
+
 # IANA Considerations
 
 ## Additions to Existing Registries
@@ -285,7 +289,7 @@ The following completed registration templates are provided as described in RFC9
 ### ML-DSA Public Key
 
 * Key Type: TBD (requested assignment 7)
-* Name: public_key
+* Name: pub
 * Label: -1
 * CBOR Type: bstr
 * Description: Public key
@@ -294,7 +298,7 @@ The following completed registration templates are provided as described in RFC9
 ### ML-DSA Private Key
 
 * Key Type: TBD (requested assignment 7)
-* Name: private_key
+* Name: priv
 * Label: -2
 * CBOR Type: bstr
 * Description: Private key or seed used to derive a private key.
