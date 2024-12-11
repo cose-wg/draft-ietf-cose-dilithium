@@ -54,7 +54,6 @@ normative:
   RFC7517: JWK
   RFC9053: COSE
   RFC7638: JOSE-KID
-  I-D.draft-ietf-cose-sphincs-plus: SLH-DSA
   I-D.draft-ietf-cose-key-thumbprint: COSE-KID
 
 
@@ -79,7 +78,6 @@ This document describes JSON Object Signing and Encryption (JOSE) and CBOR Objec
 # Introduction
 
 This document describes how to use ML-DSA keys and signatures as described in {{FIPS-204}} with JOSE and COSE.
-To reduce implementation burden, the key type and thumbprint computations for ML-DSA are generic, and suitable for use with other algorithms such as SLH-DSA as described in {{-SLH-DSA}}.
 
 # Terminology
 
@@ -135,6 +133,9 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
 }
 ~~~
 {: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
+
+The AKP key type and thumbprint computation for the AKP key type is generic, and suitable for use with algorithms other than ML-DSA.
+
 
 # ML-DSA Private Keys
 
