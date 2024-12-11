@@ -83,6 +83,7 @@ Table of Contents
    6.  AKP Thumbprints
    7.  Security Considerations
      7.1.  Size of keys and signatures
+     7.2.  Regarding HashML-DSA
    8.  IANA Considerations
      8.1.  Additions to Existing Registries
        8.1.1.  New COSE Algorithms
@@ -154,8 +155,8 @@ Table of Contents
 
                Figure 1: The all zeros ML-DSA-44 JSON Web Key
 
-   This document requests the registration of the following algorithms
-   in [IANA.cose]:
+   This document requests the registration of the following key type in
+   [IANA.cose]:
 
    +======+==============================+=======================+
    | Name | kty                          | Description           |
@@ -186,13 +187,13 @@ Table of Contents
 
    Note that FIPS 204 defines 2 expressions for private keys: a seed,
    and a private key that is expanded from the seed.  For the algorithms
-   defined in this document, the private key is always the seed, and
-   never the expanded expression.  This definition mirrors the one used
-   in Section 6 of [I-D.draft-ietf-lamps-dilithium-certificates].
+   defined in this document, the "priv" parameter is always the seed,
+   and never the expanded expression.  This definition mirrors the one
+   used in Section 6 of [I-D.draft-ietf-lamps-dilithium-certificates].
 
 5.  ML-DSA Algorithms
 
-   The ML-DSA Signature Scheme is paramaterized to support different
+   The ML-DSA Signature Scheme is parameterized to support different
    security levels.
 
    In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-
@@ -203,7 +204,7 @@ Table of Contents
    in [IANA.jose]:
 
    +===========+===========+=========================+
-   | Name      | alg       | Description             |
+   | Name      | value     | Description             |
    +===========+===========+=========================+
    | ML-DSA-44 | ML-DSA-44 | JSON Web Signature      |
    |           |           | Algorithm for ML-DSA-44 |
@@ -221,7 +222,7 @@ Table of Contents
    in [IANA.cose]:
 
    +===========+=================+=========================+
-   | Name      | alg             | Description             |
+   | Name      | value           | Description             |
    +===========+=================+=========================+
    | ML-DSA-44 | TBD (requested  | CBOR Object Signing     |
    |           | assignment -48) | Algorithm for ML-DSA-44 |
@@ -324,6 +325,11 @@ Table of Contents
    [I-D.draft-ietf-cose-key-thumbprint] can reduce the need to repeat
    public key representations.
 
+7.2.  Regarding HashML-DSA
+
+   This document does not specify algorithms for use with HashML-DSA as
+   described in Section 5.4 of FIPS-204.
+
 8.  IANA Considerations
 
 8.1.  Additions to Existing Registries
@@ -404,7 +410,7 @@ Table of Contents
 
    *  Key Type: TBD (requested assignment 7)
 
-   *  Name: public_key
+   *  Name: pub
 
    *  Label: -1
 
@@ -418,7 +424,7 @@ Table of Contents
 
    *  Key Type: TBD (requested assignment 7)
 
-   *  Name: private_key
+   *  Name: priv
 
    *  Label: -2
 
