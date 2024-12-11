@@ -57,7 +57,9 @@ normative:
   I-D.draft-ietf-cose-sphincs-plus: SLH-DSA
   I-D.draft-ietf-cose-key-thumbprint: COSE-KID
 
+
 informative:
+  I-D.draft-ietf-lamps-dilithium-certificates:  ML-DSA-CERTS
 
   FIPS-204:
     title: "Module-Lattice-Based Digital Signature Standard"
@@ -87,9 +89,70 @@ To reduce implementation burden, the key type and thumbprint computations for ML
 
 {::boilerplate bcp14-tagged}
 
+Some examples in this specification are truncated using "..." for readability.
+
+# Algorithm Key Pair Type
+
+The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
+When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED.
+
+The "pub" and "priv" parameters contain bytes.
+Some "alg" values MAY specify a structure or length checks for "pub" and "priv".
+When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.
+
+This document requests the registration of the following key types in {{-IANA.jose}}:
+
+| Name    | kty | Description
+|---
+| Algorithm Key Pair  | AKP     | JSON Web Key Type for the Algorithm Key Pair.
+{: #jose-key-type align="left" title="Algorithm Key Pair Type for JOSE"}
+
+An example truncated private key for use with ML-DSA-44 in JWK format is provided below:
+
+~~~
+{
+   "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
+   "kty": "AKP",
+   "alg": "ML-DSA-44",
+   "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
+   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+}
+~~~
+{: #json-web-key-example align="left" title="The all zeros ML-DSA-44 JSON Web Key"}
+
+This document requests the registration of the following algorithms in {{-IANA.cose}}:
+
+| Name       | kty | Description
+|---
+| AKP  | TBD (requested assignment 7)     | COSE Key Type for the Algorithm Key Pair.
+{: #cose-key-type align="left" title="Algorithm Key Pair Type for COSE"}
+
+An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:
+
+~~~
+{
+   / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
+   / kty /   1: 7, / AKP /
+   / alg /   3: -48, / ML-DSA-44 /
+   / pub  / -1: h'ba71f9f64e11baeb58...c3830546b9dd8db0d',
+   / priv / -2: h'00000000000000...0000000000000000'
+}
+~~~
+{: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
+
+# ML-DSA Private Keys
+
+Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
+For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
+The AKP Key Type MAY be used with algorithms not defined in this specification, and those algorithms MAY encode their private keys differently.
+This definition mirrors the one used in {{Section 6 of -ML-DSA-CERTS}}.
+
 # ML-DSA Algorithms
 
 The ML-DSA Signature Scheme is paramaterized to support different security levels.
+
+In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA
+with the parameter choices given in Table 1 of FIPS-204.
 
 This document requests the registration of the following algorithms in {{-IANA.jose}}:
 
@@ -109,53 +172,26 @@ This document requests the registration of the following algorithms in {{-IANA.c
 | ML-DSA-87  | TBD (requested assignment -50)     | CBOR Object Signing Algorithm for ML-DSA-87
 {: #cose-algorithms align="left" title="COSE algorithms for ML-DSA"}
 
-# Algorithm Key Pair Type
+In accordance with Algorithm Key Pair Type section of this document, when present in AKP Keys the "pub" and "priv" parameters have the following additional constraints:
 
-The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
-When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED.
+The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of FIPS-204.
 
-This document requests the registration of the following key types in {{-IANA.jose}}:
+The size of "pub", and the associated signature for each of these algorithms is defined in Table 2 of FIPS-204, and repeated here for convenience:
 
-| Name    | kty | Description
+| Algorithm | Private Key | Public Key | Signature Size
 |---
-| Algorithm Key Pair  | AKP     | JSON Web Key Type for the Algorithm Key Pair.
-{: #jose-key-type align="left" title="Algorithm Key Pair Type for JOSE"}
+| ML-DSA-44  | 2560 | 1312 | 2420
+| ML-DSA-65  | 4032 | 1952 | 3309
+| ML-DSA-87  | 4896 | 2592 | 4627
+{: #fips-204-table-2 align="left" title="Sizes (in bytes) of keys and signatures of ML-DSA"}
 
-~~~
-{
-   "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
-   "kty": "AKP",
-   "alg": "ML-DSA-44",
-   "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
-   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-}
-~~~
-{: #json-web-key-example align="left" title="The all zeros ML-DSA-44 JSON Web Key"}
+Note that "priv" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes in the table above.
+See the ML-DSA Private Keys section of this document for more details.
 
+These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
+The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.
 
-This document requests the registration of the following algorithms in {{-IANA.cose}}:
-
-| Name       | kty | Description
-|---
-| AKP  | TBD (requested assignment 7)     | COSE Key Type for the Algorithm Key Pair.
-{: #cose-key-type align="left" title="Algorithm Key Pair Type for COSE"}
-
-~~~
-{
-   / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
-   / kty /   1: 7, / AKP /
-   / alg /   3: -48, / ML-DSA-44 /
-   / pub  / -1: h'ba71f9f64e11baeb58...c3830546b9dd8db0d',
-   / priv / -2: h'00000000000000...0000000000000000'
-}
-~~~
-{: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
-
-# ML-DSA Private Keys
-
-Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
-For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
-The AKP Key Type MAY be used with algorithms not defined in this specification, and those algorithms MAY encode their private keys differently.
+In the case of JWS, the signature is base64url encoded, and the encoded signature size is larger than described in the table above.
 
 # AKP Thumbprints
 
@@ -188,6 +224,12 @@ See the `kid` values in the JSON Web Key and COSE Key examples in the appendix f
 The security considerations of {{-JWS}}, {{-JWK}} and {{-COSE}} applies to this specification as well.
 
 A detailed security analysis of ML-DSA is beyond the scope of this specification, see {{FIPS-204}} for additional details.
+
+## Size of keys and signatures
+
+Table 2 of FIPS-204 describes the size of keys and signatures.
+ML-DSA might not be the best choice for use cases that require small keys or signatures.
+Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
 
 # IANA Considerations
 
