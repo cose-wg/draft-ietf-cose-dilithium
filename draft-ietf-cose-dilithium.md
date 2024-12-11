@@ -141,7 +141,6 @@ The AKP key type and thumbprint computation for the AKP key type is generic, and
 
 Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
-The AKP Key Type MAY be used with algorithms not defined in this specification, and those algorithms MAY encode their private keys differently.
 This definition mirrors the one used in {{Section 6 of -ML-DSA-CERTS}}.
 
 # ML-DSA Algorithms
