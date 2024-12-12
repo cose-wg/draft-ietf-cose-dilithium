@@ -419,4 +419,4 @@ The following completed registration templates are provided as described in RFC7
 # Acknowledgments
 {:numbered="false"}
 
-We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite, and Russ Housley for their review feedback.
+We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite, Russ Housley, and Lucas Prabel for their comments and reviews of this document.
