@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-10T01:20:55.398695+00:00",
+  "timestamp": "2024-12-12T01:19:19.565878+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -117,7 +117,7 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/cose/eA2KV31yXVmnF7PwFG4HnvyO5pc/",
       "createdAt": "2024-11-19T19:57:30Z",
-      "updatedAt": "2024-12-06T20:28:24Z",
+      "updatedAt": "2024-12-11T17:52:59Z",
       "closedAt": null,
       "comments": [
         {
@@ -126,6 +126,20 @@
           "body": "There is subtle related consideration about the \"pub\" field in AKP: For some algorithms, it is possible to derive public key from private key, and including both causes possible security issues (e.g., X-Wing bans including public key in private X.509 keys for security reasons). But for others, it is not possible to derive public key from private key, and thus the public key must be present in private keys.\r\n\r\nWorst case, inconsistent keys can cause key compromise. Even if Ed25519 and Ed448 are not defined for use with AKP, there is an obvious interpretation for AKP with those algorithms, and for both using inconsistent keys can be instant key compromise (seeing two signatures for the same message with two different public key values exposes the private scalar).",
           "createdAt": "2024-12-06T20:28:23Z",
           "updatedAt": "2024-12-06T20:28:23Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Pending a reply to https://mailarchive.ietf.org/arch/msg/spasm/tI0aW10tiDwrzcg_z8U5kNAmkIw/\r\n\r\nI plan to set ctx to the empty string for all algorithms registered in this draft.",
+          "createdAt": "2024-12-11T17:13:02Z",
+          "updatedAt": "2024-12-11T17:13:02Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> The test vectors should document what the various fields are (some appear to be hex, others base64), and maybe the step by step computations. I\u2019m also not sure an all-zero private key, and reusing the same key for all algorithms, is necessarily a good way to generate test vectors. \r\n\r\nWe will need to ask the lists regarding this, and potentially coordinate with LAMPS\r\n\r\nSee: https://github.com/lamps-wg/dilithium-certificates/issues/24",
+          "createdAt": "2024-12-11T17:15:28Z",
+          "updatedAt": "2024-12-11T17:52:59Z"
         }
       ]
     },
@@ -369,6 +383,92 @@
           "body": "",
           "createdAt": "2024-11-19T21:02:31Z",
           "updatedAt": "2024-11-19T21:02:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOLEMDO86E4kcF",
+      "title": "Add go cose example",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/13",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-12-11T16:24:48Z",
+      "updatedAt": "2024-12-11T16:24:48Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "aa623aec2dea27f840c677a20a5504d382d0725c",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "go-cose-example",
+      "headRefOid": "b30984cdd56eb29e19a07263f4debfe01ae965ea",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOLEMDO86E5Pi1",
+      "title": "WGLC 1 Feedback",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/14",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Attempting to address all feedback in 1 PR.\r\n\r\n- https://mailarchive.ietf.org/arch/msg/cose/LIEk3hcSOUmmttxtKZcLGcLRHUQ/\r\n- https://mailarchive.ietf.org/arch/msg/cose/QFFTOb5gRi__Muhx374ifk_2upQ/\r\n- https://mailarchive.ietf.org/arch/msg/cose/Pyja-pj1RYmkdMI2IrUHVRXSmi0/\r\n\r\nPending replies, I plan to add Neil, Russ and Lucas to acknowledgments section",
+      "createdAt": "2024-12-11T17:53:44Z",
+      "updatedAt": "2024-12-11T21:11:10Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "aa623aec2dea27f840c677a20a5504d382d0725c",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "wglc-1-feedback",
+      "headRefOid": "c1cb473b0e7acee84efd7f600e69ed942f96e6e3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO86UzxDp",
+          "commit": {
+            "abbreviatedOid": "c1cb473"
+          },
+          "author": "ilaril",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-11T19:04:57Z",
+          "updatedAt": "2024-12-11T19:04:57Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "The \"pub\" and \"priv\" parameters contain byte strings in format specified by the \"alg\" value.\r\n\r\nE.g., for ML-DSA algorithms, those are presumably ML-DSA public and private (seed) keys (which are byte strings). And for HPKE algorithms, those are presumably HPKE public and private keys for the KEM used by the cipher suite.\r\n\r\nAnd the text should also specify what \"pub\" (it is the public key) and \"priv\" (it is the private key, only present for private keys) are.\r\n\r\nThen security considerations should talk about mismatched keys, where the public key does not correspond to the private key. Depending on algorithm and implementation, the consequences can range from operations explicitly failing to key compromise.",
+              "createdAt": "2024-12-11T19:04:57Z",
+              "updatedAt": "2024-12-11T19:11:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86U1V64",
+          "commit": {
+            "abbreviatedOid": "c1cb473"
+          },
+          "author": "mprorock",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-11T21:11:10Z",
+          "updatedAt": "2024-12-11T21:11:10Z",
           "comments": []
         }
       ]
