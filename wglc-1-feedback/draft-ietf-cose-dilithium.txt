@@ -85,6 +85,7 @@ Table of Contents
      7.1.  Size of keys and signatures
      7.2.  Regarding HashML-DSA
      7.3.  Validation of keys
+     7.4.  Mismatched AKP parameters
    8.  IANA Considerations
      8.1.  Additions to Existing Registries
        8.1.1.  New COSE Algorithms
@@ -135,10 +136,10 @@ Table of Contents
    information.  The concept of public and private information classes
    originates from Section 8.1 of [RFC7517].
 
-   The "pub" and "priv" parameters contain byte strings in format
-   specified by the "alg" value.  These parameters MAY have additional
-   structure or length checks depending on the associated "alg"
-   parameter and its requirements.
+   The "pub" and "priv" parameters contain byte strings in a format
+   specified by the "alg" value.  The values of "pub" and "priv" MAY
+   have additional structure or length checks depending on the
+   associated "alg" parameter and its requirements.
 
    When AKP keys are expressed in JWK, "pub" and "priv" are base64url
    encoded.
@@ -364,6 +365,14 @@ Table of Contents
    that come from trusted sources" and that "as the seed can be used to
    compute the private key, it is sensitive data and shall be treated
    with the same safeguards as a private key".
+
+7.4.  Mismatched AKP parameters
+
+   When using an AKP key with an algorithm, it is possible that the
+   "pub" and "priv" parameters have been tampered with or mismatched.
+   Depending on the algorithm and implementation, the consequences of
+   using mismatched parameters can range from operations failing to key
+   compromise.
 
 8.  IANA Considerations
 

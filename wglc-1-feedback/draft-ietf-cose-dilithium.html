@@ -1199,6 +1199,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
                 <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-validation-of-keys" class="internal xref">Validation of keys</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-mismatched-akp-parameters" class="internal xref">Mismatched AKP parameters</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -1298,8 +1301,8 @@ When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common P
 <p id="section-3-2">The "pub" parameter contains a public key, this parameter contains public information.
 The "priv" parameter contains a private key, sometimes called a secret key, this parameter contains private information.
 The concept of public and private information classes originates from <span><a href="https://rfc-editor.org/rfc/rfc7517#section-8.1" class="relref">Section 8.1</a> of [<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">The "pub" and "priv" parameters contain byte strings in format specified by the "alg" value.
-These parameters <span class="bcp14">MAY</span> have additional structure or length checks depending on the associated "alg" parameter and its requirements.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-3">The "pub" and "priv" parameters contain byte strings in a format specified by the "alg" value.
+The values of "pub" and "priv" <span class="bcp14">MAY</span> have additional structure or length checks depending on the associated "alg" parameter and its requirements.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">This document requests the registration of the following key types in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-5" class="pilcrow">¶</a></p>
 <span id="name-algorithm-key-pair-type-for"></span><div id="jose-key-type">
@@ -1601,6 +1604,15 @@ The length of the seed is 256 bits, which is 32 bytes.
 However, if the private key derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms <span class="bcp14">MUST</span> be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
 data and shall be treated with the same safeguards as a private key".<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="mismatched-akp-parameters">
+<section id="section-7.4">
+        <h3 id="name-mismatched-akp-parameters">
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-mismatched-akp-parameters" class="section-name selfRef">Mismatched AKP parameters</a>
+        </h3>
+<p id="section-7.4-1">When using an AKP key with an algorithm, it is possible that the "pub" and "priv" parameters have been tampered with or mismatched.
+Depending on the algorithm and implementation, the consequences of using mismatched parameters can range from operations failing to key compromise.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
