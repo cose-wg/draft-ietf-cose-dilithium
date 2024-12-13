@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Prorock, et al.</td>
-<td class="center">Expires 15 June 2025</td>
+<td class="center">Expires 16 June 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cose-dilithium-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-12" class="published">12 December 2024</time>
+<time datetime="2024-12-13" class="published">13 December 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-15">15 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-06-16">16 June 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1195,6 +1195,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-regarding-hashml-dsa" class="internal xref">Regarding HashML-DSA</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-validation-of-keys" class="internal xref">Validation of keys</a></p>
 </li>
             </ul>
 </li>
@@ -1289,12 +1292,16 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-algorithm-key-pair-type">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-algorithm-key-pair-type" class="section-name selfRef">Algorithm Key Pair Type</a>
       </h2>
-<p id="section-3-1">The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
+<p id="section-3-1">This section describes a generic cryptographic key structure for use with algorithms not limited to those registered in this document.
+The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
 When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is <span class="bcp14">REQUIRED</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">The "pub" and "priv" parameters contain bytes.
-Some "alg" values <span class="bcp14">MAY</span> specify a structure or length checks for "pub" and "priv".
-When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">This document requests the registration of the following key types in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-2">The "pub" parameter contains a public key, this parameter contains public information.
+The "priv" parameter contains a private key, sometimes called a secret key, this parameter contains private information.
+The concept of public and private information classes originates from <span><a href="https://rfc-editor.org/rfc/rfc7517#section-8.1" class="relref">Section 8.1</a> of [<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">The "pub" and "priv" parameters contain byte strings in format specified by the "alg" value.
+These parameters <span class="bcp14">MAY</span> have additional structure or length checks depending on the associated "alg" parameter and its requirements.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">This document requests the registration of the following key types in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-5" class="pilcrow">¶</a></p>
 <span id="name-algorithm-key-pair-type-for"></span><div id="jose-key-type">
 <table class="left" id="table-1">
         <caption>
@@ -1317,10 +1324,10 @@ When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a hr
         </tbody>
       </table>
 </div>
-<p id="section-3-5">An example truncated private key for use with ML-DSA-44 in JWK format is provided below:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-7">An example truncated private key for use with ML-DSA-44 in JWK format is provided below:<a href="#section-3-7" class="pilcrow">¶</a></p>
 <span id="name-the-all-zeros-ml-dsa-44-jso"></span><div id="json-web-key-example">
 <figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-3-6.1">
+        <div class="alignLeft art-text artwork" id="section-3-8.1">
 <pre>
 {
    "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
@@ -1335,7 +1342,7 @@ When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a hr
 <a href="#name-the-all-zeros-ml-dsa-44-jso" class="selfRef">The all zeros ML-DSA-44 JSON Web Key</a>
         </figcaption></figure>
 </div>
-<p id="section-3-7">This document requests the registration of the following key type in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-9">This document requests the registration of the following key type in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-3-9" class="pilcrow">¶</a></p>
 <span id="name-algorithm-key-pair-type-for-"></span><div id="cose-key-type">
 <table class="left" id="table-2">
         <caption>
@@ -1358,10 +1365,10 @@ When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a hr
         </tbody>
       </table>
 </div>
-<p id="section-3-9">An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-11">An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:<a href="#section-3-11" class="pilcrow">¶</a></p>
 <span id="name-the-all-zeros-ml-dsa-44-cos"></span><div id="cose-key-example">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="section-3-10.1">
+        <div class="alignLeft art-text artwork" id="section-3-12.1">
 <pre>
 {
    / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
@@ -1376,7 +1383,7 @@ When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a hr
 <a href="#name-the-all-zeros-ml-dsa-44-cos" class="selfRef">The all zeros ML-DSA-44 COSE Key</a>
         </figcaption></figure>
 </div>
-<p id="section-3-11">The AKP key type and thumbprint computation for the AKP key type is generic, and suitable for use with algorithms other than ML-DSA.<a href="#section-3-11" class="pilcrow">¶</a></p>
+<p id="section-3-13">The AKP key type and thumbprint computation for the AKP key type is generic, and suitable for use with algorithms other than ML-DSA.<a href="#section-3-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ml-dsa-private-keys">
@@ -1506,7 +1513,8 @@ with the parameter choices given in Table 1 of FIPS-204.<a href="#section-5-2" c
 See the ML-DSA Private Keys section of this document for more details.<a href="#section-5-11" class="pilcrow">¶</a></p>
 <p id="section-5-12">These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
 The ctx parameter <span class="bcp14">MUST</span> be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.<a href="#section-5-12" class="pilcrow">¶</a></p>
-<p id="section-5-13">In the case of JWS, the signature is base64url encoded, and the encoded signature size is larger than described in the table above.<a href="#section-5-13" class="pilcrow">¶</a></p>
+<p id="section-5-13">Signatures are encoded as bytestrings using th algorithms defined in Section 7.2 of FIPS-204.<a href="#section-5-13" class="pilcrow">¶</a></p>
+<p id="section-5-14">When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.<a href="#section-5-14" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="akp-thumbprints">
@@ -1578,6 +1586,21 @@ Use of thumbprints as described in <span>[<a href="#RFC7638" class="cite xref">R
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-regarding-hashml-dsa" class="section-name selfRef">Regarding HashML-DSA</a>
         </h3>
 <p id="section-7.2-1">This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of FIPS-204.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="validation-of-keys">
+<section id="section-7.3">
+        <h3 id="name-validation-of-keys">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-validation-of-keys" class="section-name selfRef">Validation of keys</a>
+        </h3>
+<p id="section-7.3-1">When an AKP algorithm requires or encourages that a key be validated before being used, the "pub" and "priv" parameters <span class="bcp14">MUST</span> be validated.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
+The "pub" key parameter <span class="bcp14">MUST</span> be validated according to the pkEncode and pkDecode algorithms before being used.
+For the ML-DSA algorithms registered in this document, the "priv" key parameter is a seed, and as such only a length check <span class="bcp14">MUST</span> be performed.
+The length of the seed is 256 bits, which is 32 bytes.
+However, if the private key derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms <span class="bcp14">MUST</span> be used.
+FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
+data and shall be treated with the same safeguards as a private key".<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
