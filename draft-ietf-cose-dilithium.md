@@ -87,11 +87,17 @@ Some examples in this specification are truncated using "..." for readability.
 
 # Algorithm Key Pair Type
 
+This section describes a generic cryptographic key structure for use with algorithms not limited to those registered in this document.
 The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
 When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED.
 
-The "pub" and "priv" parameters contain bytes.
-Some "alg" values MAY specify a structure or length checks for "pub" and "priv".
+The "pub" parameter contains a public key, this parameter contains public information.
+The "priv" parameter contains a private key, sometimes called a secret key, this parameter contains private information.
+The concept of public and private information classes originates from {{Section 8.1 of RFC7517}}.
+
+The "pub" and "priv" parameters contain byte strings in format specified by the "alg" value.
+These parameters MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
+
 When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.
 
 This document requests the registration of the following key types in {{-IANA.jose}}:
@@ -135,7 +141,6 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
 {: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
 
 The AKP key type and thumbprint computation for the AKP key type is generic, and suitable for use with algorithms other than ML-DSA.
-
 
 # ML-DSA Private Keys
 
@@ -187,7 +192,9 @@ See the ML-DSA Private Keys section of this document for more details.
 These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
 The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.
 
-In the case of JWS, the signature is base64url encoded, and the encoded signature size is larger than described in the table above.
+Signatures are encoded as bytestrings using th algorithms defined in Section 7.2 of FIPS-204.
+
+When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
 
 # AKP Thumbprints
 
@@ -230,6 +237,18 @@ Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the 
 ## Regarding HashML-DSA
 
 This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of FIPS-204.
+
+## Validation of keys
+
+When an AKP algorithm requires or encourages that a key be validated before being used, the "pub" and "priv" parameters MUST be validated.
+
+Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
+The "pub" key parameter MUST be validated according to the pkEncode and pkDecode algorithms before being used.
+For the ML-DSA algorithms registered in this document, the "priv" key parameter is a seed, and as such only a length check MUST be performed.
+The length of the seed is 256 bits, which is 32 bytes.
+However, if the private key derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
+FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
+data and shall be treated with the same safeguards as a private key".
 
 # IANA Considerations
 
