@@ -95,8 +95,8 @@ The "pub" parameter contains a public key, this parameter contains public inform
 The "priv" parameter contains a private key, sometimes called a secret key, this parameter contains private information.
 The concept of public and private information classes originates from {{Section 8.1 of RFC7517}}.
 
-The "pub" and "priv" parameters contain byte strings in format specified by the "alg" value.
-These parameters MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
+The "pub" and "priv" parameters contain byte strings in a format specified by the "alg" value.
+The values of "pub" and "priv" MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
 
 When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.
 
@@ -249,6 +249,11 @@ The length of the seed is 256 bits, which is 32 bytes.
 However, if the private key derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
 data and shall be treated with the same safeguards as a private key".
+
+## Mismatched AKP parameters
+
+When using an AKP key with an algorithm, it is possible that the "pub" and "priv" parameters have been tampered with or mismatched.
+Depending on the algorithm and implementation, the consequences of using mismatched parameters can range from operations failing to key compromise.
 
 # IANA Considerations
 
