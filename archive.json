@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-12T01:19:19.565878+00:00",
+  "timestamp": "2024-12-15T01:25:20.578421+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -425,13 +425,13 @@
       "labels": [],
       "body": "Attempting to address all feedback in 1 PR.\r\n\r\n- https://mailarchive.ietf.org/arch/msg/cose/LIEk3hcSOUmmttxtKZcLGcLRHUQ/\r\n- https://mailarchive.ietf.org/arch/msg/cose/QFFTOb5gRi__Muhx374ifk_2upQ/\r\n- https://mailarchive.ietf.org/arch/msg/cose/Pyja-pj1RYmkdMI2IrUHVRXSmi0/\r\n\r\nPending replies, I plan to add Neil, Russ and Lucas to acknowledgments section",
       "createdAt": "2024-12-11T17:53:44Z",
-      "updatedAt": "2024-12-11T21:11:10Z",
+      "updatedAt": "2024-12-13T15:14:48Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "aa623aec2dea27f840c677a20a5504d382d0725c",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "wglc-1-feedback",
-      "headRefOid": "c1cb473b0e7acee84efd7f600e69ed942f96e6e3",
+      "headRefOid": "81f463d9488382b878d9929b3a743c229b0d3f31",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -470,6 +470,26 @@
           "createdAt": "2024-12-11T21:11:10Z",
           "updatedAt": "2024-12-11T21:11:10Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLEMDO86VKZJu",
+          "commit": {
+            "abbreviatedOid": "c1cb473"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-13T15:14:48Z",
+          "updatedAt": "2024-12-13T15:14:48Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "I added (your) text to address this comment.\r\nLet me know if you would like further changes.\r\n",
+              "createdAt": "2024-12-13T15:14:48Z",
+              "updatedAt": "2024-12-13T15:14:48Z"
+            }
+          ]
         }
       ]
     }
