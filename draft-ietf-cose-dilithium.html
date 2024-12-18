@@ -11,11 +11,9 @@
 <meta content="Michael Osborne" name="author">
 <meta content="Christine Cloostermans" name="author">
 <meta content="
-       This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based digital signature scheme. 
-       This document does not define any new cryptography, only seralizations of existing cryptographic systems described in  . 
-       Note to RFC Editor: This document should not proceed to AUTH48 until NIST completes paramater tuning and selection as a part of the  PQC  standardization process. 
+       This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC) digital signature scheme defined in FIPS 204. 
     " name="description">
-<meta content="xml2rfc 3.24.0" name="generator">
+<meta content="xml2rfc 3.25.0" name="generator">
 <meta content="JOSE" name="keyword">
 <meta content="COSE" name="keyword">
 <meta content="PQC" name="keyword">
@@ -23,16 +21,16 @@
 <meta content="ML-DSA" name="keyword">
 <meta content="draft-ietf-cose-dilithium-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.24.0
-    Python 3.12.7
+  xml2rfc 3.25.0
+    Python 3.12.8
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.4
     lxml 5.3.0
     platformdirs 4.3.6
-    pycountry 22.3.5
-    PyYAML 6.0.1
+    pycountry 24.6.1
+    PyYAML 6.0.2
     requests 2.32.3
     setuptools 70.3.0
     wcwidth 0.2.13
@@ -544,7 +542,11 @@ figcaption, caption {
   }
   pre, svg {
     display: inline-block;
-    overflow-x: auto;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
   }
   pre {
     max-width: 100%;
@@ -1050,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">jose-cose-dilithium</td>
-<td class="right">November 2024</td>
+<td class="right">December 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Prorock, et al.</td>
-<td class="center">Expires 23 May 2025</td>
+<td class="center">Expires 21 June 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cose-dilithium-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-19" class="published">19 November 2024</time>
+<time datetime="2024-12-18" class="published">18 December 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-23">23 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-06-21">21 June 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,9 +1103,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">ML-DSA for JOSE and COSE</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), which was derived from Dilithium, a Post-Quantum Cryptography (PQC) based digital signature scheme.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">This document does not define any new cryptography, only seralizations of existing cryptographic systems described in <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span>.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
-<p id="section-abstract-3">Note to RFC Editor: This document should not proceed to AUTH48 until NIST completes paramater tuning and selection as a part of the <a href="https://csrc.nist.gov/projects/post-quantum-cryptography">PQC</a> standardization process.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC) digital signature scheme defined in FIPS 204.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1140,7 +1140,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1176,19 +1176,33 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-ml-dsa-algorithms" class="internal xref">ML-DSA Algorithms</a></p>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-algorithm-key-pair-type" class="internal xref">Algorithm Key Pair Type</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-algorithm-key-pair-type" class="internal xref">Algorithm Key Pair Type</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-ml-dsa-private-keys" class="internal xref">ML-DSA Private Keys</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-ml-dsa-private-keys" class="internal xref">ML-DSA Private Keys</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-ml-dsa-algorithms" class="internal xref">ML-DSA Algorithms</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-akp-thumbprints" class="internal xref">AKP Thumbprints</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-size-of-keys-and-signatures" class="internal xref">Size of keys and signatures</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-regarding-hashml-dsa" class="internal xref">Regarding HashML-DSA</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-validation-of-keys" class="internal xref">Validation of keys</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-mismatched-akp-parameters" class="internal xref">Mismatched AKP parameters</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
@@ -1261,8 +1275,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">This document describes how to use ML-DSA keys and signatures as described in <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span> with JOSE and COSE.
-To reduce implementation burden, the key type and thumbprint computations for ML-DSA are generic, and suitable for use with other algorithms such as SLH-DSA as described in <span>[<a href="#I-D.draft-ietf-cose-sphincs-plus" class="cite xref">I-D.draft-ietf-cose-sphincs-plus</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This document describes how to use ML-DSA keys and signatures as described in <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span> with JOSE and COSE.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
@@ -1274,25 +1287,137 @@ To reduce implementation burden, the key type and thumbprint computations for ML
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Some examples in this specification are truncated using "..." for readability.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="ml-dsa-algorithms">
+<div id="algorithm-key-pair-type">
 <section id="section-3">
-      <h2 id="name-ml-dsa-algorithms">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-ml-dsa-algorithms" class="section-name selfRef">ML-DSA Algorithms</a>
+      <h2 id="name-algorithm-key-pair-type">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-algorithm-key-pair-type" class="section-name selfRef">Algorithm Key Pair Type</a>
       </h2>
-<p id="section-3-1">The ML-DSA Signature Scheme is paramaterized to support different security levels.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">This document requests the registration of the following algorithms in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-2" class="pilcrow">¶</a></p>
-<span id="name-jose-algorithms-for-ml-dsa"></span><div id="jose-algorithms">
+<p id="section-3-1">This section describes a generic cryptographic key structure for use with algorithms not limited to those registered in this document.
+The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
+When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is <span class="bcp14">REQUIRED</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">The "pub" parameter contains a public key, this parameter contains public information.
+The "priv" parameter contains a private key, sometimes called a secret key, this parameter contains private information.
+The concept of public and private information classes originates from <span><a href="https://rfc-editor.org/rfc/rfc7517#section-8.1" class="relref">Section 8.1</a> of [<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">The "pub" and "priv" parameters contain byte strings in a format specified by the "alg" value.
+The values of "pub" and "priv" <span class="bcp14">MAY</span> have additional structure or length checks depending on the associated "alg" parameter and its requirements.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">This document requests the registration of the following key types in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<span id="name-algorithm-key-pair-type-for"></span><div id="jose-key-type">
 <table class="left" id="table-1">
         <caption>
 <a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-algorithm-key-pair-type-for" class="selfRef">Algorithm Key Pair Type for JOSE</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Name</th>
+            <th class="text-left" rowspan="1" colspan="1">kty</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Algorithm Key Pair</td>
+            <td class="text-left" rowspan="1" colspan="1">AKP</td>
+            <td class="text-left" rowspan="1" colspan="1">JSON Web Key Type for the Algorithm Key Pair.</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<p id="section-3-7">An example truncated private key for use with ML-DSA-44 in JWK format is provided below:<a href="#section-3-7" class="pilcrow">¶</a></p>
+<span id="name-the-all-zeros-ml-dsa-44-jso"></span><div id="json-web-key-example">
+<figure id="figure-1">
+        <div class="alignLeft art-text artwork" id="section-3-8.1">
+<pre>
+{
+   "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
+   "kty": "AKP",
+   "alg": "ML-DSA-44",
+   "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
+   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-the-all-zeros-ml-dsa-44-jso" class="selfRef">The all zeros ML-DSA-44 JSON Web Key</a>
+        </figcaption></figure>
+</div>
+<p id="section-3-9">This document requests the registration of the following key type in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-3-9" class="pilcrow">¶</a></p>
+<span id="name-algorithm-key-pair-type-for-"></span><div id="cose-key-type">
+<table class="left" id="table-2">
+        <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-algorithm-key-pair-type-for-" class="selfRef">Algorithm Key Pair Type for COSE</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Name</th>
+            <th class="text-left" rowspan="1" colspan="1">kty</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">AKP</td>
+            <td class="text-left" rowspan="1" colspan="1">TBD (requested assignment 7)</td>
+            <td class="text-left" rowspan="1" colspan="1">COSE Key Type for the Algorithm Key Pair.</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<p id="section-3-11">An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:<a href="#section-3-11" class="pilcrow">¶</a></p>
+<span id="name-the-all-zeros-ml-dsa-44-cos"></span><div id="cose-key-example">
+<figure id="figure-2">
+        <div class="alignLeft art-text artwork" id="section-3-12.1">
+<pre>
+{
+   / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
+   / kty /   1: 7, / AKP /
+   / alg /   3: -48, / ML-DSA-44 /
+   / pub  / -1: h'ba71f9f64e11baeb58...c3830546b9dd8db0d',
+   / priv / -2: h'00000000000000...0000000000000000'
+}
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-the-all-zeros-ml-dsa-44-cos" class="selfRef">The all zeros ML-DSA-44 COSE Key</a>
+        </figcaption></figure>
+</div>
+<p id="section-3-13">The AKP key type and thumbprint computation for the AKP key type is generic, and suitable for use with algorithms other than ML-DSA.<a href="#section-3-13" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="ml-dsa-private-keys">
+<section id="section-4">
+      <h2 id="name-ml-dsa-private-keys">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-ml-dsa-private-keys" class="section-name selfRef">ML-DSA Private Keys</a>
+      </h2>
+<p id="section-4-1">Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
+For the algorithms defined in this document, the "priv" parameter is always the seed, and never the expanded expression.
+This definition mirrors the one used in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-05#section-6" class="relref">Section 6</a> of [<a href="#I-D.draft-ietf-lamps-dilithium-certificates" class="cite xref">I-D.draft-ietf-lamps-dilithium-certificates</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="ml-dsa-algorithms">
+<section id="section-5">
+      <h2 id="name-ml-dsa-algorithms">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-ml-dsa-algorithms" class="section-name selfRef">ML-DSA Algorithms</a>
+      </h2>
+<p id="section-5-1">The ML-DSA Signature Scheme is parameterized to support different security levels.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA
+with the parameter choices given in Table 1 of FIPS-204.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">This document requests the registration of the following algorithms in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-5-3" class="pilcrow">¶</a></p>
+<span id="name-jose-algorithms-for-ml-dsa"></span><div id="jose-algorithms">
+<table class="left" id="table-3">
+        <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
 <a href="#name-jose-algorithms-for-ml-dsa" class="selfRef">JOSE algorithms for ML-DSA</a>
         </caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Name</th>
-            <th class="text-left" rowspan="1" colspan="1">alg</th>
+            <th class="text-left" rowspan="1" colspan="1">value</th>
             <th class="text-left" rowspan="1" colspan="1">Description</th>
           </tr>
         </thead>
@@ -1315,17 +1440,17 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         </tbody>
       </table>
 </div>
-<p id="section-3-4">This document requests the registration of the following algorithms in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">This document requests the registration of the following algorithms in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-5-5" class="pilcrow">¶</a></p>
 <span id="name-cose-algorithms-for-ml-dsa"></span><div id="cose-algorithms">
-<table class="left" id="table-2">
+<table class="left" id="table-4">
         <caption>
-<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#table-4" class="selfRef">Table 4</a>:
 <a href="#name-cose-algorithms-for-ml-dsa" class="selfRef">COSE algorithms for ML-DSA</a>
         </caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Name</th>
-            <th class="text-left" rowspan="1" colspan="1">alg</th>
+            <th class="text-left" rowspan="1" colspan="1">value</th>
             <th class="text-left" rowspan="1" colspan="1">Description</th>
           </tr>
         </thead>
@@ -1348,105 +1473,51 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         </tbody>
       </table>
 </div>
-</section>
-</div>
-<div id="algorithm-key-pair-type">
-<section id="section-4">
-      <h2 id="name-algorithm-key-pair-type">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-algorithm-key-pair-type" class="section-name selfRef">Algorithm Key Pair Type</a>
-      </h2>
-<p id="section-4-1">The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
-When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is <span class="bcp14">REQUIRED</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">This document requests the registration of the following key types in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-4-2" class="pilcrow">¶</a></p>
-<span id="name-algorithm-key-pair-type-for"></span><div id="jose-key-type">
-<table class="left" id="table-3">
+<p id="section-5-7">In accordance with Algorithm Key Pair Type section of this document, when present in AKP Keys the "pub" and "priv" parameters have the following additional constraints:<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-8">The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of FIPS-204.<a href="#section-5-8" class="pilcrow">¶</a></p>
+<p id="section-5-9">The size of "pub", and the associated signature for each of these algorithms is defined in Table 2 of FIPS-204, and repeated here for convenience:<a href="#section-5-9" class="pilcrow">¶</a></p>
+<span id="name-sizes-in-bytes-of-keys-and-"></span><div id="fips-204-table-2">
+<table class="left" id="table-5">
         <caption>
-<a href="#table-3" class="selfRef">Table 3</a>:
-<a href="#name-algorithm-key-pair-type-for" class="selfRef">Algorithm Key Pair Type for JOSE</a>
+<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#name-sizes-in-bytes-of-keys-and-" class="selfRef">Sizes (in bytes) of keys and signatures of ML-DSA</a>
         </caption>
 <thead>
           <tr>
-            <th class="text-left" rowspan="1" colspan="1">Name</th>
-            <th class="text-left" rowspan="1" colspan="1">kty</th>
-            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">Algorithm</th>
+            <th class="text-left" rowspan="1" colspan="1">Private Key</th>
+            <th class="text-left" rowspan="1" colspan="1">Public Key</th>
+            <th class="text-left" rowspan="1" colspan="1">Signature Size</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">Algorithm Key Pair</td>
-            <td class="text-left" rowspan="1" colspan="1">AKP</td>
-            <td class="text-left" rowspan="1" colspan="1">JSON Web Key Type for the Algorithm Key Pair.</td>
+            <td class="text-left" rowspan="1" colspan="1">ML-DSA-44</td>
+            <td class="text-left" rowspan="1" colspan="1">2560</td>
+            <td class="text-left" rowspan="1" colspan="1">1312</td>
+            <td class="text-left" rowspan="1" colspan="1">2420</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">ML-DSA-65</td>
+            <td class="text-left" rowspan="1" colspan="1">4032</td>
+            <td class="text-left" rowspan="1" colspan="1">1952</td>
+            <td class="text-left" rowspan="1" colspan="1">3309</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">ML-DSA-87</td>
+            <td class="text-left" rowspan="1" colspan="1">4896</td>
+            <td class="text-left" rowspan="1" colspan="1">2592</td>
+            <td class="text-left" rowspan="1" colspan="1">4627</td>
           </tr>
         </tbody>
       </table>
 </div>
-<span id="name-the-all-zeros-ml-dsa-44-jso"></span><div id="json-web-key-example">
-<figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-4-4.1">
-<pre>
-{
-   "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
-   "kty": "AKP",
-   "alg": "ML-DSA-44",
-   "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
-   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-}
-</pre>
-</div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-the-all-zeros-ml-dsa-44-jso" class="selfRef">The all zeros ML-DSA-44 JSON Web Key</a>
-        </figcaption></figure>
-</div>
-<p id="section-4-5">This document requests the registration of the following algorithms in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-4-5" class="pilcrow">¶</a></p>
-<span id="name-algorithm-key-pair-type-for-"></span><div id="cose-key-type">
-<table class="left" id="table-4">
-        <caption>
-<a href="#table-4" class="selfRef">Table 4</a>:
-<a href="#name-algorithm-key-pair-type-for-" class="selfRef">Algorithm Key Pair Type for COSE</a>
-        </caption>
-<thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Name</th>
-            <th class="text-left" rowspan="1" colspan="1">kty</th>
-            <th class="text-left" rowspan="1" colspan="1">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">AKP</td>
-            <td class="text-left" rowspan="1" colspan="1">TBD (requested assignment 7)</td>
-            <td class="text-left" rowspan="1" colspan="1">COSE Key Type for the Algorithm Key Pair.</td>
-          </tr>
-        </tbody>
-      </table>
-</div>
-<span id="name-the-all-zeros-ml-dsa-44-cos"></span><div id="cose-key-example">
-<figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="section-4-7.1">
-<pre>
-{
-   / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
-   / kty /   1: 7, / AKP /
-   / alg /   3: -48, / ML-DSA-44 /
-   / pub  / -1: h'ba71f9f64e11baeb58...c3830546b9dd8db0d',
-   / priv / -2: h'00000000000000...0000000000000000'
-}
-</pre>
-</div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-the-all-zeros-ml-dsa-44-cos" class="selfRef">The all zeros ML-DSA-44 COSE Key</a>
-        </figcaption></figure>
-</div>
-</section>
-</div>
-<div id="ml-dsa-private-keys">
-<section id="section-5">
-      <h2 id="name-ml-dsa-private-keys">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-ml-dsa-private-keys" class="section-name selfRef">ML-DSA Private Keys</a>
-      </h2>
-<p id="section-5-1">Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
-For the algorithms defined in this document, the private key is always the seed, and never the expanded expression.
-The AKP Key Type <span class="bcp14">MAY</span> be used with algorithms not defined in this specification, and those algorithms <span class="bcp14">MAY</span> encode their private keys differently.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-11">Note that "priv" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes in the table above.
+See the ML-DSA Private Keys section of this document for more details.<a href="#section-5-11" class="pilcrow">¶</a></p>
+<p id="section-5-12">These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
+The ctx parameter <span class="bcp14">MUST</span> be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.<a href="#section-5-12" class="pilcrow">¶</a></p>
+<p id="section-5-13">Signatures are encoded as bytestrings using th algorithms defined in Section 7.2 of FIPS-204.<a href="#section-5-13" class="pilcrow">¶</a></p>
+<p id="section-5-14">When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.<a href="#section-5-14" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="akp-thumbprints">
@@ -1502,6 +1573,48 @@ The AKP Key Type <span class="bcp14">MAY</span> be used with algorithms not defi
       </h2>
 <p id="section-7-1">The security considerations of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> and <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> applies to this specification as well.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">A detailed security analysis of ML-DSA is beyond the scope of this specification, see <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span> for additional details.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<div id="size-of-keys-and-signatures">
+<section id="section-7.1">
+        <h3 id="name-size-of-keys-and-signatures">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-size-of-keys-and-signatures" class="section-name selfRef">Size of keys and signatures</a>
+        </h3>
+<p id="section-7.1-1">Table 2 of FIPS-204 describes the size of keys and signatures.
+ML-DSA might not be the best choice for use cases that require small keys or signatures.
+Use of thumbprints as described in <span>[<a href="#RFC7638" class="cite xref">RFC7638</a>]</span> and <span>[<a href="#I-D.draft-ietf-cose-key-thumbprint" class="cite xref">I-D.draft-ietf-cose-key-thumbprint</a>]</span> can reduce the need to repeat public key representations.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="regarding-hashml-dsa">
+<section id="section-7.2">
+        <h3 id="name-regarding-hashml-dsa">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-regarding-hashml-dsa" class="section-name selfRef">Regarding HashML-DSA</a>
+        </h3>
+<p id="section-7.2-1">This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of FIPS-204.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="validation-of-keys">
+<section id="section-7.3">
+        <h3 id="name-validation-of-keys">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-validation-of-keys" class="section-name selfRef">Validation of keys</a>
+        </h3>
+<p id="section-7.3-1">When an AKP algorithm requires or encourages that a key be validated before being used, the "pub" and "priv" parameters <span class="bcp14">MUST</span> be validated.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
+The "pub" key parameter <span class="bcp14">MUST</span> be validated according to the pkEncode and pkDecode algorithms before being used.
+For the ML-DSA algorithms registered in this document, the "priv" key parameter is a seed, and as such only a length check <span class="bcp14">MUST</span> be performed.
+The length of the seed is 256 bits, which is 32 bytes.
+However, if the private key derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms <span class="bcp14">MUST</span> be used.
+FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
+data and shall be treated with the same safeguards as a private key".<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="mismatched-akp-parameters">
+<section id="section-7.4">
+        <h3 id="name-mismatched-akp-parameters">
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-mismatched-akp-parameters" class="section-name selfRef">Mismatched AKP parameters</a>
+        </h3>
+<p id="section-7.4-1">When using an AKP key with an algorithm, it is possible that the "pub" and "priv" parameters have been tampered with or mismatched.
+Depending on the algorithm and implementation, the consequences of using mismatched parameters can range from operations failing to key compromise.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1656,7 +1769,7 @@ The following completed registration templates are provided as described in RFC9
               <p id="section-8.1.4-1.1.1">Key Type: TBD (requested assignment 7)<a href="#section-8.1.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.1.4-1.2">
-              <p id="section-8.1.4-1.2.1">Name: public_key<a href="#section-8.1.4-1.2.1" class="pilcrow">¶</a></p>
+              <p id="section-8.1.4-1.2.1">Name: pub<a href="#section-8.1.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.1.4-1.3">
               <p id="section-8.1.4-1.3.1">Label: -1<a href="#section-8.1.4-1.3.1" class="pilcrow">¶</a></p>
@@ -1683,7 +1796,7 @@ The following completed registration templates are provided as described in RFC9
               <p id="section-8.1.5-1.1.1">Key Type: TBD (requested assignment 7)<a href="#section-8.1.5-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.1.5-1.2">
-              <p id="section-8.1.5-1.2.1">Name: private_key<a href="#section-8.1.5-1.2.1" class="pilcrow">¶</a></p>
+              <p id="section-8.1.5-1.2.1">Name: priv<a href="#section-8.1.5-1.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.1.5-1.3">
               <p id="section-8.1.5-1.3.1">Label: -2<a href="#section-8.1.5-1.3.1" class="pilcrow">¶</a></p>
@@ -1923,10 +2036,6 @@ The following completed registration templates are provided as described in RFC7
         <dd>
 <span class="refAuthor">Isobe, K.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) Key Thumbprint"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-key-thumbprint-06</span>, <time datetime="2024-09-06" class="refDate">6 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-key-thumbprint-06">https://datatracker.ietf.org/doc/html/draft-ietf-cose-key-thumbprint-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.draft-ietf-cose-sphincs-plus">[I-D.draft-ietf-cose-sphincs-plus]</dt>
-        <dd>
-<span class="refAuthor">Prorock, M.</span>, <span class="refAuthor">Steele, O.</span>, <span class="refAuthor">Misoczki, R.</span>, <span class="refAuthor">Osborne, M.</span>, and <span class="refAuthor">C. Cloostermans</span>, <span class="refTitle">"SLH-DSA for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-sphincs-plus-05</span>, <time datetime="2024-10-20" class="refDate">20 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-sphincs-plus-05">https://datatracker.ietf.org/doc/html/draft-ietf-cose-sphincs-plus-05</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="IANA.cose">[IANA.cose]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/cose">https://www.iana.org/assignments/cose</a>&gt;</span>. </dd>
@@ -1971,6 +2080,10 @@ The following completed registration templates are provided as described in RFC7
 <dt id="FIPS-204">[FIPS-204]</dt>
         <dd>
 <span class="refTitle">"Module-Lattice-Based Digital Signature Standard"</span>, <span>n.d.</span>, <span>&lt;<a href="https://doi.org/10.6028/NIST.FIPS.204">https://doi.org/10.6028/NIST.FIPS.204</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.draft-ietf-lamps-dilithium-certificates">[I-D.draft-ietf-lamps-dilithium-certificates]</dt>
+        <dd>
+<span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-DSA"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-dilithium-certificates-05</span>, <time datetime="2024-11-04" class="refDate">4 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-05">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="NIST-PQC-2022">[NIST-PQC-2022]</dt>
       <dd>
@@ -2139,7 +2252,7 @@ The following completed registration templates are provided as described in RFC7
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-B-1">We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite, and Russ Housley for their review feedback.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite, Russ Housley, and Lucas Prabel for their comments and reviews of this document.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
