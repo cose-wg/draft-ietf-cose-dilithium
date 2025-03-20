@@ -91,7 +91,7 @@ This section describes a generic cryptographic key structure for use with algori
 The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
 When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED.
 
-The "pub" parameter contains a public key, this parameter contains public information.
+The "pub" parameter contains a public key, this parameter contains public information and is REQUIRED.
 The "priv" parameter contains a private key, sometimes called a secret key, this parameter contains private information.
 The concept of public and private information classes originates from {{Section 8.1 of RFC7517}}.
 
@@ -443,4 +443,4 @@ The following completed registration templates are provided as described in RFC7
 # Acknowledgments
 {:numbered="false"}
 
-We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite, Russ Housley, and Lucas Prabel for their comments and reviews of this document.
+We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite, Russ Housley, Filip Skokan, and Lucas Prabel for their comments and reviews of this document.
