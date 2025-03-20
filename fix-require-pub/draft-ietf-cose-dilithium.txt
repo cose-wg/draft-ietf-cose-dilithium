@@ -5,14 +5,14 @@
 CBOR Object Signing and Encryption                            M. Prorock
 Internet-Draft                                                  mesur.io
 Intended status: Standards Track                               O. Steele
-Expires: 21 June 2025                                          Transmute
+Expires: 21 September 2025                                     Transmute
                                                              R. Misoczki
                                                                   Google
                                                               M. Osborne
                                                                      IBM
                                                          C. Cloostermans
                                                                      NXP
-                                                        18 December 2024
+                                                           20 March 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 June 2025.
+   This Internet-Draft will expire on 21 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -131,10 +131,10 @@ Table of Contents
    REQUIRED.
 
    The "pub" parameter contains a public key, this parameter contains
-   public information.  The "priv" parameter contains a private key,
-   sometimes called a secret key, this parameter contains private
-   information.  The concept of public and private information classes
-   originates from Section 8.1 of [RFC7517].
+   public information and is REQUIRED.  The "priv" parameter contains a
+   private key, sometimes called a secret key, this parameter contains
+   private information.  The concept of public and private information
+   classes originates from Section 8.1 of [RFC7517].
 
    The "pub" and "priv" parameters contain byte strings in a format
    specified by the "alg" value.  The values of "pub" and "priv" MAY
@@ -647,9 +647,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure:
               Algorithm Identifiers for ML-DSA", Work in Progress,
               Internet-Draft, draft-ietf-lamps-dilithium-certificates-
-              05, 4 November 2024,
+              07, 2 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              dilithium-certificates-05>.
+              dilithium-certificates-07>.
 
    [NIST-PQC-2022]
               "Selected Algorithms 2022", n.d.,
@@ -755,8 +755,8 @@ A.2.  COSE
 Acknowledgments
 
    We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden,
-   Anders Rundgren, David Waite, Russ Housley, and Lucas Prabel for
-   their comments and reviews of this document.
+   Anders Rundgren, David Waite, Russ Housley, Filip Skokan, and Lucas
+   Prabel for their comments and reviews of this document.
 
 Authors' Addresses
 
