@@ -91,14 +91,17 @@ This section describes a generic cryptographic key structure for use with algori
 The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
 When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED.
 
+The concept of public and private information classes for key pairs originates from {{Section 8.1 of RFC7517}}.
+
 The "pub" parameter contains a public key, this parameter contains public information and is REQUIRED.
-The "priv" parameter contains a private key, sometimes called a secret key, this parameter contains private information.
-The concept of public and private information classes originates from {{Section 8.1 of RFC7517}}.
+The label(s) for private information is dependent on the "alg" parameter.
+Typically, a single "priv" parameter is necessary to express the private information needed to represent a private key.
+When registering new algorithms, use of multiple labels for private information is NOT RECOMMENDED.
 
-The "pub" and "priv" parameters contain byte strings in a format specified by the "alg" value.
-The values of "pub" and "priv" MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
+The public and private information classes contain byte strings in a format specified by the "alg" value.
+These classes MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
 
-When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.
+When AKP keys are expressed in JWK, values for the public and private information classes are base64url encoded.
 
 This document requests the registration of the following key types in {{-IANA.jose}}:
 
@@ -134,7 +137,7 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
    / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
    / kty /   1: 7, / AKP /
    / alg /   3: -48, / ML-DSA-44 /
-   / pub  / -1: h'ba71f9f64e11baeb58...c3830546b9dd8db0d',
+   / pub  / -1: h'ba71f9f64e11baeb589...3830546b9dd8db0d',
    / priv / -2: h'00000000000000...0000000000000000'
 }
 ~~~
@@ -144,9 +147,30 @@ The AKP key type and thumbprint computation for the AKP key type is generic, and
 
 # ML-DSA Private Keys
 
-Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
-For the algorithms defined in this document, the "priv" parameter is always the seed, and never the expanded expression.
-This definition mirrors the one used in {{Section 6 of -ML-DSA-CERTS}}.
+Note that FIPS 204 defines 2 expressions for private keys: a seed (priv), and a private key that is expanded from the seed (priv_exp).
+
+Similar to {{-ML-DSA-CERTS}} the following cases are possible:
+
+1. Only the "priv" parameter is present.
+2. Only the "priv_exp" parameter is present.
+3. Both parameters are present.
+
+For ML-DSA keys, when "priv" is present, it MUST have a length of 32 bytes.
+When both "priv" and "priv_exp" are present, the "priv" parameter MUST expand to the "priv_exp" parameter.
+
+Here is an ellided example of the case where both "priv" and "priv_exp" are present:
+
+~~~
+{
+   "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
+   "kty": "AKP",
+   "alg": "ML-DSA-44",
+   "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
+   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+   "priv_exp": "129kadu...DZgbTP07e7gEWzw4MFRr54"
+}
+~~~
+{: #json-web-key-example-both-present align="left" title="The all zeros ML-DSA-44 JSON Web Key with both priv and priv_exp parameters"}
 
 # ML-DSA Algorithms
 
@@ -173,7 +197,7 @@ This document requests the registration of the following algorithms in {{-IANA.c
 | ML-DSA-87  | TBD (requested assignment -50)     | CBOR Object Signing Algorithm for ML-DSA-87
 {: #cose-algorithms align="left" title="COSE algorithms for ML-DSA"}
 
-In accordance with Algorithm Key Pair Type section of this document, when present in AKP Keys the "pub" and "priv" parameters have the following additional constraints:
+In accordance with Algorithm Key Pair Type section of this document, ML-DSA key parameters have the following additional constraints:
 
 The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of FIPS-204.
 
@@ -186,13 +210,13 @@ The size of "pub", and the associated signature for each of these algorithms is 
 | ML-DSA-87  | 4896 | 2592 | 4627
 {: #fips-204-table-2 align="left" title="Sizes (in bytes) of keys and signatures of ML-DSA"}
 
-Note that "priv" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes in the table above.
+Note that "priv" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes for "priv_exp" in the table above.
 See the ML-DSA Private Keys section of this document for more details.
 
 These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
 The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.
 
-Signatures are encoded as bytestrings using th algorithms defined in Section 7.2 of FIPS-204.
+Signatures are encoded as bytestrings using the algorithms defined in Section 7.2 of FIPS-204.
 
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
 
@@ -240,19 +264,20 @@ This document does not specify algorithms for use with HashML-DSA as described i
 
 ## Validation of keys
 
-When an AKP algorithm requires or encourages that a key be validated before being used, the "pub" and "priv" parameters MUST be validated.
+When an AKP algorithm requires or encourages that a key be validated before being used, all algorithm related key parameters MUST be validated.
 
 Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
 The "pub" key parameter MUST be validated according to the pkEncode and pkDecode algorithms before being used.
 For the ML-DSA algorithms registered in this document, the "priv" key parameter is a seed, and as such only a length check MUST be performed.
 The length of the seed is 256 bits, which is 32 bytes.
-However, if the private key derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
+However, if the private key ("priv_exp") is derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
 data and shall be treated with the same safeguards as a private key".
 
+
 ## Mismatched AKP parameters
 
-When using an AKP key with an algorithm, it is possible that the "pub" and "priv" parameters have been tampered with or mismatched.
+When using an AKP key with an algorithm, it is possible that the public and private information class parameters have been tampered with or mismatched.
 Depending on the algorithm and implementation, the consequences of using mismatched parameters can range from operations failing to key compromise.
 
 # IANA Considerations
@@ -319,13 +344,22 @@ The following completed registration templates are provided as described in RFC9
 * Description: Public key
 * Reference: RFC XXXX
 
-### ML-DSA Private Key
+### ML-DSA Private Key Seed
 
 * Key Type: TBD (requested assignment 7)
 * Name: priv
 * Label: -2
 * CBOR Type: bstr
-* Description: Private key or seed used to derive a private key.
+* Description: Private key
+* Reference: RFC XXXX
+
+### ML-DSA Private Key Expanded
+
+* Key Type: TBD (requested assignment 7)
+* Name: priv_exp
+* Label: -3
+* CBOR Type: bstr
+* Description: Private key expanded form
 * Reference: RFC XXXX
 
 ### New JOSE Algorithms
@@ -393,10 +427,19 @@ The following completed registration templates are provided as described in RFC7
 * Change Controller: IETF
 * Specification Document(s): RFC XXXX
 
-#### AKP Private Key
+#### AKP Private Key Seed
 
 * Parameter Name: priv
-* Parameter Description: Private key or seed used to derive a private key.
+* Parameter Description: Private key
+* Used with "kty" Value(s): AKP
+* Parameter Information Class: Private
+* Change Controller: IETF
+* Specification Document(s): RFC XXXX
+
+#### AKP Private Key Expanded
+
+* Parameter Name: priv_exp
+* Parameter Description: Private key expanded form
 * Used with "kty" Value(s): AKP
 * Parameter Information Class: Private
 * Change Controller: IETF
