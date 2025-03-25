@@ -135,11 +135,10 @@ Table of Contents
    originates from Section 8.1 of [RFC7517].
 
    The "pub" parameter contains a public key, this parameter contains
-   public information and is REQUIRED.  The label(s) for private
-   information is dependent on the "alg" parameter.  Typically, a single
-   "priv" parameter is necessary to express the private information
-   needed to represent a private key.  When registering new algorithms,
-   use of multiple labels for private information is NOT RECOMMENDED.
+   public information and is REQUIRED.  Typically, a single "priv"
+   parameter is necessary to express the private information needed to
+   represent a private key.  When registering new algorithms, use of
+   multiple labels for private information is NOT RECOMMENDED.
 
    The public and private information classes contain byte strings in a
    format specified by the "alg" value.  These classes MAY have
