@@ -95,7 +95,7 @@ The concept of public and private information classes for key pairs originates f
 
 The "pub" parameter contains a public key, this parameter contains public information and is REQUIRED.
 Typically, a single "priv" parameter is necessary to express the private information needed to represent a private key.
-When registering new algorithms, use of multiple labels for private information is NOT RECOMMENDED.
+When registering new algorithms, use of multiple key parameters for private information is NOT RECOMMENDED.
 
 The key parameters for public and private information classes contain byte strings in a format specified by the "alg" value.
 These classes MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
