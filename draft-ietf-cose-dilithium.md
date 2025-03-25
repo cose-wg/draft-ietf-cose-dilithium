@@ -97,7 +97,7 @@ The "pub" parameter contains a public key, this parameter contains public inform
 Typically, a single "priv" parameter is necessary to express the private information needed to represent a private key.
 When registering new algorithms, use of multiple labels for private information is NOT RECOMMENDED.
 
-The public and private information classes contain byte strings in a format specified by the "alg" value.
+The key parameters for public and private information classes contain byte strings in a format specified by the "alg" value.
 These classes MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
 
 When AKP keys are expressed in JWK, values for the public and private information classes are base64url encoded.
