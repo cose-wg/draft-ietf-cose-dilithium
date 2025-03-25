@@ -92,7 +92,7 @@ Table of Contents
        8.1.2.  New COSE Key Types
        8.1.3.  New COSE Key Type Parameters
        8.1.4.  ML-DSA Public Key
-       8.1.5.  ML-DSA Private Key Seed
+       8.1.5.  ML-DSA Private Key
        8.1.6.  ML-DSA Private Key Expanded
        8.1.7.  New JOSE Algorithms
        8.1.8.  New JOSE Key Types
@@ -496,7 +496,7 @@ Table of Contents
 
    *  Reference: RFC XXXX
 
-8.1.5.  ML-DSA Private Key Seed
+8.1.5.  ML-DSA Private Key
 
    *  Key Type: TBD (requested assignment 7)
 
