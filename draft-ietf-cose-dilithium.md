@@ -156,6 +156,7 @@ Similar to {{-ML-DSA-CERTS}} the following cases are possible:
 
 For ML-DSA keys, when "priv" is present, it MUST have a length of 32 bytes.
 When both "priv" and "priv_exp" are present, the "priv" parameter MUST expand to the "priv_exp" parameter.
+See Security Considerations of this document for details.
 
 Here is an ellided example of the case where both "priv" and "priv_exp" are present:
 
