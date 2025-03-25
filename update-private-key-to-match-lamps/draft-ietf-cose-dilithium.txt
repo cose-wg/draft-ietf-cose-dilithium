@@ -623,7 +623,7 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-8.1.9.2.  AKP Private Key Seed
+8.1.9.2.  AKP Private Key
 
    *  Parameter Name: priv
 
