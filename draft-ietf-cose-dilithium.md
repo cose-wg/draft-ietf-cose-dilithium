@@ -427,7 +427,7 @@ The following completed registration templates are provided as described in RFC7
 * Change Controller: IETF
 * Specification Document(s): RFC XXXX
 
-#### AKP Private Key Seed
+#### AKP Private Key
 
 * Parameter Name: priv
 * Parameter Description: Private key
