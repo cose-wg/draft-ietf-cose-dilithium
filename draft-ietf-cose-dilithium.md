@@ -94,7 +94,6 @@ When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common P
 The concept of public and private information classes for key pairs originates from {{Section 8.1 of RFC7517}}.
 
 The "pub" parameter contains a public key, this parameter contains public information and is REQUIRED.
-The label(s) for private information is dependent on the "alg" parameter.
 Typically, a single "priv" parameter is necessary to express the private information needed to represent a private key.
 When registering new algorithms, use of multiple labels for private information is NOT RECOMMENDED.
 
