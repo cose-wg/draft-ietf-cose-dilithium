@@ -100,7 +100,7 @@ When registering new algorithms, use of multiple key parameters for private info
 The key parameters for public and private information classes contain byte strings in a format specified by the "alg" value.
 These classes MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
 
-When AKP keys are expressed in JWK, values for the public and private information classes are base64url encoded.
+When AKP keys are expressed in JWK, key parameters are base64url encoded.
 
 This document requests the registration of the following key types in {{-IANA.jose}}:
 
