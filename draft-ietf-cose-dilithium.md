@@ -344,7 +344,7 @@ The following completed registration templates are provided as described in RFC9
 * Description: Public key
 * Reference: RFC XXXX
 
-### ML-DSA Private Key Seed
+### ML-DSA Private Key
 
 * Key Type: TBD (requested assignment 7)
 * Name: priv
