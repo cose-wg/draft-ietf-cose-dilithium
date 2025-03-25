@@ -138,7 +138,7 @@ Table of Contents
    public information and is REQUIRED.  Typically, a single "priv"
    parameter is necessary to express the private information needed to
    represent a private key.  When registering new algorithms, use of
-   multiple labels for private information is NOT RECOMMENDED.
+   multiple key parameters for private information is NOT RECOMMENDED.
 
    The key parameters for public and private information classes contain
    byte strings in a format specified by the "alg" value.  These classes
