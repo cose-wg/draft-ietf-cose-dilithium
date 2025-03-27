@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T01:10:43.355676+00:00",
+  "timestamp": "2025-03-27T01:18:08.034628+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -515,6 +515,215 @@
               "body": "I added (your) text to address this comment.\r\nLet me know if you would like further changes.\r\n",
               "createdAt": "2024-12-13T15:14:48Z",
               "updatedAt": "2024-12-13T15:14:48Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOLEMDO86PYRWs",
+      "title": "Clarify that pub is required for AKP",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/15",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/cose/zk85SqBgDTK88PZCcWs5sgChopQ/",
+      "createdAt": "2025-03-20T02:05:15Z",
+      "updatedAt": "2025-03-25T14:40:09Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "1cc4dbd1886581d00e2a93b1c0a4ef284aaf7956",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "fix-require-pub",
+      "headRefOid": "2b74c5d8f1bde1eb8d20d465294841133ab17dda",
+      "closedAt": "2025-03-25T14:40:09Z",
+      "mergedAt": "2025-03-25T14:40:09Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "975d8b52314a24572e965df17684d8900682792d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO86hBKXE",
+          "commit": {
+            "abbreviatedOid": "2b74c5d"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-20T06:35:15Z",
+          "updatedAt": "2025-03-20T06:35:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOLEMDO86QEsp3",
+      "title": "Add priv_exp",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/16",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR adds support for priv_exp, as discussed at IETF 122\r\n\r\nhttps://datatracker.ietf.org/doc/slides-122-cose-ml-dsa-for-jose-and-cose/",
+      "createdAt": "2025-03-25T16:12:57Z",
+      "updatedAt": "2025-03-25T16:22:03Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "f082039ba2f97e3d0179b0af3442386f3d2d9cb8",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "update-private-key-to-match-lamps",
+      "headRefOid": "8dcc57596a435e054e527aacac792c5480de35b9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO86hyj1l",
+          "commit": {
+            "abbreviatedOid": "cdf9b19"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T16:15:40Z",
+          "updatedAt": "2025-03-25T16:15:40Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2025-03-25T16:15:40Z",
+              "updatedAt": "2025-03-25T16:15:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86hykgW",
+          "commit": {
+            "abbreviatedOid": "cdf9b19"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T16:16:34Z",
+          "updatedAt": "2025-03-25T16:16:34Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\nThe key parameters for public and private information classes contain byte strings in a format specified by the \"alg\" value.\r\n```",
+              "createdAt": "2025-03-25T16:16:34Z",
+              "updatedAt": "2025-03-25T16:16:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86hylI2",
+          "commit": {
+            "abbreviatedOid": "b6e2d17"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T16:17:28Z",
+          "updatedAt": "2025-03-25T16:17:28Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nWhen registering new algorithms, use of multiple key parameters for private information is NOT RECOMMENDED.\r\n```",
+              "createdAt": "2025-03-25T16:17:28Z",
+              "updatedAt": "2025-03-25T16:17:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86hylqg",
+          "commit": {
+            "abbreviatedOid": "5be66a6"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T16:18:08Z",
+          "updatedAt": "2025-03-25T16:18:08Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\nWhen AKP keys are expressed in JWK, key parameters are base64url encoded.\r\n```",
+              "createdAt": "2025-03-25T16:18:08Z",
+              "updatedAt": "2025-03-25T16:18:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86hynOG",
+          "commit": {
+            "abbreviatedOid": "b43696b"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T16:20:19Z",
+          "updatedAt": "2025-03-25T16:20:19Z",
+          "comments": [
+            {
+              "originalPosition": 47,
+              "body": "```suggestion\r\nWhen both \"priv\" and \"priv_exp\" are present, the \"priv\" parameter MUST expand to the \"priv_exp\" parameter.\r\nSee Security Considerations of this document for details.\r\n```",
+              "createdAt": "2025-03-25T16:20:19Z",
+              "updatedAt": "2025-03-25T16:20:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86hyoEq",
+          "commit": {
+            "abbreviatedOid": "25430d7"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T16:21:33Z",
+          "updatedAt": "2025-03-25T16:21:34Z",
+          "comments": [
+            {
+              "originalPosition": 120,
+              "body": "```suggestion\r\n### ML-DSA Private Key\r\n```",
+              "createdAt": "2025-03-25T16:21:34Z",
+              "updatedAt": "2025-03-25T16:21:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86hyoXd",
+          "commit": {
+            "abbreviatedOid": "cfeb136"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T16:21:59Z",
+          "updatedAt": "2025-03-25T16:21:59Z",
+          "comments": [
+            {
+              "originalPosition": 138,
+              "body": "```suggestion\r\n#### AKP Private Key\r\n```",
+              "createdAt": "2025-03-25T16:21:59Z",
+              "updatedAt": "2025-03-25T16:21:59Z"
             }
           ]
         }
