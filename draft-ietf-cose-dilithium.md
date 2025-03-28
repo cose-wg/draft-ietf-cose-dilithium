@@ -172,7 +172,7 @@ Here is an elided example of the case where both "seed" and "priv" are present:
    "priv": "129kadu...DZgbTP07e7gEWzw4MFRr54"
 }
 ~~~
-{: #json-web-key-example-both-present align="left" title="The all zeros ML-DSA-44 JSON Web Key with both priv and priv_exp parameters"}
+{: #json-web-key-example-both-present align="left" title="The all zeros ML-DSA-44 JSON Web Key with both seed and priv parameters"}
 
 # ML-DSA Algorithms
 
