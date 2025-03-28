@@ -355,13 +355,13 @@ The following completed registration templates are provided as described in RFC9
 * Description: Private key
 * Reference: RFC XXXX
 
-### ML-DSA Private Key Expanded
+### ML-DSA Private Key Seed
 
 * Key Type: TBD (requested assignment 7)
-* Name: priv_exp
+* Name: seed
 * Label: -3
 * CBOR Type: bstr
-* Description: Private key expanded form
+* Description: Private key seed
 * Reference: RFC XXXX
 
 ### New JOSE Algorithms
