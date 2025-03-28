@@ -438,10 +438,10 @@ The following completed registration templates are provided as described in RFC7
 * Change Controller: IETF
 * Specification Document(s): RFC XXXX
 
-#### AKP Private Key Expanded
+#### AKP Private Key Seed
 
-* Parameter Name: priv_exp
-* Parameter Description: Private key expanded form
+* Parameter Name: seed
+* Parameter Description: Private key seed
 * Used with "kty" Value(s): AKP
 * Parameter Information Class: Private
 * Change Controller: IETF
