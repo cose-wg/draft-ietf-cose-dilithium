@@ -272,7 +272,7 @@ Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
 The "pub" key parameter MUST be validated according to the pkEncode and pkDecode algorithms before being used.
 For the ML-DSA algorithms registered in this document, the "priv" key parameter is a seed, and as such only a length check MUST be performed.
 The length of the seed is 256 bits, which is 32 bytes.
-However, if the private key ("priv_exp") is derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
+However, if the private key ("priv") is derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
 data and shall be treated with the same safeguards as a private key".
 
