@@ -169,7 +169,7 @@ Here is an elided example of the case where both "seed" and "priv" are present:
    "alg": "ML-DSA-44",
    "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
    "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-   "priv_exp": "129kadu...DZgbTP07e7gEWzw4MFRr54"
+   "priv": "129kadu...DZgbTP07e7gEWzw4MFRr54"
 }
 ~~~
 {: #json-web-key-example-both-present align="left" title="The all zeros ML-DSA-44 JSON Web Key with both priv and priv_exp parameters"}
