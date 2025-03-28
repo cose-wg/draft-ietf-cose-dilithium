@@ -1226,7 +1226,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.8.2.1.2.5.1"><a href="#section-8.1.5" class="auto internal xref">8.1.5</a>.  <a href="#name-ml-dsa-private-key" class="internal xref">ML-DSA Private Key</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.6">
-                    <p id="section-toc.1-1.8.2.1.2.6.1"><a href="#section-8.1.6" class="auto internal xref">8.1.6</a>.  <a href="#name-ml-dsa-private-key-expanded" class="internal xref">ML-DSA Private Key Expanded</a></p>
+                    <p id="section-toc.1-1.8.2.1.2.6.1"><a href="#section-8.1.6" class="auto internal xref">8.1.6</a>.  <a href="#name-ml-dsa-private-key-seed" class="internal xref">ML-DSA Private Key Seed</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.7">
                     <p id="section-toc.1-1.8.2.1.2.7.1"><a href="#section-8.1.7" class="auto internal xref">8.1.7</a>.  <a href="#name-new-jose-algorithms" class="internal xref">New JOSE Algorithms</a></p>
@@ -1382,7 +1382,7 @@ These classes <span class="bcp14">MAY</span> have additional structure or length
    / kty /   1: 7, / AKP /
    / alg /   3: -48, / ML-DSA-44 /
    / pub  / -1: h'ba71f9f64e11baeb589...3830546b9dd8db0d',
-   / priv / -2: h'00000000000000...0000000000000000'
+   / seed / -3: h'00000000000000...0000000000000000'
 }
 </pre>
 </div>
@@ -1405,16 +1405,18 @@ These classes <span class="bcp14">MAY</span> have additional structure or length
           <p id="section-4-3.1.1">Only the "seed" parameter is present.<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-4-3.2">
-          <p id="section-4-3.2.1">Only the "priv_exp" parameter is present.<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-3.2.1">Only the "priv" parameter is present.<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-4-3.3">
           <p id="section-4-3.3.1">Both parameters are present.<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-4-4">For ML-DSA keys, when "priv" is present, it <span class="bcp14">MUST</span> have a length of 32 bytes.
-When both "priv" and "priv_exp" are present, the "priv" parameter <span class="bcp14">MUST</span> expand to the "priv_exp" parameter.
+<p id="section-4-4">For ML-DSA keys, when "priv" is present, "seed" <span class="bcp14">SHOULD</span> be present to enable validation of the private key expansion process.
+Validation and expansion of private keys might be skipped in constrained environments.
+For ML-DSA keys, when "seed" is present, it <span class="bcp14">MUST</span> have a length of 32 bytes.
+When both "seed" and "priv" are present, the "seed" parameter <span class="bcp14">MUST</span> expand to the "priv" parameter.
 See Security Considerations of this document for details.<a href="#section-4-4" class="pilcrow">¶</a></p>
-<p id="section-4-5">Here is an ellided example of the case where both "priv" and "priv_exp" are present:<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-5">Here is an elided example of the case where both "seed" and "priv" are present:<a href="#section-4-5" class="pilcrow">¶</a></p>
 <span id="name-the-all-zeros-ml-dsa-44-json"></span><div id="json-web-key-example-both-present">
 <figure id="figure-3">
         <div class="alignLeft art-text artwork" id="section-4-6.1">
@@ -1424,13 +1426,13 @@ See Security Considerations of this document for details.<a href="#section-4-4" 
    "kty": "AKP",
    "alg": "ML-DSA-44",
    "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
-   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-   "priv_exp": "129kadu...DZgbTP07e7gEWzw4MFRr54"
+   "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+   "priv": "129kadu...DZgbTP07e7gEWzw4MFRr54"
 }
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-the-all-zeros-ml-dsa-44-json" class="selfRef">The all zeros ML-DSA-44 JSON Web Key with both priv and priv_exp parameters</a>
+<a href="#name-the-all-zeros-ml-dsa-44-json" class="selfRef">The all zeros ML-DSA-44 JSON Web Key with both seed and priv parameters</a>
         </figcaption></figure>
 </div>
 </section>
@@ -1548,7 +1550,7 @@ with the parameter choices given in Table 1 of FIPS-204.<a href="#section-5-2" c
         </tbody>
       </table>
 </div>
-<p id="section-5-11">Note that "priv" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes for "priv_exp" in the table above.
+<p id="section-5-11">Note that "seed" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes for "priv" in the table above.
 See the ML-DSA Private Keys section of this document for more details.<a href="#section-5-11" class="pilcrow">¶</a></p>
 <p id="section-5-12">These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
 The ctx parameter <span class="bcp14">MUST</span> be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.<a href="#section-5-12" class="pilcrow">¶</a></p>
@@ -1637,7 +1639,7 @@ Use of thumbprints as described in <span>[<a href="#RFC7638" class="cite xref">R
 The "pub" key parameter <span class="bcp14">MUST</span> be validated according to the pkEncode and pkDecode algorithms before being used.
 For the ML-DSA algorithms registered in this document, the "priv" key parameter is a seed, and as such only a length check <span class="bcp14">MUST</span> be performed.
 The length of the seed is 256 bits, which is 32 bytes.
-However, if the private key ("priv_exp") is derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms <span class="bcp14">MUST</span> be used.
+However, if the private key ("priv") is derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms <span class="bcp14">MUST</span> be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
 data and shall be treated with the same safeguards as a private key".<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 </section>
@@ -1849,17 +1851,17 @@ The following completed registration templates are provided as described in RFC9
           </ul>
 </section>
 </div>
-<div id="ml-dsa-private-key-expanded">
+<div id="ml-dsa-private-key-seed">
 <section id="section-8.1.6">
-          <h4 id="name-ml-dsa-private-key-expanded">
-<a href="#section-8.1.6" class="section-number selfRef">8.1.6. </a><a href="#name-ml-dsa-private-key-expanded" class="section-name selfRef">ML-DSA Private Key Expanded</a>
+          <h4 id="name-ml-dsa-private-key-seed">
+<a href="#section-8.1.6" class="section-number selfRef">8.1.6. </a><a href="#name-ml-dsa-private-key-seed" class="section-name selfRef">ML-DSA Private Key Seed</a>
           </h4>
 <ul class="normal">
 <li class="normal" id="section-8.1.6-1.1">
               <p id="section-8.1.6-1.1.1">Key Type: TBD (requested assignment 7)<a href="#section-8.1.6-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.1.6-1.2">
-              <p id="section-8.1.6-1.2.1">Name: priv_exp<a href="#section-8.1.6-1.2.1" class="pilcrow">¶</a></p>
+              <p id="section-8.1.6-1.2.1">Name: seed<a href="#section-8.1.6-1.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.1.6-1.3">
               <p id="section-8.1.6-1.3.1">Label: -3<a href="#section-8.1.6-1.3.1" class="pilcrow">¶</a></p>
@@ -1868,7 +1870,7 @@ The following completed registration templates are provided as described in RFC9
               <p id="section-8.1.6-1.4.1">CBOR Type: bstr<a href="#section-8.1.6-1.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.1.6-1.5">
-              <p id="section-8.1.6-1.5.1">Description: Private key expanded form<a href="#section-8.1.6-1.5.1" class="pilcrow">¶</a></p>
+              <p id="section-8.1.6-1.5.1">Description: Private key seed<a href="#section-8.1.6-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.1.6-1.6">
               <p id="section-8.1.6-1.6.1">Reference: RFC XXXX<a href="#section-8.1.6-1.6.1" class="pilcrow">¶</a></p>
@@ -2078,17 +2080,17 @@ The following completed registration templates are provided as described in RFC7
             </ul>
 </section>
 </div>
-<div id="akp-private-key-expanded">
+<div id="akp-private-key-seed">
 <section id="section-8.1.9.3">
-            <h5 id="name-akp-private-key-expanded">
-<a href="#section-8.1.9.3" class="section-number selfRef">8.1.9.3. </a><a href="#name-akp-private-key-expanded" class="section-name selfRef">AKP Private Key Expanded</a>
+            <h5 id="name-akp-private-key-seed">
+<a href="#section-8.1.9.3" class="section-number selfRef">8.1.9.3. </a><a href="#name-akp-private-key-seed" class="section-name selfRef">AKP Private Key Seed</a>
             </h5>
 <ul class="normal">
 <li class="normal" id="section-8.1.9.3-1.1">
-                <p id="section-8.1.9.3-1.1.1">Parameter Name: priv_exp<a href="#section-8.1.9.3-1.1.1" class="pilcrow">¶</a></p>
+                <p id="section-8.1.9.3-1.1.1">Parameter Name: seed<a href="#section-8.1.9.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-8.1.9.3-1.2">
-                <p id="section-8.1.9.3-1.2.1">Parameter Description: Private key expanded form<a href="#section-8.1.9.3-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-8.1.9.3-1.2.1">Parameter Description: Private key seed<a href="#section-8.1.9.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-8.1.9.3-1.3">
                 <p id="section-8.1.9.3-1.3.1">Used with "kty" Value(s): AKP<a href="#section-8.1.9.3-1.3.1" class="pilcrow">¶</a></p>

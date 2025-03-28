@@ -93,7 +93,7 @@ Table of Contents
        8.1.3.  New COSE Key Type Parameters
        8.1.4.  ML-DSA Public Key
        8.1.5.  ML-DSA Private Key
-       8.1.6.  ML-DSA Private Key Expanded
+       8.1.6.  ML-DSA Private Key Seed
        8.1.7.  New JOSE Algorithms
        8.1.8.  New JOSE Key Types
        8.1.9.  New JSON Web Key Parameters
@@ -193,7 +193,7 @@ Table of Contents
       / kty /   1: 7, / AKP /
       / alg /   3: -48, / ML-DSA-44 /
       / pub  / -1: h'ba71f9f64e11baeb589...3830546b9dd8db0d',
-      / priv / -2: h'00000000000000...0000000000000000'
+      / seed / -3: h'00000000000000...0000000000000000'
    }
 
                  Figure 2: The all zeros ML-DSA-44 COSE Key
@@ -211,29 +211,32 @@ Table of Contents
 
    1.  Only the "seed" parameter is present.
 
-   2.  Only the "priv_exp" parameter is present.
+   2.  Only the "priv" parameter is present.
 
    3.  Both parameters are present.
 
-   For ML-DSA keys, when "priv" is present, it MUST have a length of 32
-   bytes.  When both "priv" and "priv_exp" are present, the "priv"
-   parameter MUST expand to the "priv_exp" parameter.  See Security
+   For ML-DSA keys, when "priv" is present, "seed" SHOULD be present to
+   enable validation of the private key expansion process.  Validation
+   and expansion of private keys might be skipped in constrained
+   environments.  For ML-DSA keys, when "seed" is present, it MUST have
+   a length of 32 bytes.  When both "seed" and "priv" are present, the
+   "seed" parameter MUST expand to the "priv" parameter.  See Security
    Considerations of this document for details.
 
-   Here is an ellided example of the case where both "priv" and
-   "priv_exp" are present:
+   Here is an elided example of the case where both "seed" and "priv"
+   are present:
 
    {
       "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
       "kty": "AKP",
       "alg": "ML-DSA-44",
       "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
-      "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "priv_exp": "129kadu...DZgbTP07e7gEWzw4MFRr54"
+      "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "priv": "129kadu...DZgbTP07e7gEWzw4MFRr54"
    }
 
-     Figure 3: The all zeros ML-DSA-44 JSON Web Key with both priv and
-                            priv_exp parameters
+     Figure 3: The all zeros ML-DSA-44 JSON Web Key with both seed and
+                              priv parameters
 
 5.  ML-DSA Algorithms
 
@@ -303,8 +306,8 @@ Table of Contents
       Table 5: Sizes (in bytes) of keys and signatures of
                              ML-DSA
 
-   Note that "priv" size is always 32 bytes, and that KeyGen_internal is
-   called to produce the private key sizes for "priv_exp" in the table
+   Note that "seed" size is always 32 bytes, and that KeyGen_internal is
+   called to produce the private key sizes for "priv" in the table
    above.  See the ML-DSA Private Keys section of this document for more
    details.
 
@@ -390,13 +393,12 @@ Table of Contents
    DSA algorithms registered in this document, the "priv" key parameter
    is a seed, and as such only a length check MUST be performed.  The
    length of the seed is 256 bits, which is 32 bytes.  However, if the
-   private key ("priv_exp") is derived from the seed using
-   KeyGen_internal is stored as part of some implementation, the
-   skEncode and skDecode algorithms MUST be used.  FIPS-204 notes,
-   "skDecode should only be run on inputs that come from trusted
-   sources" and that "as the seed can be used to compute the private
-   key, it is sensitive data and shall be treated with the same
-   safeguards as a private key".
+   private key ("priv") is derived from the seed using KeyGen_internal
+   is stored as part of some implementation, the skEncode and skDecode
+   algorithms MUST be used.  FIPS-204 notes, "skDecode should only be
+   run on inputs that come from trusted sources" and that "as the seed
+   can be used to compute the private key, it is sensitive data and
+   shall be treated with the same safeguards as a private key".
 
 7.4.  Mismatched AKP parameters
 
@@ -510,17 +512,17 @@ Table of Contents
 
    *  Reference: RFC XXXX
 
-8.1.6.  ML-DSA Private Key Expanded
+8.1.6.  ML-DSA Private Key Seed
 
    *  Key Type: TBD (requested assignment 7)
 
-   *  Name: priv_exp
+   *  Name: seed
 
    *  Label: -3
 
    *  CBOR Type: bstr
 
-   *  Description: Private key expanded form
+   *  Description: Private key seed
 
    *  Reference: RFC XXXX
 
@@ -637,11 +639,11 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-8.1.9.3.  AKP Private Key Expanded
+8.1.9.3.  AKP Private Key Seed
 
-   *  Parameter Name: priv_exp
+   *  Parameter Name: seed
 
-   *  Parameter Description: Private key expanded form
+   *  Parameter Description: Private key seed
 
    *  Used with "kty" Value(s): AKP
 
