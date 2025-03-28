@@ -141,6 +141,9 @@ Table of Contents
    registering new algorithms, use of multiple key type parameters for
    private information is NOT RECOMMENDED.
 
+   The "seed" parameter contains private information and MUST NOT be
+   present in public keys.
+
    Some algorithms might require or encourage additional structure or
    length checks for associated key type parameters.
 

@@ -1307,9 +1307,10 @@ The "pub" parameter contains public information and is <span class="bcp14">REQUI
 The "priv" parameter contains private information and <span class="bcp14">MUST NOT</span> be present in public keys.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Some algorithm specifications, such as ML-DSA, might allow for use of multiple key type parameters for private information.
 When registering new algorithms, use of multiple key type parameters for private information is <span class="bcp14">NOT RECOMMENDED</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">Some algorithms might require or encourage additional structure or length checks for associated key type parameters.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">When AKP keys are expressed in JWK, key parameters are base64url encoded.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">This document requests the registration of the following key types in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-3">The "seed" parameter contains private information and <span class="bcp14">MUST NOT</span> be present in public keys.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">Some algorithms might require or encourage additional structure or length checks for associated key type parameters.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">When AKP keys are expressed in JWK, key parameters are base64url encoded.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">This document requests the registration of the following key types in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-6" class="pilcrow">¶</a></p>
 <span id="name-algorithm-key-pair-type-for"></span><div id="jose-key-type">
 <table class="left" id="table-1">
         <caption>
@@ -1332,10 +1333,10 @@ When registering new algorithms, use of multiple key type parameters for private
         </tbody>
       </table>
 </div>
-<p id="section-3-7">An example truncated private key for use with ML-DSA-44 in JWK format is provided below:<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-8">An example truncated private key for use with ML-DSA-44 in JWK format is provided below:<a href="#section-3-8" class="pilcrow">¶</a></p>
 <span id="name-the-all-zeros-ml-dsa-44-jso"></span><div id="json-web-key-example">
 <figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-3-8.1">
+        <div class="alignLeft art-text artwork" id="section-3-9.1">
 <pre>
 {
    "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
@@ -1350,7 +1351,7 @@ When registering new algorithms, use of multiple key type parameters for private
 <a href="#name-the-all-zeros-ml-dsa-44-jso" class="selfRef">The all zeros ML-DSA-44 JSON Web Key</a>
         </figcaption></figure>
 </div>
-<p id="section-3-9">This document requests the registration of the following key type in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-10">This document requests the registration of the following key type in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-3-10" class="pilcrow">¶</a></p>
 <span id="name-algorithm-key-pair-type-for-"></span><div id="cose-key-type">
 <table class="left" id="table-2">
         <caption>
@@ -1373,10 +1374,10 @@ When registering new algorithms, use of multiple key type parameters for private
         </tbody>
       </table>
 </div>
-<p id="section-3-11">An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:<a href="#section-3-11" class="pilcrow">¶</a></p>
+<p id="section-3-12">An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:<a href="#section-3-12" class="pilcrow">¶</a></p>
 <span id="name-the-all-zeros-ml-dsa-44-cos"></span><div id="cose-key-example">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="section-3-12.1">
+        <div class="alignLeft art-text artwork" id="section-3-13.1">
 <pre>
 {
    / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
@@ -1391,7 +1392,7 @@ When registering new algorithms, use of multiple key type parameters for private
 <a href="#name-the-all-zeros-ml-dsa-44-cos" class="selfRef">The all zeros ML-DSA-44 COSE Key</a>
         </figcaption></figure>
 </div>
-<p id="section-3-13">The AKP key type and thumbprint computations are generic, and suitable for use with algorithms other than ML-DSA.<a href="#section-3-13" class="pilcrow">¶</a></p>
+<p id="section-3-14">The AKP key type and thumbprint computations are generic, and suitable for use with algorithms other than ML-DSA.<a href="#section-3-14" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ml-dsa-private-keys">
