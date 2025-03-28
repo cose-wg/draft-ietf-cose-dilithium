@@ -5,14 +5,14 @@
 CBOR Object Signing and Encryption                            M. Prorock
 Internet-Draft                                                  mesur.io
 Intended status: Standards Track                               O. Steele
-Expires: 26 September 2025                                     Transmute
+Expires: 29 September 2025                                     Transmute
                                                              R. Misoczki
                                                                   Google
                                                               M. Osborne
                                                                      IBM
                                                          C. Cloostermans
                                                                      NXP
-                                                           25 March 2025
+                                                           28 March 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 September 2025.
+   This Internet-Draft will expire on 29 September 2025.
 
 Copyright Notice
 
@@ -209,7 +209,7 @@ Table of Contents
    Similar to [I-D.draft-ietf-lamps-dilithium-certificates] the
    following cases are possible:
 
-   1.  Only the "priv" parameter is present.
+   1.  Only the "seed" parameter is present.
 
    2.  Only the "priv_exp" parameter is present.
 
