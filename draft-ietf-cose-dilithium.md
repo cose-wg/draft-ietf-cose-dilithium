@@ -154,6 +154,8 @@ Similar to {{-ML-DSA-CERTS}} the following cases are possible:
 2. Only the "priv_exp" parameter is present.
 3. Both parameters are present.
 
+For ML-DSA keys, when "priv" is present, "seed" SHOULD be present to enable validation of the private key expansion process. 
+Validation and expansion of private keys might be skipped in constrained environments.
 For ML-DSA keys, when "priv" is present, it MUST have a length of 32 bytes.
 When both "priv" and "priv_exp" are present, the "priv" parameter MUST expand to the "priv_exp" parameter.
 See Security Considerations of this document for details.
