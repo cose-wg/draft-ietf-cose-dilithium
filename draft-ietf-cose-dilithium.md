@@ -151,7 +151,7 @@ Note that FIPS 204 defines 2 expressions for private keys: a seed (priv), and a 
 Similar to {{-ML-DSA-CERTS}} the following cases are possible:
 
 1. Only the "seed" parameter is present.
-2. Only the "priv_exp" parameter is present.
+2. Only the "priv" parameter is present.
 3. Both parameters are present.
 
 For ML-DSA keys, when "priv" is present, "seed" SHOULD be present to enable validation of the private key expansion process. 
