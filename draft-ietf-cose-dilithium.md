@@ -160,7 +160,7 @@ For ML-DSA keys, when "seed" is present, it MUST have a length of 32 bytes.
 When both "seed" and "priv" are present, the "seed" parameter MUST expand to the "priv" parameter.
 See Security Considerations of this document for details.
 
-Here is an ellided example of the case where both "priv" and "priv_exp" are present:
+Here is an elided example of the case where both "seed" and "priv" are present:
 
 ~~~
 {
