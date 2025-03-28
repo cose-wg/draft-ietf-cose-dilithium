@@ -168,7 +168,7 @@ Here is an elided example of the case where both "seed" and "priv" are present:
    "kty": "AKP",
    "alg": "ML-DSA-44",
    "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
-   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+   "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
    "priv_exp": "129kadu...DZgbTP07e7gEWzw4MFRr54"
 }
 ~~~
