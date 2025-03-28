@@ -212,7 +212,7 @@ The size of "pub", and the associated signature for each of these algorithms is 
 | ML-DSA-87  | 4896 | 2592 | 4627
 {: #fips-204-table-2 align="left" title="Sizes (in bytes) of keys and signatures of ML-DSA"}
 
-Note that "priv" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes for "priv_exp" in the table above.
+Note that "seed" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes for "priv" in the table above.
 See the ML-DSA Private Keys section of this document for more details.
 
 These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
