@@ -137,7 +137,7 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
    / kty /   1: 7, / AKP /
    / alg /   3: -48, / ML-DSA-44 /
    / pub  / -1: h'ba71f9f64e11baeb589...3830546b9dd8db0d',
-   / priv / -2: h'00000000000000...0000000000000000'
+   / seed / -3: h'00000000000000...0000000000000000'
 }
 ~~~
 {: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
