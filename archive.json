@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-27T01:18:08.034628+00:00",
+  "timestamp": "2025-03-30T01:24:41.460297+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -195,6 +195,46 @@
           "body": "Addressed in https://mailarchive.ietf.org/arch/msg/cose/C_FAD4WXBX1GwfziRMHoMVSXjh0/",
           "createdAt": "2024-12-18T15:46:56Z",
           "updatedAt": "2024-12-18T15:46:56Z"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "I_kwDOLEMDO86wM_BT",
+      "title": "Replace AKP with a key type per parameter set",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/17",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "OR13"
+      ],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/cose/gr298YcbmezEnNNA5tfmJ9rnFDE/\n\nI suggest we solve the seed problem first, and then prepare a PR that shows only a change set addressing this issue.",
+      "createdAt": "2025-03-28T13:35:32Z",
+      "updatedAt": "2025-03-28T16:23:24Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "panva",
+          "authorAssociation": "NONE",
+          "body": "I find this proposal very un-JOSE like and also a reason to push the document back to a pre-WGLC state.",
+          "createdAt": "2025-03-28T13:43:56Z",
+          "updatedAt": "2025-03-28T13:43:56Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "body": "I agree with Filip.  If the authors are proposing to fundamentally change the key representation, I will request as chair that the document be returned to the working group.  I will also request cross-review by the JOSE working group.",
+          "createdAt": "2025-03-28T14:51:02Z",
+          "updatedAt": "2025-03-28T14:51:02Z"
+        },
+        {
+          "author": "ilaril",
+          "authorAssociation": "NONE",
+          "body": "I do not think there is any need for this. AKP works fine with ML-DSA as long as there is no HashML-DSA, and the expert advice is do not use HashML-DSA (\"Working Groups SHOULD NOT include HashML-DSA as a signature option.\" -draft-connolly-cfrg-hybrid-sig-considerations-00).\n",
+          "createdAt": "2025-03-28T16:23:23Z",
+          "updatedAt": "2025-03-28T16:23:23Z"
         }
       ]
     }
@@ -574,18 +614,61 @@
       "labels": [],
       "body": "This PR adds support for priv_exp, as discussed at IETF 122\r\n\r\nhttps://datatracker.ietf.org/doc/slides-122-cose-ml-dsa-for-jose-and-cose/",
       "createdAt": "2025-03-25T16:12:57Z",
-      "updatedAt": "2025-03-25T16:22:03Z",
+      "updatedAt": "2025-03-28T17:06:24Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "f082039ba2f97e3d0179b0af3442386f3d2d9cb8",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "update-private-key-to-match-lamps",
-      "headRefOid": "8dcc57596a435e054e527aacac792c5480de35b9",
+      "headRefOid": "a810029020c5dfd2578cdf021e05ab8fad333bf2",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "ilaril",
+          "authorAssociation": "NONE",
+          "body": "How would this work with hybrid signatures (or native hybrid KEMs)? Those can end up in cases like one of the components being seed-only and the other being expanded-only.\r\n\r\nE.g., id-MLDSA65-Ed25519. There is no standard expanded private key format for Ed25519 (I have seen at least two formats that could qualify as \"expanded\" Ed25519 private keys), while there is for ML-DSA.",
+          "createdAt": "2025-03-27T15:45:24Z",
+          "updatedAt": "2025-03-27T15:51:45Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@ilaril \r\n\r\n> How would this work with hybrid signatures (or native hybrid KEMs)? Those can end up in cases like one of the components being seed-only and the other being expanded-only.\r\n> \r\n> E.g., id-MLDSA65-Ed25519. There is no standard expanded private key format for Ed25519 (I have seen at least two formats that could qualify as \"expanded\" Ed25519 private keys), while there is for ML-DSA.\r\n\r\nAt least for X-Wing, I would imagine:\r\n\r\n```\r\n{\r\n   \"kid\": \"T4xl70S7MT...yo0Gu6o\",\r\n   \"kty\": \"AKP\",\r\n   \"alg\": \"X-Wing\",\r\n   \"pub\": \"unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ\",\r\n   \"seed/priv\": \"AAAAAAAAAAA...AAAAAAAAAAAAA\", // (not the concatenated expansions)\r\n}\r\n```\r\n\r\nPer https://datatracker.ietf.org/doc/html/draft-connolly-cfrg-xwing-kem-06#appendix-C (note that seed and sk are the same).\r\n\r\nFor the other cases, like chempat - https://datatracker.ietf.org/doc/html/draft-josefsson-chempat-03#section-10\r\n\r\nYou would have to store `sk_T, sk_PQ`... maybe:\r\n\r\n```\r\n{\r\n   \"kid\": \"T4xl70S7MT...yo0Gu6o\",\r\n   \"kty\": \"AKP\",\r\n   \"alg\": \"Chempat-X25519-mceliece8192128\",\r\n   \"pub\": \"unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ\",\r\n   \"seed/priv\": \"...concat(sk_T, sk_PQ, pk_T, pk_PQ)...\", // here sk_PQ is expanded I believe, but I could be wrong\r\n}\r\n```\r\n\r\nThe point would be that in order to use an AKP key, you would need to understand how to process all the mandatory key parameters for a given algorithm.\r\n\r\nSome algorithms might be as simple as \"priv\", others might look like RSA does today... \r\n\r\nI think we have learned that opaque byte string parameters are best, and so as much as possible, we should aim for the minimum number of opaque byte strings needed to support interop.\r\n\r\nIf you want \"unbounded algorithmic agility (feature or bug, depending on your view of history)\", where the same key is used with a potentially unbounded number of algorithms, you can easily do that with AKP, you just have to say which specific algorithm you are trying to support, and the fingerprint will commit to that algorithm.\r\n\r\n\r\n",
+          "createdAt": "2025-03-27T18:33:12Z",
+          "updatedAt": "2025-03-27T18:33:12Z"
+        },
+        {
+          "author": "ilaril",
+          "authorAssociation": "NONE",
+          "body": "> > How would this work with hybrid signatures (or native hybrid KEMs)? Those can end up in cases like one of the components being seed-only and the other being expanded-only.\r\n> \r\n> At least for X-Wing, I would imagine:\r\n\r\nYes, X-Wing is easy as it always uses \"super-seed\" (which is internally used to generate seeds for both components).\r\n \r\n> For the other cases, like chempat - https://datatracker.ietf.org/doc/html/draft-josefsson-chempat-03#section-10\r\n> \r\n> You would have to store `sk_T, sk_PQ`... maybe:\r\n\r\nThere are 9 possible combinations of seeds and expanded keys there.\r\n\r\nE.g., how does one store `sk_T` being seed-only, while `sk_PQ` is expanded-only?\r\n\r\n\r\n> The point would be that in order to use an AKP key, you would need to understand how to process all the mandatory key parameters for a given algorithm.\r\n>\r\n> Some algorithms might be as simple as \"priv\", others might look like RSA does today...\r\n> \r\n> I think we have learned that opaque byte string parameters are best, and so as much as possible, we should aim for the minimum number of opaque byte strings needed to support interop.\r\n\r\nBecause processing of the private key octet string can be algorithm-dependent, the minimum number of private parameters is 1.\r\nThat is, one can always do with just \"priv\", \"priv_exp\" is never needed.\r\n\r\nE.g., with primitive algorithms, one can prepend a flag byte (01 => Seed, 02 => Expanded, 03 => Both). With composite algorithms, one can, e.g., do it like draft-ietf-lamps-pq-composite-sigs-04.\r\n\r\nIdeally, the COSE/JOSE code would just stuff the raw private/public key to some library that then transparently handles the internals.\r\n\r\n\r\n",
+          "createdAt": "2025-03-28T10:14:28Z",
+          "updatedAt": "2025-03-28T10:14:28Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The current proposal in this draft is closed to this:\r\n\r\n> E.g., with primitive algorithms, one can prepend a flag byte (01 => Seed, 02 => Expanded, 03 => Both). \r\n\r\nIts just we use CBOR / JSON to handle the prepending, and the both case, is handled by the presence of 2 map keys.\r\n\r\n@ilaril would you mind giving a thumbs up / thumbs down to any of the suggested changes on this PR?\r\n",
+          "createdAt": "2025-03-28T13:30:36Z",
+          "updatedAt": "2025-03-28T13:30:36Z"
+        },
+        {
+          "author": "ilaril",
+          "authorAssociation": "NONE",
+          "body": "I think this would be tolerable if the section \"Algorithm Key Pair Type\" made it clear what to do with algorithms that do not have defined seed expansion, and that the matching requirement is independent of algorithm.\r\n\r\nFor example, COSE-HPKE and JOSE-HPKE algorithms do not have seed expansion (even if using X-Wing as KEM!). Also, any hybrid signature algorithms are unlikely to have any defined seed expansion.\r\n\r\n\r\nMaybe something like (with fields renamed):\r\n\r\n_If the associated \"alg\" value does not define seed expansion, then \"seed\" parameter MUST NOT be present, and the \"priv\" parameter is used for the private key, if present._\r\n\r\n_If both \"seed\" and \"priv\" parameters are both present, then the seed in \"seed\" parameter MUST expand to the key in \"priv\" parameter following the seed expansion procedure for the associated \"alg\" value._\r\n",
+          "createdAt": "2025-03-28T14:30:44Z",
+          "updatedAt": "2025-03-28T14:30:44Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@ilaril I agree, I will make it clear that the parameters for a given AKP come from the algorithm.\r\n",
+          "createdAt": "2025-03-28T15:54:52Z",
+          "updatedAt": "2025-03-28T15:54:52Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLEMDO86hyj1l",
@@ -724,6 +807,319 @@
               "body": "```suggestion\r\n#### AKP Private Key\r\n```",
               "createdAt": "2025-03-25T16:21:59Z",
               "updatedAt": "2025-03-25T16:21:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iQ3cX",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "Simo Sorce's [suggestion on the list](https://mailarchive.ietf.org/arch/msg/jose/9u6XQ9cff_smC0PosebgIO3o5CU/) resonates with me:\r\n> If priv is the seed, why not call it just 'seed' ?\r\n\r\nI suggest adding a \"seed\" ML-DSA-specific JWK parameter and using \"priv\" for the expanded form.\r\n\r\nLikewise, I suggest a parallel change for COSE where \"seed\" is given the -3 label instead of \"priv_exp\" and \"priv\" with label -2 is used for the expanded private key.\r\n\r\n(Note:  I am writing this as an individual - not a COSE chair.)",
+          "createdAt": "2025-03-27T16:01:23Z",
+          "updatedAt": "2025-03-27T16:01:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTr8G",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:33:51Z",
+          "updatedAt": "2025-03-27T18:33:52Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\n1. Only the \"seed\" parameter is present.\r\n```",
+              "createdAt": "2025-03-27T18:33:52Z",
+              "updatedAt": "2025-03-27T18:33:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTsDL",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:34:05Z",
+          "updatedAt": "2025-03-27T18:34:05Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "```suggestion\r\n2. Only the \"priv\" parameter is present.\r\n```",
+              "createdAt": "2025-03-27T18:34:05Z",
+              "updatedAt": "2025-03-27T18:34:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTsJw",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:34:16Z",
+          "updatedAt": "2025-03-27T18:34:16Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\nFor ML-DSA keys, when \"seed\" is present, it MUST have a length of 32 bytes.\r\n```",
+              "createdAt": "2025-03-27T18:34:16Z",
+              "updatedAt": "2025-03-27T18:34:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTsVc",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:34:37Z",
+          "updatedAt": "2025-03-27T18:34:37Z",
+          "comments": [
+            {
+              "originalPosition": 47,
+              "body": "```suggestion\r\nWhen both \"seed\" and \"priv\" are present, the \"seed\" parameter MUST expand to the \"priv\" parameter.\r\n```",
+              "createdAt": "2025-03-27T18:34:37Z",
+              "updatedAt": "2025-03-27T18:34:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTseN",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:34:52Z",
+          "updatedAt": "2025-03-27T18:34:52Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\nHere is an elided example of the case where both \"seed\" and \"priv\" are present:\r\n```",
+              "createdAt": "2025-03-27T18:34:52Z",
+              "updatedAt": "2025-03-27T18:34:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTsiS",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:35:00Z",
+          "updatedAt": "2025-03-27T18:35:00Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\r\n   \"seed\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\r\n```",
+              "createdAt": "2025-03-27T18:35:00Z",
+              "updatedAt": "2025-03-27T18:35:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTspP",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:35:08Z",
+          "updatedAt": "2025-03-27T18:35:09Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "```suggestion\r\n   \"priv\": \"129kadu...DZgbTP07e7gEWzw4MFRr54\"\r\n```",
+              "createdAt": "2025-03-27T18:35:09Z",
+              "updatedAt": "2025-03-27T18:35:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTswa",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:35:21Z",
+          "updatedAt": "2025-03-27T18:35:21Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\r\n{: #json-web-key-example-both-present align=\"left\" title=\"The all zeros ML-DSA-44 JSON Web Key with both seed and priv parameters\"}\r\n```",
+              "createdAt": "2025-03-27T18:35:21Z",
+              "updatedAt": "2025-03-27T18:35:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTs6D",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:35:37Z",
+          "updatedAt": "2025-03-27T18:35:38Z",
+          "comments": [
+            {
+              "originalPosition": 80,
+              "body": "```suggestion\r\nNote that \"seed\" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes for \"priv\" in the table above.\r\n```",
+              "createdAt": "2025-03-27T18:35:38Z",
+              "updatedAt": "2025-03-27T18:35:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTtF9",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:35:59Z",
+          "updatedAt": "2025-03-27T18:35:59Z",
+          "comments": [
+            {
+              "originalPosition": 103,
+              "body": "```suggestion\r\nHowever, if the private key (\"priv\") is derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.\r\n```",
+              "createdAt": "2025-03-27T18:35:59Z",
+              "updatedAt": "2025-03-27T18:35:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTtw0",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:37:13Z",
+          "updatedAt": "2025-03-27T18:37:13Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "```suggestion\r\n### ML-DSA Private Key Seed\r\n\r\n* Key Type: TBD (requested assignment 7)\r\n* Name: seed\r\n* Label: -3\r\n* CBOR Type: bstr\r\n* Description: Private key seed\r\n```",
+              "createdAt": "2025-03-27T18:37:13Z",
+              "updatedAt": "2025-03-27T18:37:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTuKf",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:37:59Z",
+          "updatedAt": "2025-03-27T18:38:00Z",
+          "comments": [
+            {
+              "originalPosition": 147,
+              "body": "```suggestion\r\n#### AKP Private Key Seed\r\n\r\n* Parameter Name: seed\r\n* Parameter Description: Private key seed\r\n```",
+              "createdAt": "2025-03-27T18:37:59Z",
+              "updatedAt": "2025-03-27T18:38:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTu3z",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:39:20Z",
+          "updatedAt": "2025-03-27T18:39:21Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n   / seed / -3: h'00000000000000...0000000000000000'\r\n```",
+              "createdAt": "2025-03-27T18:39:20Z",
+              "updatedAt": "2025-03-27T18:39:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTwxB",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:42:16Z",
+          "updatedAt": "2025-03-27T18:42:16Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\r\n3. Both parameters are present.\r\n\r\nFor ML-DSA keys, when \"priv\" is present, \"seed\" SHOULD be present to enable validation of the private key expansion process. \r\nValidation and expansion of private keys might be skipped in constrained environments.\r\n```",
+              "createdAt": "2025-03-27T18:42:16Z",
+              "updatedAt": "2025-03-27T18:42:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86iTx6h",
+          "commit": {
+            "abbreviatedOid": "8dcc575"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-27T18:44:20Z",
+          "updatedAt": "2025-03-27T18:44:20Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "cc @simo5 per discussion on the list.\r\n\r\nThis would assume we apply the suggestions to rename \"priv\" -> \"seed\" and \"priv_exp\" -> \"priv\".",
+              "createdAt": "2025-03-27T18:44:20Z",
+              "updatedAt": "2025-03-27T18:44:20Z"
             }
           ]
         }
