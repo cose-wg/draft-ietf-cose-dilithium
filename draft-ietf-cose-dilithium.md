@@ -100,6 +100,9 @@ When registering new algorithms, use of multiple key type parameters for private
 
 The "seed" parameter contains private information and MUST NOT be present in public keys.
 
+If the associated "alg" value does not define seed expansion, then "seed" parameter MUST NOT be present, and the "priv" parameter is used for the private key, if present.
+
+If both "seed" and "priv" parameters are present, then the seed in "seed" parameter MUST expand to the key in "priv" parameter following the seed expansion procedure for the associated "alg" value.
 Whether "seed" is allowed, and how it is related to "pub" and "priv" is algorithm specific and needs to be described as part of specifying the use of AKP for a given algorithm, see below for an example of how this is done for ML-DSA.
 
 Some algorithms might require or encourage additional structure or length checks for associated key type parameters.
