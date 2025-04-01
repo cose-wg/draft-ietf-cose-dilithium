@@ -42,7 +42,7 @@ func CompactSign(private_key string, payload []byte) (string, error) {
 	}
 	// caution, this assumes circl and JOSE / COSE alg names are the name.
 	suite := schemes.ByName(jwk["alg"])
-	seed, err := base64.RawURLEncoding.DecodeString(jwk["priv"])
+	seed, err := base64.RawURLEncoding.DecodeString(jwk["seed"])
 	if err != nil {
 		return "", errors.New("Failed to decode jwk.priv, malformed seed")
 	}
@@ -66,7 +66,7 @@ func CompactVerify(public_key string, jws string) (JWSVerification, error) {
 	if err != nil {
 		return verified, errors.New("Failed to parse jwk private key")
 	}
-	if jwk["priv"] != "" {
+	if jwk["seed"] != "" {
 		return verified, errors.New("CompactVerify cannot be called with a private key")
 	}
 	// caution, this assumes circl and JOSE / COSE alg names are the name.

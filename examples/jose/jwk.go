@@ -22,7 +22,7 @@ type AKPKey struct {
 	Kty  string `json:"kty"`
 	Alg  string `json:"alg"`
 	Pub  string `json:"pub"`
-	Priv string `json:"priv"`
+	Seed string `json:"seed"`
 }
 
 func GenerateKey(alg string, seed []byte) (string, error) {
@@ -33,7 +33,7 @@ func GenerateKey(alg string, seed []byte) (string, error) {
 		Kty:  "AKP",
 		Alg:  alg,
 		Pub:  base64.RawURLEncoding.EncodeToString(pub_bytes),
-		Priv: base64.RawURLEncoding.EncodeToString(seed[:]),
+		Seed: base64.RawURLEncoding.EncodeToString(seed[:]),
 	})
 	kid, _ := CalculateJwkThumbprint(string(jwk))
 	jwk_with_thumbprint, err := json.Marshal(AKPKey{
@@ -41,7 +41,7 @@ func GenerateKey(alg string, seed []byte) (string, error) {
 		Kty:  "AKP",
 		Alg:  alg,
 		Pub:  base64.RawURLEncoding.EncodeToString(pub_bytes),
-		Priv: base64.RawURLEncoding.EncodeToString(seed[:]),
+		Seed: base64.RawURLEncoding.EncodeToString(seed[:]),
 	})
 	return string(jwk_with_thumbprint), err
 }
@@ -69,11 +69,11 @@ func SuiteFromJWK(jwk string) (sign.Scheme, sign.PublicKey, sign.PrivateKey, err
 		return nil, nil, nil, errors.New("Failed to parse JSON")
 	}
 	suite := schemes.ByName(key["alg"])
-	if key["priv"] != "" {
+	if key["seed"] != "" {
 		suite := schemes.ByName(key["alg"])
-		seed, err := base64.RawURLEncoding.DecodeString(key["priv"])
+		seed, err := base64.RawURLEncoding.DecodeString(key["seed"])
 		if err != nil {
-			return nil, nil, nil, errors.New("Failed to decode jwk.priv, malformed seed")
+			return nil, nil, nil, errors.New("Failed to decode jwk.seed, malformed seed")
 		}
 		pub, priv := suite.DeriveKey(seed[:])
 		return suite, pub, priv, nil
