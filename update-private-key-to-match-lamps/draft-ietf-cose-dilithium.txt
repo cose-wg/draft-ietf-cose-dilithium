@@ -5,14 +5,14 @@
 CBOR Object Signing and Encryption                            M. Prorock
 Internet-Draft                                                  mesur.io
 Intended status: Standards Track                               O. Steele
-Expires: 29 September 2025                                     Transmute
+Expires: 3 October 2025                                        Transmute
                                                              R. Misoczki
                                                                   Google
                                                               M. Osborne
                                                                      IBM
                                                          C. Cloostermans
                                                                      NXP
-                                                           28 March 2025
+                                                            1 April 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 September 2025.
+   This Internet-Draft will expire on 3 October 2025.
 
 Copyright Notice
 
@@ -143,6 +143,11 @@ Table of Contents
 
    The "seed" parameter contains private information and MUST NOT be
    present in public keys.
+
+   Whether "seed" is allowed, and how it is related to "pub" and "priv"
+   is algorithm specific and needs to be described as part of specifying
+   the use of AKP for a given algorithm, see below for an example of how
+   this is done for ML-DSA.
 
    Some algorithms might require or encourage additional structure or
    length checks for associated key type parameters.
