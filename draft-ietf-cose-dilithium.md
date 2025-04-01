@@ -100,6 +100,8 @@ When registering new algorithms, use of multiple key type parameters for private
 
 The "seed" parameter contains private information and MUST NOT be present in public keys.
 
+Whether "seed" is allowed, and how it is related to "pub" and "priv" is algorithm specific and needs to be described as part of specifying the use of AKP for a given algorithm, see below for an example of how this is done for ML-DSA.
+
 Some algorithms might require or encourage additional structure or length checks for associated key type parameters.
 
 When AKP keys are expressed in JWK, key parameters are base64url encoded.
