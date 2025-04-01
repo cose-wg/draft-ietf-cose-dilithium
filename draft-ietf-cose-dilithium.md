@@ -89,16 +89,25 @@ Some examples in this specification are truncated using "..." for readability.
 
 This section describes a generic cryptographic key structure for use with algorithms not limited to those registered in this document.
 The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
-When this key type is used the "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED.
+The concept of public and private information classes for key pairs originates from {{Section 8.1 of RFC7517}}.
+The parameters for public and private information classes contain byte strings in a format specified by the "alg" value.
+The "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED for all AKP keys.
+The "pub" parameter contains public information and is REQUIRED.
+The "priv" parameter contains private information and MUST NOT be present in public keys.
 
-The "pub" parameter contains a public key, this parameter contains public information and is REQUIRED.
-The "priv" parameter contains a private key, sometimes called a secret key, this parameter contains private information.
-The concept of public and private information classes originates from {{Section 8.1 of RFC7517}}.
+Some algorithm specifications, such as ML-DSA, might allow for use of multiple key type parameters for private information.
+When registering new algorithms, use of multiple key type parameters for private information is NOT RECOMMENDED.
 
-The "pub" and "priv" parameters contain byte strings in a format specified by the "alg" value.
-The values of "pub" and "priv" MAY have additional structure or length checks depending on the associated "alg" parameter and its requirements.
+The "seed" parameter contains private information and MUST NOT be present in public keys.
 
-When AKP keys are expressed in JWK, "pub" and "priv" are base64url encoded.
+If the associated "alg" value does not define seed expansion, then "seed" parameter MUST NOT be present, and the "priv" parameter is used for the private key, if present.
+
+If both "seed" and "priv" parameters are present, then the seed in "seed" parameter MUST expand to the key in "priv" parameter following the seed expansion procedure for the associated "alg" value.
+Whether "seed" is allowed, and how it is related to "pub" and "priv" is algorithm specific and needs to be described as part of specifying the use of AKP for a given algorithm, see below for an example of how this is done for ML-DSA.
+
+Some algorithms might require or encourage additional structure or length checks for associated key type parameters.
+
+When AKP keys are expressed in JWK, key parameters are base64url encoded.
 
 This document requests the registration of the following key types in {{-IANA.jose}}:
 
@@ -115,7 +124,7 @@ An example truncated private key for use with ML-DSA-44 in JWK format is provide
    "kty": "AKP",
    "alg": "ML-DSA-44",
    "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
-   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+   "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 }
 ~~~
 {: #json-web-key-example align="left" title="The all zeros ML-DSA-44 JSON Web Key"}
@@ -134,19 +143,44 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
    / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
    / kty /   1: 7, / AKP /
    / alg /   3: -48, / ML-DSA-44 /
-   / pub  / -1: h'ba71f9f64e11baeb58...c3830546b9dd8db0d',
-   / priv / -2: h'00000000000000...0000000000000000'
+   / pub  / -1: h'ba71f9f64e11baeb589...3830546b9dd8db0d',
+   / seed / -3: h'00000000000000...0000000000000000'
 }
 ~~~
 {: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
 
-The AKP key type and thumbprint computation for the AKP key type is generic, and suitable for use with algorithms other than ML-DSA.
+The AKP key type and thumbprint computations are generic, and suitable for use with algorithms other than ML-DSA.
 
 # ML-DSA Private Keys
 
 Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
-For the algorithms defined in this document, the "priv" parameter is always the seed, and never the expanded expression.
-This definition mirrors the one used in {{Section 6 of -ML-DSA-CERTS}}.
+
+Similar to {{-ML-DSA-CERTS}} the following cases are possible:
+
+1. Only the "seed" parameter is present.
+2. Only the "priv" parameter is present.
+3. Both parameters are present.
+
+When "seed" is present, it MUST have a length of 32 bytes.
+When both "seed" and "priv" are present, the "seed" parameter MUST expand to the "priv" parameter.
+When "priv" is present, "seed" SHOULD be present to enable validation of the private key expansion process.
+Validation and expansion of private keys might be skipped in constrained environments.
+
+See Security Considerations of this document for details.
+
+Here is an elided example of the case where both "seed" and "priv" are present:
+
+~~~
+{
+   "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
+   "kty": "AKP",
+   "alg": "ML-DSA-44",
+   "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
+   "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+   "priv": "129kadu...DZgbTP07e7gEWzw4MFRr54"
+}
+~~~
+{: #json-web-key-example-both-present align="left" title="The all zeros ML-DSA-44 JSON Web Key with both seed and priv parameters"}
 
 # ML-DSA Algorithms
 
@@ -173,7 +207,7 @@ This document requests the registration of the following algorithms in {{-IANA.c
 | ML-DSA-87  | TBD (requested assignment -50)     | CBOR Object Signing Algorithm for ML-DSA-87
 {: #cose-algorithms align="left" title="COSE algorithms for ML-DSA"}
 
-In accordance with Algorithm Key Pair Type section of this document, when present in AKP Keys the "pub" and "priv" parameters have the following additional constraints:
+In accordance with Algorithm Key Pair Type section of this document, ML-DSA key parameters have the following additional constraints:
 
 The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of FIPS-204.
 
@@ -186,13 +220,15 @@ The size of "pub", and the associated signature for each of these algorithms is 
 | ML-DSA-87  | 4896 | 2592 | 4627
 {: #fips-204-table-2 align="left" title="Sizes (in bytes) of keys and signatures of ML-DSA"}
 
-Note that "priv" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes in the table above.
+Note that "seed" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes for "priv" in the table above.
+
 See the ML-DSA Private Keys section of this document for more details.
 
 These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
+
 The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.
 
-Signatures are encoded as bytestrings using th algorithms defined in Section 7.2 of FIPS-204.
+Signatures are encoded as bytestrings using the algorithms defined in Section 7.2 of FIPS-204.
 
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
 
@@ -240,19 +276,20 @@ This document does not specify algorithms for use with HashML-DSA as described i
 
 ## Validation of keys
 
-When an AKP algorithm requires or encourages that a key be validated before being used, the "pub" and "priv" parameters MUST be validated.
+When an AKP algorithm requires or encourages that a key be validated before being used, all algorithm related key parameters MUST be validated.
 
 Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
 The "pub" key parameter MUST be validated according to the pkEncode and pkDecode algorithms before being used.
-For the ML-DSA algorithms registered in this document, the "priv" key parameter is a seed, and as such only a length check MUST be performed.
+For the ML-DSA algorithms registered in this document, the "seed" key parameter is a seed, and as such only a length check MUST be performed.
 The length of the seed is 256 bits, which is 32 bytes.
-However, if the private key derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
+However, if the private key ("priv") is derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
 data and shall be treated with the same safeguards as a private key".
 
+
 ## Mismatched AKP parameters
 
-When using an AKP key with an algorithm, it is possible that the "pub" and "priv" parameters have been tampered with or mismatched.
+When using an AKP key with an algorithm, it is possible that the public and private information class parameters have been tampered with or mismatched.
 Depending on the algorithm and implementation, the consequences of using mismatched parameters can range from operations failing to key compromise.
 
 # IANA Considerations
@@ -310,7 +347,16 @@ The following completed registration templates are provided as described in RFC9
 IANA is requested to add the following entries to the COSE Key Type Parameters.
 The following completed registration templates are provided as described in RFC9053.
 
-### ML-DSA Public Key
+### AKP Seed
+
+* Key Type: TBD (requested assignment 7)
+* Name: seed
+* Label: -3
+* CBOR Type: bstr
+* Description: Seed used to derive keys for an algorithm
+* Reference: RFC XXXX
+
+### AKP Public Key
 
 * Key Type: TBD (requested assignment 7)
 * Name: pub
@@ -319,13 +365,13 @@ The following completed registration templates are provided as described in RFC9
 * Description: Public key
 * Reference: RFC XXXX
 
-### ML-DSA Private Key
+### AKP Private Key
 
 * Key Type: TBD (requested assignment 7)
 * Name: priv
 * Label: -2
 * CBOR Type: bstr
-* Description: Private key or seed used to derive a private key.
+* Description: Private key
 * Reference: RFC XXXX
 
 ### New JOSE Algorithms
@@ -384,6 +430,15 @@ The following completed registration templates are provided as described in RFC7
 IANA is requested to add the following entries to the JSON Web Key Parameters Registry.
 The following completed registration templates are provided as described in RFC7517, and RFC7638.
 
+#### AKP Seed
+
+* Parameter Name: seed
+* Parameter Description: Seed used to derive keys for an algorithm
+* Used with "kty" Value(s): AKP
+* Parameter Information Class: Private
+* Change Controller: IETF
+* Specification Document(s): RFC XXXX
+
 #### AKP Public Key
 
 * Parameter Name: pub
@@ -396,7 +451,7 @@ The following completed registration templates are provided as described in RFC7
 #### AKP Private Key
 
 * Parameter Name: priv
-* Parameter Description: Private key or seed used to derive a private key.
+* Parameter Description: Private key
 * Used with "kty" Value(s): AKP
 * Parameter Information Class: Private
 * Change Controller: IETF
