@@ -26,8 +26,8 @@ func TestGenerateKey(t *testing.T) {
 	if len(decoded.Pub) != 1750 {
 		t.Fatalf(`JWK pub length not expected (%d), want 1750`, len(decoded.Pub))
 	}
-	if len(decoded.Priv) != 43 {
-		t.Fatalf(`JWK priv length not expected (%d), want 43`, len(decoded.Priv))
+	if len(decoded.Seed) != 43 {
+		t.Fatalf(`JWK seed length not expected (%d), want 43`, len(decoded.Seed))
 	}
 	if decoded.Kid != "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o" { // for ML-DSA-44 all zeros private key
 		t.Fatalf(`JWK did not have expected thumbprint (%s), want T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o`, decoded.Kid)
