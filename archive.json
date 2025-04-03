@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:27:44.059026+00:00",
+  "timestamp": "2025-04-03T01:18:52.363794+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -47,6 +47,11 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "pending-close",
+      "description": null,
+      "color": "aaaaaa"
     }
   ],
   "issues": [
@@ -209,10 +214,12 @@
       "assignees": [
         "OR13"
       ],
-      "labels": [],
+      "labels": [
+        "pending-close"
+      ],
       "body": "https://mailarchive.ietf.org/arch/msg/cose/gr298YcbmezEnNNA5tfmJ9rnFDE/\n\nI suggest we solve the seed problem first, and then prepare a PR that shows only a change set addressing this issue.",
       "createdAt": "2025-03-28T13:35:32Z",
-      "updatedAt": "2025-03-28T16:23:24Z",
+      "updatedAt": "2025-04-01T17:00:31Z",
       "closedAt": null,
       "comments": [
         {
@@ -231,10 +238,17 @@
         },
         {
           "author": "ilaril",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I do not think there is any need for this. AKP works fine with ML-DSA as long as there is no HashML-DSA, and the expert advice is do not use HashML-DSA (\"Working Groups SHOULD NOT include HashML-DSA as a signature option.\" -draft-connolly-cfrg-hybrid-sig-considerations-00).\n",
           "createdAt": "2025-03-28T16:23:23Z",
           "updatedAt": "2025-03-28T16:23:23Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "There does not seem to be much support for this, so I am marking it pending close.",
+          "createdAt": "2025-04-01T17:00:29Z",
+          "updatedAt": "2025-04-01T17:00:29Z"
         }
       ]
     }
@@ -607,28 +621,30 @@
       "id": "PR_kwDOLEMDO86QEsp3",
       "title": "Add priv_exp",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/16",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This PR adds support for priv_exp, as discussed at IETF 122\r\n\r\nhttps://datatracker.ietf.org/doc/slides-122-cose-ml-dsa-for-jose-and-cose/",
       "createdAt": "2025-03-25T16:12:57Z",
-      "updatedAt": "2025-03-28T17:06:24Z",
+      "updatedAt": "2025-04-01T16:59:39Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "f082039ba2f97e3d0179b0af3442386f3d2d9cb8",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "update-private-key-to-match-lamps",
-      "headRefOid": "a810029020c5dfd2578cdf021e05ab8fad333bf2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "d597dc4398e19f80d25d9fde4706fdab1a663924",
+      "closedAt": "2025-04-01T16:59:39Z",
+      "mergedAt": "2025-04-01T16:59:39Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "26d66bd972b23f5c9441e60f44fd128e7b21d992"
+      },
       "comments": [
         {
           "author": "ilaril",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "How would this work with hybrid signatures (or native hybrid KEMs)? Those can end up in cases like one of the components being seed-only and the other being expanded-only.\r\n\r\nE.g., id-MLDSA65-Ed25519. There is no standard expanded private key format for Ed25519 (I have seen at least two formats that could qualify as \"expanded\" Ed25519 private keys), while there is for ML-DSA.",
           "createdAt": "2025-03-27T15:45:24Z",
           "updatedAt": "2025-03-27T15:51:45Z"
@@ -642,7 +658,7 @@
         },
         {
           "author": "ilaril",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> > How would this work with hybrid signatures (or native hybrid KEMs)? Those can end up in cases like one of the components being seed-only and the other being expanded-only.\r\n> \r\n> At least for X-Wing, I would imagine:\r\n\r\nYes, X-Wing is easy as it always uses \"super-seed\" (which is internally used to generate seeds for both components).\r\n \r\n> For the other cases, like chempat - https://datatracker.ietf.org/doc/html/draft-josefsson-chempat-03#section-10\r\n> \r\n> You would have to store `sk_T, sk_PQ`... maybe:\r\n\r\nThere are 9 possible combinations of seeds and expanded keys there.\r\n\r\nE.g., how does one store `sk_T` being seed-only, while `sk_PQ` is expanded-only?\r\n\r\n\r\n> The point would be that in order to use an AKP key, you would need to understand how to process all the mandatory key parameters for a given algorithm.\r\n>\r\n> Some algorithms might be as simple as \"priv\", others might look like RSA does today...\r\n> \r\n> I think we have learned that opaque byte string parameters are best, and so as much as possible, we should aim for the minimum number of opaque byte strings needed to support interop.\r\n\r\nBecause processing of the private key octet string can be algorithm-dependent, the minimum number of private parameters is 1.\r\nThat is, one can always do with just \"priv\", \"priv_exp\" is never needed.\r\n\r\nE.g., with primitive algorithms, one can prepend a flag byte (01 => Seed, 02 => Expanded, 03 => Both). With composite algorithms, one can, e.g., do it like draft-ietf-lamps-pq-composite-sigs-04.\r\n\r\nIdeally, the COSE/JOSE code would just stuff the raw private/public key to some library that then transparently handles the internals.\r\n\r\n\r\n",
           "createdAt": "2025-03-28T10:14:28Z",
           "updatedAt": "2025-03-28T10:14:28Z"
@@ -656,7 +672,7 @@
         },
         {
           "author": "ilaril",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I think this would be tolerable if the section \"Algorithm Key Pair Type\" made it clear what to do with algorithms that do not have defined seed expansion, and that the matching requirement is independent of algorithm.\r\n\r\nFor example, COSE-HPKE and JOSE-HPKE algorithms do not have seed expansion (even if using X-Wing as KEM!). Also, any hybrid signature algorithms are unlikely to have any defined seed expansion.\r\n\r\n\r\nMaybe something like (with fields renamed):\r\n\r\n_If the associated \"alg\" value does not define seed expansion, then \"seed\" parameter MUST NOT be present, and the \"priv\" parameter is used for the private key, if present._\r\n\r\n_If both \"seed\" and \"priv\" parameters are both present, then the seed in \"seed\" parameter MUST expand to the key in \"priv\" parameter following the seed expansion procedure for the associated \"alg\" value._\r\n",
           "createdAt": "2025-03-28T14:30:44Z",
           "updatedAt": "2025-03-28T14:30:44Z"
@@ -667,6 +683,13 @@
           "body": "@ilaril I agree, I will make it clear that the parameters for a given AKP come from the algorithm.\r\n",
           "createdAt": "2025-03-28T15:54:52Z",
           "updatedAt": "2025-03-28T15:54:52Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@ilaril I ended up applying both suggestions, based on @selfissued 's comment.\r\n\r\nI'm going to push a draft version to the list, to enable better review.",
+          "createdAt": "2025-04-01T16:59:20Z",
+          "updatedAt": "2025-04-01T16:59:20Z"
         }
       ],
       "reviews": [
@@ -1122,8 +1145,109 @@
               "updatedAt": "2025-03-27T18:44:20Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86i0qYb",
+          "commit": {
+            "abbreviatedOid": "a810029"
+          },
+          "author": "ilaril",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-01T07:19:26Z",
+          "updatedAt": "2025-04-01T07:19:26Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "This does not seem to say what to do with algorithms without defined seed expansion, or that seed and private key are supposed to match if both are present (AKP is supposed to be much more generic than just ML-DSA). Copying earlier suggested text as suggested change:\r\n\r\n```suggestion\r\n\r\nIf the associated \"alg\" value does not define seed expansion, then \"seed\" parameter MUST NOT be present, and the \"priv\" parameter is used for the private key, if present.\r\n\r\nIf both \"seed\" and \"priv\" parameters are present, then the seed in \"seed\" parameter MUST expand to the key in \"priv\" parameter following the seed expansion procedure for the associated \"alg\" value.\r\n```",
+              "createdAt": "2025-04-01T07:19:26Z",
+              "updatedAt": "2025-04-01T07:19:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86i5_Dv",
+          "commit": {
+            "abbreviatedOid": "a810029"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-01T15:23:53Z",
+          "updatedAt": "2025-04-01T15:23:53Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nThe \"seed\" parameter contains private information and MUST NOT be present in public keys.\r\n\r\nWhether \"seed\" is allowed, and how it is related to \"pub\" and \"priv\" is algorithm specific and needs to be described as part of specifying the use of AKP for a given algorithm, see below for an example of how this is done for ML-DSA.\r\n```",
+              "createdAt": "2025-04-01T15:23:53Z",
+              "updatedAt": "2025-04-01T15:24:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86i5_6M",
+          "commit": {
+            "abbreviatedOid": "a810029"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-01T15:25:02Z",
+          "updatedAt": "2025-04-01T15:25:03Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "> AKP is supposed to be much more generic than just ML-DSA\r\n\r\nThis was the original reason why I left the discussion of seeds to the alg specific key section.\r\n\r\nI was not sure I could craft generic text that would work for all future \"alg\" values.\r\n\r\nI would prefer to leave this level of detail to the following section that is alg specific.\r\n\r\nPerhaps instead we might say something like:\r\n\r\nhttps://github.com/cose-wg/draft-ietf-cose-dilithium/pull/16/files#r2023090886\r\n\r\n",
+              "createdAt": "2025-04-01T15:25:02Z",
+              "updatedAt": "2025-04-01T15:25:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86i65Hv",
+          "commit": {
+            "abbreviatedOid": "a810029"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "I agree that this is now the right way to make this change, after the recent suggestions have been incorporated.\r\n\r\nI do have questions (as an individual) whether this change is needed at all.  But we should discuss that on the list.",
+          "createdAt": "2025-04-01T16:49:28Z",
+          "updatedAt": "2025-04-01T16:49:28Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOLEMDO86Q95Zf",
+      "title": "Fix examples",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/18",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Follow up from https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/16\r\n\r\nFixing examples only",
+      "createdAt": "2025-04-01T17:15:26Z",
+      "updatedAt": "2025-04-01T17:41:28Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "26d66bd972b23f5c9441e60f44fd128e7b21d992",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "fix-examples",
+      "headRefOid": "a795cdcbe010bd211e924fb071c053eccf363f23",
+      "closedAt": "2025-04-01T17:41:28Z",
+      "mergedAt": "2025-04-01T17:41:28Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "b281f33f11c0db04624be00fd81636ed5315c119"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
