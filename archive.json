@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-03T01:18:52.363794+00:00",
+  "timestamp": "2025-04-20T01:25:58.921431+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1246,6 +1246,32 @@
       "mergeCommit": {
         "oid": "b281f33f11c0db04624be00fd81636ed5315c119"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOLEMDO86TJO3s",
+      "title": "Collect COSE Key Types in one section",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/19",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I think that AKP SEED, AKP Public Key, and AKA Private Key are supposed to be organized under the new COSE Key Type Parameters section.",
+      "createdAt": "2025-04-18T16:52:37Z",
+      "updatedAt": "2025-04-18T16:52:37Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "b281f33f11c0db04624be00fd81636ed5315c119",
+      "headRepository": "seanturner/draft-ietf-cose-dilithium",
+      "headRefName": "patch-1",
+      "headRefOid": "a40cebdeeb26d1256c8e54c550c1ec567b7e1777",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
