@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-20T01:25:58.921431+00:00",
+  "timestamp": "2025-05-08T01:23:52.584716+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1261,7 +1261,7 @@
       "labels": [],
       "body": "I think that AKP SEED, AKP Public Key, and AKA Private Key are supposed to be organized under the new COSE Key Type Parameters section.",
       "createdAt": "2025-04-18T16:52:37Z",
-      "updatedAt": "2025-04-18T16:52:37Z",
+      "updatedAt": "2025-05-07T17:44:46Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "b281f33f11c0db04624be00fd81636ed5315c119",
@@ -1273,7 +1273,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO86oPolc",
+          "commit": {
+            "abbreviatedOid": "a40cebd"
+          },
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-07T17:44:46Z",
+          "updatedAt": "2025-05-07T17:44:46Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
