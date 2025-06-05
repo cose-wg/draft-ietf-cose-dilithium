@@ -316,7 +316,7 @@ The following completed registration templates are provided as described in RFC9
 IANA is requested to add the following entries to the COSE Key Type Parameters.
 The following completed registration templates are provided as described in RFC9053.
 
-### AKP Public Key
+#### AKP Public Key
 
 * Key Type: TBD (requested assignment 7)
 * Name: pub
@@ -325,7 +325,7 @@ The following completed registration templates are provided as described in RFC9
 * Description: Public key
 * Reference: RFC XXXX
 
-### AKP Private Key
+#### AKP Private Key
 
 * Key Type: TBD (requested assignment 7)
 * Name: priv
