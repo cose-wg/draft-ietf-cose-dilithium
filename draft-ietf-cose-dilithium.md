@@ -151,6 +151,8 @@ Unlike {{-ML-DSA-CERTS}}, this document specifies ML-DSA private information usi
 
 For the ML-DSA private keys described in this document, the "priv" parameter MUST be the seed, and MUST have a length of 32 bytes.
 
+This specification intentionally does not define a means of utilizing the expanded private key representation defined by NIST so as to increase interoperability by having a single ML-DSA private key representation for COSE and JOSE.
+
 See Security Considerations of this document for details.
 
 # ML-DSA Algorithms
