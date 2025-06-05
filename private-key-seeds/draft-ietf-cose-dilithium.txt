@@ -91,11 +91,9 @@ Table of Contents
        8.1.1.  New COSE Algorithms
        8.1.2.  New COSE Key Types
        8.1.3.  New COSE Key Type Parameters
-       8.1.4.  AKP Public Key
-       8.1.5.  AKP Private Key
-       8.1.6.  New JOSE Algorithms
-       8.1.7.  New JOSE Key Types
-       8.1.8.  New JSON Web Key Parameters
+       8.1.4.  New JOSE Algorithms
+       8.1.5.  New JOSE Key Types
+       8.1.6.  New JSON Web Key Parameters
    9.  References
      9.1.  Normative References
      9.2.  Informative References
@@ -459,7 +457,7 @@ Table of Contents
    Parameters.  The following completed registration templates are
    provided as described in RFC9053.
 
-8.1.4.  AKP Public Key
+8.1.3.1.  AKP Public Key
 
    *  Key Type: TBD (requested assignment 7)
 
@@ -473,7 +471,7 @@ Table of Contents
 
    *  Reference: RFC XXXX
 
-8.1.5.  AKP Private Key
+8.1.3.2.  AKP Private Key
 
    *  Key Type: TBD (requested assignment 7)
 
@@ -487,14 +485,14 @@ Table of Contents
 
    *  Reference: RFC XXXX
 
-8.1.6.  New JOSE Algorithms
+8.1.4.  New JOSE Algorithms
 
    IANA is requested to add the following entries to the JSON Web
    Signature and Encryption Algorithms Registry.  The following
    completed registration templates are provided as described in
    RFC7518.
 
-8.1.6.1.  ML-DSA-44
+8.1.4.1.  ML-DSA-44
 
    *  Algorithm Name: ML-DSA-44
 
@@ -512,7 +510,7 @@ Table of Contents
 
    *  Algorithm Analysis Documents(s): [FIPS-204]
 
-8.1.6.2.  ML-DSA-65
+8.1.4.2.  ML-DSA-65
 
    *  Algorithm Name: ML-DSA-65
 
@@ -530,7 +528,7 @@ Table of Contents
 
    *  Algorithm Analysis Documents(s): [FIPS-204]
 
-8.1.6.3.  ML-DSA-87
+8.1.4.3.  ML-DSA-87
 
    *  Algorithm Name: ML-DSA-87
 
@@ -548,13 +546,13 @@ Table of Contents
 
    *  Algorithm Analysis Documents(s): [FIPS-204]
 
-8.1.7.  New JOSE Key Types
+8.1.5.  New JOSE Key Types
 
    IANA is requested to add the following entries to the JSON Web Key
    Types Registry.  The following completed registration templates are
    provided as described in RFC7518 RFC7638.
 
-8.1.7.1.  AKP
+8.1.5.1.  AKP
 
    *  "kty" Parameter Value: AKP
 
@@ -566,13 +564,13 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-8.1.8.  New JSON Web Key Parameters
+8.1.6.  New JSON Web Key Parameters
 
    IANA is requested to add the following entries to the JSON Web Key
    Parameters Registry.  The following completed registration templates
    are provided as described in RFC7517, and RFC7638.
 
-8.1.8.1.  AKP Public Key
+8.1.6.1.  AKP Public Key
 
    *  Parameter Name: pub
 
@@ -586,7 +584,7 @@ Table of Contents
 
    *  Specification Document(s): RFC XXXX
 
-8.1.8.2.  AKP Private Key
+8.1.6.2.  AKP Private Key
 
    *  Parameter Name: priv
 
