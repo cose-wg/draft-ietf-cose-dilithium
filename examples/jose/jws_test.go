@@ -11,7 +11,7 @@ import (
 )
 
 type JOSETestVector struct {
-	Seed   string `json:"seed"`
+	Priv   string `json:"priv"`
 	Jwk    AKPKey `json:"jwk"`
 	Jws    string `json:"jws"`
 	RawTbs string `json:"raw_to_be_signed"`
@@ -66,7 +66,7 @@ func TestSign_0(t *testing.T) {
 	sig, _ := SignatureFromJWS(jws)
 	pub, _ := base64.RawURLEncoding.DecodeString(key.Pub)
 	examples, _ := json.MarshalIndent(JOSETestVector{
-		Seed:   hex.EncodeToString(seed[:]),
+		Priv:   hex.EncodeToString(seed[:]),
 		Jwk:    key,
 		Jws:    jws,
 		RawTbs: hex.EncodeToString(tbs),
@@ -107,7 +107,7 @@ func TestSign_1(t *testing.T) {
 	sig, _ := SignatureFromJWS(jws)
 	pub, _ := base64.RawURLEncoding.DecodeString(key.Pub)
 	examples, _ := json.MarshalIndent(JOSETestVector{
-		Seed:   hex.EncodeToString(seed[:]),
+		Priv:   hex.EncodeToString(seed[:]),
 		Jwk:    key,
 		Jws:    jws,
 		RawTbs: hex.EncodeToString(tbs),
@@ -148,7 +148,7 @@ func TestSign_2(t *testing.T) {
 	sig, _ := SignatureFromJWS(jws)
 	pub, _ := base64.RawURLEncoding.DecodeString(key.Pub)
 	examples, _ := json.MarshalIndent(JOSETestVector{
-		Seed:   hex.EncodeToString(seed[:]),
+		Priv:   hex.EncodeToString(seed[:]),
 		Jwk:    key,
 		Jws:    jws,
 		RawTbs: hex.EncodeToString(tbs),

@@ -10,7 +10,7 @@ import (
 )
 
 type COSETestVector struct {
-	Seed      string `json:"seed"`
+	Priv      string `json:"priv"`
 	Key       string `json:"key"`
 	KeyDiag   string `json:"key_diag"`
 	Sign1     string `json:"sign1"`
@@ -53,7 +53,7 @@ func TestSign1_0(t *testing.T) {
 	kd, _ := cbor.Diagnose(private_key)
 	sd, _ := cbor.Diagnose(signature)
 	examples, _ := json.MarshalIndent(COSETestVector{
-		Seed:      hex.EncodeToString(seed[:]),
+		Priv:      hex.EncodeToString(seed[:]),
 		Key:       hex.EncodeToString(private_key),
 		KeyDiag:   kd,
 		Sign1:     hex.EncodeToString(signature),
@@ -92,7 +92,7 @@ func TestSign1_1(t *testing.T) {
 	kd, _ := cbor.Diagnose(private_key)
 	sd, _ := cbor.Diagnose(signature)
 	examples, _ := json.MarshalIndent(COSETestVector{
-		Seed:      hex.EncodeToString(seed[:]),
+		Priv:      hex.EncodeToString(seed[:]),
 		Key:       hex.EncodeToString(private_key),
 		KeyDiag:   kd,
 		Sign1:     hex.EncodeToString(signature),
@@ -132,7 +132,7 @@ func TestSign1_2(t *testing.T) {
 	kd, _ := cbor.Diagnose(private_key)
 	sd, _ := cbor.Diagnose(signature)
 	examples, _ := json.MarshalIndent(COSETestVector{
-		Seed:      hex.EncodeToString(seed[:]),
+		Priv:      hex.EncodeToString(seed[:]),
 		Key:       hex.EncodeToString(private_key),
 		KeyDiag:   kd,
 		Sign1:     hex.EncodeToString(signature),

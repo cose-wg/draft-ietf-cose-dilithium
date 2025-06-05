@@ -169,7 +169,7 @@ func Sign1(private_key []byte, header Header, payload []byte) ([]byte, error) {
 	var suite sign.Scheme
 	name, _ := AlgorithmToSuite(key.Alg)
 	suite = schemes.ByName(name)
-	_, priv := suite.DeriveKey(key.Seed)
+	_, priv := suite.DeriveKey(key.Priv)
 	var signer cose.Signer = &keySigner{
 		alg: key.Alg,
 		key: priv,

@@ -42,9 +42,9 @@ func CompactSign(private_key string, payload []byte) (string, error) {
 	}
 	// caution, this assumes circl and JOSE / COSE alg names are the name.
 	suite := schemes.ByName(jwk["alg"])
-	seed, err := base64.RawURLEncoding.DecodeString(jwk["seed"])
+	seed, err := base64.RawURLEncoding.DecodeString(jwk["priv"])
 	if err != nil {
-		return "", errors.New("Failed to decode jwk.priv, malformed seed")
+		return "", errors.New("Failed to decode jwk.priv, malformed priv")
 	}
 	_, priv := suite.DeriveKey(seed[:])
 	var header, _ = json.Marshal(JWSHeader{
