@@ -147,7 +147,7 @@ The AKP key type and thumbprint computations are generic, and suitable for use w
 
 Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 
-Unlike {{-ML-DSA-CERTS}}, this document specifies ML-DSA private information using only the seed.
+Unlike {{-ML-DSA-CERTS}}, this document specifies ML-DSA private key information using only the seed.
 
 For the ML-DSA private keys described in this document, the "priv" parameter MUST be the seed, and MUST have a length of 32 bytes.
 
