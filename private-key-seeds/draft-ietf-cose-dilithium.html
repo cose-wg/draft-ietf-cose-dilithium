@@ -1595,7 +1595,7 @@ Use of thumbprints as described in <span>[<a href="#RFC7638" class="cite xref">R
 <p id="section-7.3-1">When an AKP algorithm requires or encourages that a key be validated before being used, all algorithm related key parameters <span class="bcp14">MUST</span> be validated.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
 The "pub" key parameter <span class="bcp14">MUST</span> be validated according to the pkEncode and pkDecode algorithms before being used.
-For the ML-DSA algorithms registered in this document, the "priv" key parameter is a seed, and as such only a length check <span class="bcp14">MUST</span> be performed.
+For the ML-DSA algorithms registered in this document, the "priv" key parameter is the seed, and therefore, only a length check <span class="bcp14">MUST</span> be performed.
 The length of the seed is 256 bits, which is 32 bytes.
 However, when the priv parameter is expanded using KeyGen_internal, the skEncode and skDecode algorithms <span class="bcp14">MUST</span> be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive data and shall be treated with the same safeguards as a private key".<a href="#section-7.3-2" class="pilcrow">¶</a></p>
