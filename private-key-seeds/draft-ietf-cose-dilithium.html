@@ -1391,7 +1391,7 @@ The "priv" parameter contains private information and <span class="bcp14">MUST N
       </h2>
 <p id="section-4-1">Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">Unlike <span>[<a href="#I-D.draft-ietf-lamps-dilithium-certificates" class="cite xref">I-D.draft-ietf-lamps-dilithium-certificates</a>]</span>, this document specifies ML-DSA private key information using only the seed.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">For the ML-DSA private keys described in this document, the "priv" parameter <span class="bcp14">MUST</span> be the seed, and <span class="bcp14">MUST</span> have a length of 32 bytes.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-3">For the ML-DSA private keys described in this document, the <code>priv</code> parameter <span class="bcp14">MUST</span> be the seed, and <span class="bcp14">MUST</span> have a length of 32 bytes.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <p id="section-4-4">This specification intentionally does not define a means of utilizing the expanded private key representation defined by NIST so as to increase interoperability by having a single ML-DSA private key representation for COSE and JOSE.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">See Security Considerations of this document for details.<a href="#section-4-5" class="pilcrow">¶</a></p>
 </section>

@@ -203,7 +203,7 @@ Table of Contents
    Unlike [I-D.draft-ietf-lamps-dilithium-certificates], this document
    specifies ML-DSA private key information using only the seed.
 
-   For the ML-DSA private keys described in this document, the "priv"
+   For the ML-DSA private keys described in this document, the priv
    parameter MUST be the seed, and MUST have a length of 32 bytes.
 
    This specification intentionally does not define a means of utilizing
