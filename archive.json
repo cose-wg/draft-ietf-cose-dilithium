@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-08T01:41:24.210097+00:00",
+  "timestamp": "2025-06-10T01:27:12.565783+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1303,18 +1303,26 @@
       "labels": [],
       "body": "This pull request removes the \"expanded private key\" representation from ML-DSA AKP for both JOSE and COSE.\r\n\r\nThis PR addresses the chairs request described here:\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/cose/gF4yEG8ps03nvgvPHALiMkYwg68/\r\n\r\nUnless there are objections, this PR will be merged in 1 week, and -07 will be published to the datatracker.\r\n",
       "createdAt": "2025-06-05T16:19:58Z",
-      "updatedAt": "2025-06-05T16:58:31Z",
+      "updatedAt": "2025-06-09T19:04:34Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "4b2dc102ea3c080f598f21f9a053761b4eafc314",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "private-key-seeds",
-      "headRefOid": "624aedfd7c7d90cbeb7054fac97063c507ea1b0c",
+      "headRefOid": "b0f54128995bee5f643fa557e0fb292e990138d5",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "body": "Yes please. I think IETF's stance should be that an ML-DSA / ML-KEM private key just is a seed. Period.\r\n\r\nBy the by, built a little benchmarking on openssl's ML-DSA implementation, and doing an atomic:\r\n\r\n```\r\ndef sign_from_seed(mldsaSeed, M):\r\n    (pk, sk) = ML-DSA.keygen(seed);\r\n    return ML-DSA.sign(sk, M);\r\n```\r\n\r\nis only like 1.5x the CPU cost of carrying the expanded key -- ie ML-DSA.keygen(seed) costs about 0.5 of a ML-DSA.sign(). \r\n\r\nI really think the IETF's position should be to think of the expanded for as an \"intermediate value that you might need to cache for performance reasons\", and not as a top-level interop format.",
+          "createdAt": "2025-06-09T17:33:24Z",
+          "updatedAt": "2025-06-09T17:33:24Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLEMDO86s64C9",
@@ -1341,6 +1349,152 @@
           "createdAt": "2025-06-05T16:58:31Z",
           "updatedAt": "2025-06-05T16:58:31Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLEMDO86teZff",
+          "commit": {
+            "abbreviatedOid": "624aedf"
+          },
+          "author": "mprorock",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-09T15:23:06Z",
+          "updatedAt": "2025-06-09T15:23:06Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLEMDO86tf1_d",
+          "commit": {
+            "abbreviatedOid": "624aedf"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-09T17:36:18Z",
+          "updatedAt": "2025-06-09T17:36:19Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "```suggestion\r\nUnlike {{-ML-DSA-CERTS}}, this document specifies ML-DSA private key information using only the seed.\r\n```",
+              "createdAt": "2025-06-09T17:36:18Z",
+              "updatedAt": "2025-06-09T17:36:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86tf3HZ",
+          "commit": {
+            "abbreviatedOid": "624aedf"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-09T17:37:38Z",
+          "updatedAt": "2025-06-09T17:37:38Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "```suggestion\r\nNote that `priv` size is always 32 bytes, and that KeyGen_internal is called to produce the expanded private keys for \"Private Key\" in the table above.\r\n```",
+              "createdAt": "2025-06-09T17:37:38Z",
+              "updatedAt": "2025-06-09T17:41:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86tf39u",
+          "commit": {
+            "abbreviatedOid": "624aedf"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-09T17:38:41Z",
+          "updatedAt": "2025-06-09T17:38:41Z",
+          "comments": [
+            {
+              "originalPosition": 93,
+              "body": "```suggestion\r\nFor the ML-DSA algorithms registered in this document, the \"priv\" key parameter is the seed, and therefore, only a length check MUST be performed.\r\n```",
+              "createdAt": "2025-06-09T17:38:41Z",
+              "updatedAt": "2025-06-09T17:38:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86tf4qo",
+          "commit": {
+            "abbreviatedOid": "624aedf"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-09T17:39:33Z",
+          "updatedAt": "2025-06-09T17:39:33Z",
+          "comments": [
+            {
+              "originalPosition": 98,
+              "body": "```suggestion\r\nHowever, when the `priv` parameter is expanded using KeyGen_internal, the skEncode and skDecode algorithms MUST be used.\r\n```",
+              "createdAt": "2025-06-09T17:39:33Z",
+              "updatedAt": "2025-06-09T17:39:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86tf5Pf",
+          "commit": {
+            "abbreviatedOid": "624aedf"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-09T17:40:27Z",
+          "updatedAt": "2025-06-09T17:40:27Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\r\nFor the ML-DSA private keys described in this document, the `priv` parameter MUST be the seed, and MUST have a length of 32 bytes.\r\n```",
+              "createdAt": "2025-06-09T17:40:27Z",
+              "updatedAt": "2025-06-09T17:40:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO86tf6XX",
+          "commit": {
+            "abbreviatedOid": "624aedf"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thanks for doing this!\r\n\r\nPlease apply my editorial suggestions before merging.",
+          "createdAt": "2025-06-09T17:42:01Z",
+          "updatedAt": "2025-06-09T17:42:01Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLEMDO86tgh3m",
+          "commit": {
+            "abbreviatedOid": "702f341"
+          },
+          "author": "selfissued",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-09T18:49:12Z",
+          "updatedAt": "2025-06-09T18:49:13Z",
+          "comments": [
+            {
+              "originalPosition": 93,
+              "body": "```suggestion\r\nFor the ML-DSA algorithms registered in this document, the `priv` key parameter is the seed, and therefore, only a length check MUST be performed.\r\n```",
+              "createdAt": "2025-06-09T18:49:13Z",
+              "updatedAt": "2025-06-09T18:49:13Z"
+            }
+          ]
         }
       ]
     }
