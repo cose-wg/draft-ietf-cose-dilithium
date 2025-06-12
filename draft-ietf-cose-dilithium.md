@@ -95,15 +95,7 @@ The "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED for al
 The "pub" parameter contains public information and is REQUIRED.
 The "priv" parameter contains private information and MUST NOT be present in public keys.
 
-Some algorithm specifications, such as ML-DSA, might allow for use of multiple key type parameters for private information.
 When registering new algorithms, use of multiple key type parameters for private information is NOT RECOMMENDED.
-
-The "seed" parameter contains private information and MUST NOT be present in public keys.
-
-If the associated "alg" value does not define seed expansion, then "seed" parameter MUST NOT be present, and the "priv" parameter is used for the private key, if present.
-
-If both "seed" and "priv" parameters are present, then the seed in "seed" parameter MUST expand to the key in "priv" parameter following the seed expansion procedure for the associated "alg" value.
-Whether "seed" is allowed, and how it is related to "pub" and "priv" is algorithm specific and needs to be described as part of specifying the use of AKP for a given algorithm, see below for an example of how this is done for ML-DSA.
 
 Some algorithms might require or encourage additional structure or length checks for associated key type parameters.
 
@@ -124,7 +116,7 @@ An example truncated private key for use with ML-DSA-44 in JWK format is provide
    "kty": "AKP",
    "alg": "ML-DSA-44",
    "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
-   "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+   "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 }
 ~~~
 {: #json-web-key-example align="left" title="The all zeros ML-DSA-44 JSON Web Key"}
@@ -144,7 +136,7 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
    / kty /   1: 7, / AKP /
    / alg /   3: -48, / ML-DSA-44 /
    / pub  / -1: h'ba71f9f64e11baeb589...3830546b9dd8db0d',
-   / seed / -3: h'00000000000000...0000000000000000'
+   / priv / -2: h'00000000000000...0000000000000000'
 }
 ~~~
 {: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
@@ -155,39 +147,19 @@ The AKP key type and thumbprint computations are generic, and suitable for use w
 
 Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 
-Similar to {{-ML-DSA-CERTS}} the following cases are possible:
+Unlike {{-ML-DSA-CERTS}}, this document specifies ML-DSA private key information using only the seed.
 
-1. Only the "seed" parameter is present.
-2. Only the "priv" parameter is present.
-3. Both parameters are present.
+For the ML-DSA private keys described in this document, the `priv` parameter MUST be the seed, and MUST have a length of 32 bytes.
 
-When "seed" is present, it MUST have a length of 32 bytes.
-When both "seed" and "priv" are present, the "seed" parameter MUST expand to the "priv" parameter.
-When "priv" is present, "seed" SHOULD be present to enable validation of the private key expansion process.
-Validation and expansion of private keys might be skipped in constrained environments.
+This specification intentionally does not define a means of utilizing the expanded private key representation defined by NIST so as to increase interoperability by having a single ML-DSA private key representation for COSE and JOSE.
 
 See Security Considerations of this document for details.
-
-Here is an elided example of the case where both "seed" and "priv" are present:
-
-~~~
-{
-   "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
-   "kty": "AKP",
-   "alg": "ML-DSA-44",
-   "pub": "unH59k4Ru...DZgbTP07e7gEWzw4MFRrndjbDQ",
-   "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-   "priv": "129kadu...DZgbTP07e7gEWzw4MFRr54"
-}
-~~~
-{: #json-web-key-example-both-present align="left" title="The all zeros ML-DSA-44 JSON Web Key with both seed and priv parameters"}
 
 # ML-DSA Algorithms
 
 The ML-DSA Signature Scheme is parameterized to support different security levels.
 
-In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA
-with the parameter choices given in Table 1 of FIPS-204.
+In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA with the parameter choices given in Table 1 of FIPS-204.
 
 This document requests the registration of the following algorithms in {{-IANA.jose}}:
 
@@ -220,7 +192,7 @@ The size of "pub", and the associated signature for each of these algorithms is 
 | ML-DSA-87  | 4896 | 2592 | 4627
 {: #fips-204-table-2 align="left" title="Sizes (in bytes) of keys and signatures of ML-DSA"}
 
-Note that "seed" size is always 32 bytes, and that KeyGen_internal is called to produce the private key sizes for "priv" in the table above.
+Note that `priv` size is always 32 bytes, and that KeyGen_internal is called to produce the expanded private keys for "Private Key" in the table above.
 
 See the ML-DSA Private Keys section of this document for more details.
 
@@ -280,11 +252,10 @@ When an AKP algorithm requires or encourages that a key be validated before bein
 
 Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
 The "pub" key parameter MUST be validated according to the pkEncode and pkDecode algorithms before being used.
-For the ML-DSA algorithms registered in this document, the "seed" key parameter is a seed, and as such only a length check MUST be performed.
+For the ML-DSA algorithms registered in this document, the `priv` key parameter is the seed, and therefore, only a length check MUST be performed.
 The length of the seed is 256 bits, which is 32 bytes.
-However, if the private key ("priv") is derived from the seed using KeyGen_internal is stored as part of some implementation, the skEncode and skDecode algorithms MUST be used.
-FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive
-data and shall be treated with the same safeguards as a private key".
+However, when the `priv` parameter is expanded using KeyGen_internal, the skEncode and skDecode algorithms MUST be used.
+FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive data and shall be treated with the same safeguards as a private key".
 
 
 ## Mismatched AKP parameters
@@ -346,15 +317,6 @@ The following completed registration templates are provided as described in RFC9
 
 IANA is requested to add the following entries to the COSE Key Type Parameters.
 The following completed registration templates are provided as described in RFC9053.
-
-#### AKP Seed
-
-* Key Type: TBD (requested assignment 7)
-* Name: seed
-* Label: -3
-* CBOR Type: bstr
-* Description: Seed used to derive keys for an algorithm
-* Reference: RFC XXXX
 
 #### AKP Public Key
 
@@ -429,15 +391,6 @@ The following completed registration templates are provided as described in RFC7
 
 IANA is requested to add the following entries to the JSON Web Key Parameters Registry.
 The following completed registration templates are provided as described in RFC7517, and RFC7638.
-
-#### AKP Seed
-
-* Parameter Name: seed
-* Parameter Description: Seed used to derive keys for an algorithm
-* Used with "kty" Value(s): AKP
-* Parameter Information Class: Private
-* Change Controller: IETF
-* Specification Document(s): RFC XXXX
 
 #### AKP Public Key
 

@@ -23,8 +23,8 @@ func TestGenerateKey(t *testing.T) {
 	if len(cose_key.Pub) != 1312 {
 		t.Fatalf(`COSE Key did not contain expected public key length (%d), want 1312`, len(cose_key.Pub))
 	}
-	if len(cose_key.Seed) != 32 {
-		t.Fatalf(`COSE Key did not contain expected private key (seed) length (%d), want 32`, len(cose_key.Seed))
+	if len(cose_key.Priv) != 32 {
+		t.Fatalf(`COSE Key did not contain expected private key (seed) length (%d), want 32`, len(cose_key.Priv))
 	}
 }
 

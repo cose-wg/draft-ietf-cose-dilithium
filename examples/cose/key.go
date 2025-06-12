@@ -36,7 +36,7 @@ type AKPKey struct {
 	Kty  int            `cbor:"1,keyasint,omitempty"`
 	Alg  cose.Algorithm `cbor:"3,keyasint,omitempty"`
 	Pub  []byte         `cbor:"-1,keyasint,omitempty"`
-	Seed []byte         `cbor:"-3,keyasint,omitempty"`
+	Priv []byte         `cbor:"-2,keyasint,omitempty"`
 }
 
 func GenerateKey(alg cose.Algorithm, seed []byte) ([]byte, error) {
@@ -49,7 +49,7 @@ func GenerateKey(alg cose.Algorithm, seed []byte) ([]byte, error) {
 		Kty:  AKP,
 		Alg:  alg,
 		Pub:  pub_bytes,
-		Seed: seed,
+		Priv: seed,
 	})
 	if encode_private_key_error != nil {
 		return nil, errors.New(`Failed to cbor encode cose key`)
@@ -63,7 +63,7 @@ func GenerateKey(alg cose.Algorithm, seed []byte) ([]byte, error) {
 		Kty:  AKP,
 		Alg:  alg,
 		Pub:  pub_bytes,
-		Seed: seed,
+		Priv: seed,
 	})
 	return private_key_with_thumbprint, nil
 }
@@ -74,7 +74,7 @@ func PublicKeyFromPrivateKey(cose_key []byte) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to parse cbor")
 	}
-	key.Seed = nil
+	key.Priv = nil
 	encoded_public_key, encode_public_key_error := cbor.Marshal(key)
 	if encode_public_key_error != nil {
 		return nil, errors.New(`Failed to cbor encode cose key`)
