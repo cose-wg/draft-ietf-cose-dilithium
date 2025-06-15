@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-10T01:27:12.565783+00:00",
+  "timestamp": "2025-06-15T01:43:11.973930+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1296,24 +1296,26 @@
       "id": "PR_kwDOLEMDO86ZO4Ot",
       "title": "Private key seeds",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/20",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This pull request removes the \"expanded private key\" representation from ML-DSA AKP for both JOSE and COSE.\r\n\r\nThis PR addresses the chairs request described here:\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/cose/gF4yEG8ps03nvgvPHALiMkYwg68/\r\n\r\nUnless there are objections, this PR will be merged in 1 week, and -07 will be published to the datatracker.\r\n",
       "createdAt": "2025-06-05T16:19:58Z",
-      "updatedAt": "2025-06-09T19:04:34Z",
+      "updatedAt": "2025-06-12T20:47:07Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "4b2dc102ea3c080f598f21f9a053761b4eafc314",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "private-key-seeds",
       "headRefOid": "b0f54128995bee5f643fa557e0fb292e990138d5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-06-12T20:47:07Z",
+      "mergedAt": "2025-06-12T20:47:07Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "4225a3462266c312480f291bec4f8379c818fae5"
+      },
       "comments": [
         {
           "author": "ounsworth",
@@ -1369,7 +1371,7 @@
             "abbreviatedOid": "624aedf"
           },
           "author": "selfissued",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-06-09T17:36:18Z",
@@ -1389,7 +1391,7 @@
             "abbreviatedOid": "624aedf"
           },
           "author": "selfissued",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-06-09T17:37:38Z",
@@ -1409,7 +1411,7 @@
             "abbreviatedOid": "624aedf"
           },
           "author": "selfissued",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-06-09T17:38:41Z",
@@ -1429,7 +1431,7 @@
             "abbreviatedOid": "624aedf"
           },
           "author": "selfissued",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-06-09T17:39:33Z",
@@ -1449,7 +1451,7 @@
             "abbreviatedOid": "624aedf"
           },
           "author": "selfissued",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-06-09T17:40:27Z",
@@ -1469,7 +1471,7 @@
             "abbreviatedOid": "624aedf"
           },
           "author": "selfissued",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "Thanks for doing this!\r\n\r\nPlease apply my editorial suggestions before merging.",
           "createdAt": "2025-06-09T17:42:01Z",
@@ -1482,7 +1484,7 @@
             "abbreviatedOid": "702f341"
           },
           "author": "selfissued",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-06-09T18:49:12Z",
