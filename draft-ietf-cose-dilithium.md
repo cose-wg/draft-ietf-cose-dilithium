@@ -28,7 +28,7 @@ venue:
 author:
  -
     fullname: "Michael Prorock"
-    organization: mesur.io
+    organization: Tradeverifyd
     email: "mprorock@mesur.io"
  -
     fullname: "Orie Steele"
