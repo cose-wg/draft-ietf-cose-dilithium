@@ -3,10 +3,9 @@
 
 
 CBOR Object Signing and Encryption                            M. Prorock
-Internet-Draft                                                  mesur.io
-Intended status: Standards Track                               O. Steele
-Expires: 2 January 2026                                     Tradeverifyd
-                                                             1 July 2025
+Internet-Draft                                                 O. Steele
+Intended status: Standards Track                            Tradeverifyd
+Expires: 2 January 2026                                      1 July 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -784,7 +783,7 @@ Contributors
 Authors' Addresses
 
    Michael Prorock
-   mesur.io
+   Tradeverifyd
    Email: mprorock@mesur.io
 
 
