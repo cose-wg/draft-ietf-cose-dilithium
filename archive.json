@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T01:43:11.973930+00:00",
+  "timestamp": "2025-07-03T01:27:19.481070+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1497,6 +1497,46 @@
               "updatedAt": "2025-06-09T18:49:13Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOLEMDO86c5uij",
+      "title": "Update author information and add contributor section",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/21",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Update authors to reflect history, add contributor section",
+      "createdAt": "2025-07-01T12:54:35Z",
+      "updatedAt": "2025-07-01T14:24:51Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "4225a3462266c312480f291bec4f8379c818fae5",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "update-authors-contributors",
+      "headRefOid": "feb3eea4a2b98f9e5512e9c003c9a5fd9e1f6ca6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO86xWi5q",
+          "commit": {
+            "abbreviatedOid": "0ccb958"
+          },
+          "author": "selfissued",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T13:33:42Z",
+          "updatedAt": "2025-07-01T13:33:42Z",
+          "comments": []
         }
       ]
     }
