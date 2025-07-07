@@ -57,14 +57,15 @@ normative:
   RFC9053: COSE
   RFC7638: JOSE-KID
   I-D.draft-ietf-cose-key-thumbprint: COSE-KID
+  FIPS-204:
+    title: "Module-Lattice-Based Digital Signature Standard"
+    target: https://doi.org/10.6028/NIST.FIPS.204
 
 
 informative:
   I-D.draft-ietf-lamps-dilithium-certificates:  ML-DSA-CERTS
 
-  FIPS-204:
-    title: "Module-Lattice-Based Digital Signature Standard"
-    target: https://doi.org/10.6028/NIST.FIPS.204
+
 
   NIST-PQC-2022:
     title: "Selected Algorithms 2022"
