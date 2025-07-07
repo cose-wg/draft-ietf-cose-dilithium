@@ -3,16 +3,9 @@
 
 
 CBOR Object Signing and Encryption                            M. Prorock
-Internet-Draft                                                  mesur.io
-Intended status: Standards Track                               O. Steele
-Expires: 14 December 2025                                      Transmute
-                                                             R. Misoczki
-                                                                  Google
-                                                              M. Osborne
-                                                                     IBM
-                                                         C. Cloostermans
-                                                                     NXP
-                                                            12 June 2025
+Internet-Draft                                                 O. Steele
+Intended status: Standards Track                            Tradeverifyd
+Expires: 8 January 2026                                      7 July 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -57,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2025.
+   This Internet-Draft will expire on 8 January 2026.
 
 Copyright Notice
 
@@ -101,6 +94,7 @@ Table of Contents
      A.1.  JOSE
      A.2.  COSE
    Acknowledgments
+   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -607,6 +601,9 @@ Table of Contents
 
 9.1.  Normative References
 
+   [FIPS-204] "Module-Lattice-Based Digital Signature Standard", n.d.,
+              <https://doi.org/10.6028/NIST.FIPS.204>.
+
    [I-D.draft-ietf-cose-key-thumbprint]
               Isobe, K., Tschofenig, H., and O. Steele, "CBOR Object
               Signing and Encryption (COSE) Key Thumbprint", Work in
@@ -650,17 +647,14 @@ Table of Contents
 
 9.2.  Informative References
 
-   [FIPS-204] "Module-Lattice-Based Digital Signature Standard", n.d.,
-              <https://doi.org/10.6028/NIST.FIPS.204>.
-
    [I-D.draft-ietf-lamps-dilithium-certificates]
               Massimo, J., Kampanakis, P., Turner, S., and B.
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Digital
               Signature Algorithm (ML-DSA)", Work in Progress, Internet-
-              Draft, draft-ietf-lamps-dilithium-certificates-11, 22 May
+              Draft, draft-ietf-lamps-dilithium-certificates-12, 26 June
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-dilithium-certificates-11>.
+              lamps-dilithium-certificates-12>.
 
    [NIST-PQC-2022]
               "Selected Algorithms 2022", n.d.,
@@ -769,17 +763,7 @@ Acknowledgments
    Anders Rundgren, David Waite, Russ Housley, Filip Skokan, and Lucas
    Prabel for their comments and reviews of this document.
 
-Authors' Addresses
-
-   Michael Prorock
-   mesur.io
-   Email: mprorock@mesur.io
-
-
-   Orie Steele
-   Transmute
-   Email: orie@transmute.industries
-
+Contributors
 
    Rafael Misoczki
    Google
@@ -794,3 +778,15 @@ Authors' Addresses
    Christine Cloostermans
    NXP
    Email: christine.cloostermans@nxp.com
+
+
+Authors' Addresses
+
+   Michael Prorock
+   Tradeverifyd
+   Email: mprorock@mesur.io
+
+
+   Orie Steele
+   Tradeverifyd
+   Email: orie@or13.io
