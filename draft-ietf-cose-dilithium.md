@@ -65,8 +65,6 @@ normative:
 informative:
   I-D.draft-ietf-lamps-dilithium-certificates:  ML-DSA-CERTS
 
-
-
   NIST-PQC-2022:
     title: "Selected Algorithms 2022"
     target: https://csrc.nist.gov/Projects/post-quantum-cryptography/selected-algorithms-2022
