@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-03T01:27:19.481070+00:00",
+  "timestamp": "2025-07-08T01:27:52.929303+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -208,9 +208,9 @@
       "id": "I_kwDOLEMDO86wM_BT",
       "title": "Replace AKP with a key type per parameter set",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/17",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "OR13"
       ],
@@ -219,8 +219,8 @@
       ],
       "body": "https://mailarchive.ietf.org/arch/msg/cose/gr298YcbmezEnNNA5tfmJ9rnFDE/\n\nI suggest we solve the seed problem first, and then prepare a PR that shows only a change set addressing this issue.",
       "createdAt": "2025-03-28T13:35:32Z",
-      "updatedAt": "2025-04-01T17:00:31Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-07T13:00:01Z",
+      "closedAt": "2025-07-07T12:59:53Z",
       "comments": [
         {
           "author": "panva",
@@ -231,7 +231,7 @@
         },
         {
           "author": "selfissued",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I agree with Filip.  If the authors are proposing to fundamentally change the key representation, I will request as chair that the document be returned to the working group.  I will also request cross-review by the JOSE working group.",
           "createdAt": "2025-03-28T14:51:02Z",
           "updatedAt": "2025-03-28T14:51:02Z"
@@ -245,7 +245,7 @@
         },
         {
           "author": "OR13",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "COLLABORATOR",
           "body": "There does not seem to be much support for this, so I am marking it pending close.",
           "createdAt": "2025-04-01T17:00:29Z",
           "updatedAt": "2025-04-01T17:00:29Z"
@@ -1505,24 +1505,26 @@
       "id": "PR_kwDOLEMDO86c5uij",
       "title": "Update author information and add contributor section",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/21",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Update authors to reflect history, add contributor section",
       "createdAt": "2025-07-01T12:54:35Z",
-      "updatedAt": "2025-07-01T14:24:51Z",
+      "updatedAt": "2025-07-07T12:59:32Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "4225a3462266c312480f291bec4f8379c818fae5",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "update-authors-contributors",
-      "headRefOid": "feb3eea4a2b98f9e5512e9c003c9a5fd9e1f6ca6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "897884b1d65294da8fbdc7a6a40249e8864a3df1",
+      "closedAt": "2025-07-07T12:59:31Z",
+      "mergedAt": "2025-07-07T12:59:31Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "3ef9951c3662c0362bc520992b6b0387eedfaa8d"
+      },
       "comments": [],
       "reviews": [
         {
