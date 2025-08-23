@@ -209,6 +209,10 @@ Signatures are encoded as bytestrings using the algorithms defined in Section 7.
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
 When producing COSE signatures, no encoding is needed, see {{Section 4 of RFC9052}} for more details on how COSE signatures are created.
 
+Table 2 of FIPS-204 describes the ML-DSA key and signature sizes.
+ML-DSA might not be the best choice for use cases that require small keys or signatures.
+Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
+
 # AKP Thumbprints
 
 Although this document describes how to represent ML-DSA keys using AKP, the AKP key type and thumbprint computations are suitable for use with algorithms other than ML-DSA.
@@ -248,12 +252,6 @@ A detailed security analysis of ML-DSA is beyond the scope of this specification
 The seed and the private key expanded from the seed require the same level of protection.
 If an unauthorized party obtains the seed, or the expanded private key, they can forge signatures.
 This undermines the authenticity and integrity guarantees provided by ML-DSA, as attackers could impersonate the legitimate signer or alter signed data without detection.
-
-## Size of keys and signatures
-
-Table 2 of FIPS-204 describes the size of keys and signatures.
-ML-DSA might not be the best choice for use cases that require small keys or signatures.
-Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
 
 ## Regarding HashML-DSA
 
