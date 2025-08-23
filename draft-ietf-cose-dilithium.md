@@ -79,6 +79,8 @@ This document describes JSON Object Signing and Encryption (JOSE) and CBOR Objec
 # Introduction
 
 This document describes how to use ML-DSA keys and signatures as described in {{FIPS-204}} with JOSE and COSE.
+A new key type named Algorithm Key Pair (AKP) is defined to express public and private keys for use with algorithms not limited to those registered in this document.
+Similarly, a new thumbprint algorithm is defined for AKP, to ensure these keys can be compared according the procedures defined in {{RFC7638}} and {{-COSE-KID}}.
 
 # Terminology
 
@@ -142,7 +144,6 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
 ~~~
 {: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
 
-The AKP key type and thumbprint computations are generic, and suitable for use with algorithms other than ML-DSA.
 
 # ML-DSA Private Keys
 
@@ -206,6 +207,8 @@ Signatures are encoded as bytestrings using the algorithms defined in Section 7.
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
 
 # AKP Thumbprints
+
+Although this document describes how to represent ML-DSA keys using AKP, the AKP key type and thumbprint computations are suitable for use with algorithms other than ML-DSA.
 
 When computing the COSE Key Thumbprint as described in {{-COSE-KID}}, the required parameters for algorithm key pairs are:
 
