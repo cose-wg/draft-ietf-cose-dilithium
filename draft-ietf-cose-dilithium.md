@@ -240,6 +240,12 @@ The security considerations of {{-JWS}}, {{-JWK}} and {{-COSE}} applies to this 
 
 A detailed security analysis of ML-DSA is beyond the scope of this specification, see {{FIPS-204}} for additional details.
 
+## Private key compromise
+
+The seed and the private key expanded from the seed require the same level of protection.
+If an unauthorized party obtains the seed, or the expanded private key, they can forge signatures.
+This undermines the authenticity and integrity guarantees provided by ML-DSA, as attackers could impersonate the legitimate signer or alter signed data without detection.
+
 ## Size of keys and signatures
 
 Table 2 of FIPS-204 describes the size of keys and signatures.
