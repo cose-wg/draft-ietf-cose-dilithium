@@ -264,12 +264,11 @@ See {{Section 8.3 of -ML-DSA-CERTS}} for discussion regarding HashML-DSA in the 
 When an AKP algorithm requires or encourages that a key be validated before being used, all algorithm related key parameters MUST be validated.
 
 Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
-The "pub" key parameter MUST be validated according to the pkEncode and pkDecode algorithms before being used.
+For Algorithms 22 and 23 (pkEncode and pkDecode), the inputs need to be within the ranges given in the algorithms.
 For the ML-DSA algorithms registered in this document, the `priv` key parameter is the seed, and therefore, only a length check MUST be performed.
 The length of the seed is 256 bits, which is 32 bytes.
 However, when the `priv` parameter is expanded using KeyGen_internal, the skEncode and skDecode algorithms MUST be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive data and shall be treated with the same safeguards as a private key".
-
 
 ## Mismatched AKP parameters
 
