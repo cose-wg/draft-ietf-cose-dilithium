@@ -253,9 +253,11 @@ The seed and the private key expanded from the seed require the same level of pr
 If an unauthorized party obtains the seed, or the expanded private key, they can forge signatures.
 This undermines the authenticity and integrity guarantees provided by ML-DSA, as attackers could impersonate the legitimate signer or alter signed data without detection.
 
-## Regarding HashML-DSA
+## Rationale for not supporting HashML-DSA
 
 This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of FIPS-204.
+As the verify routines are different, future support for HashML-DSA would require the registration of additional algorithms.
+See {{Section 8.3 of -ML-DSA-CERTS}} for discussion regarding HashML-DSA in the context of certificates.
 
 ## Validation of keys
 
