@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-08T01:27:52.929303+00:00",
+  "timestamp": "2025-08-24T01:38:33.549808+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1541,6 +1541,58 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOLEMDO86lB-hL",
+      "title": "GENART Review",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/22",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR is towards the GENART Review:\r\n\r\n- https://datatracker.ietf.org/doc/review-ietf-cose-dilithium-08-genart-lc-housley-2025-07-09/",
+      "createdAt": "2025-08-23T12:59:21Z",
+      "updatedAt": "2025-08-23T13:00:08Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "630bbc914a5993d1f934af4d2d087d8943f38368",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "genart-review",
+      "headRefOid": "6133578d0c44bea820e8dff5820e39c07a802656",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOLEMDO86lCFCg",
+      "title": "SECDIR Review",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/23",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Towards https://datatracker.ietf.org/doc/review-ietf-cose-dilithium-08-secdir-lc-yee-2025-08-16/\r\n\r\nThis PR build on #22 ",
+      "createdAt": "2025-08-23T13:28:34Z",
+      "updatedAt": "2025-08-23T13:28:53Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "630bbc914a5993d1f934af4d2d087d8943f38368",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "secdir-review",
+      "headRefOid": "8e4c2a1f6c6a0008c167540ff0e8bd7a0655c967",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
