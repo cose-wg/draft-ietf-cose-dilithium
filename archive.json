@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-24T01:38:33.549808+00:00",
+  "timestamp": "2025-08-28T01:19:52.612220+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1554,7 +1554,7 @@
       "labels": [],
       "body": "This PR is towards the GENART Review:\r\n\r\n- https://datatracker.ietf.org/doc/review-ietf-cose-dilithium-08-genart-lc-housley-2025-07-09/",
       "createdAt": "2025-08-23T12:59:21Z",
-      "updatedAt": "2025-08-23T13:00:08Z",
+      "updatedAt": "2025-08-26T20:35:39Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "630bbc914a5993d1f934af4d2d087d8943f38368",
@@ -1566,7 +1566,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO868L3KP",
+          "commit": {
+            "abbreviatedOid": "6133578"
+          },
+          "author": "paulwouters",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "LGTM",
+          "createdAt": "2025-08-26T20:35:39Z",
+          "updatedAt": "2025-08-26T20:35:39Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 23,
@@ -1580,7 +1594,7 @@
       "labels": [],
       "body": "Towards https://datatracker.ietf.org/doc/review-ietf-cose-dilithium-08-secdir-lc-yee-2025-08-16/\r\n\r\nThis PR build on #22 ",
       "createdAt": "2025-08-23T13:28:34Z",
-      "updatedAt": "2025-08-23T13:28:53Z",
+      "updatedAt": "2025-08-26T20:36:46Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "630bbc914a5993d1f934af4d2d087d8943f38368",
@@ -1592,7 +1606,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO868L30E",
+          "commit": {
+            "abbreviatedOid": "8e4c2a1"
+          },
+          "author": "paulwouters",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "LGTM",
+          "createdAt": "2025-08-26T20:36:46Z",
+          "updatedAt": "2025-08-26T20:36:46Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
