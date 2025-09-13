@@ -151,7 +151,7 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
 
 Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 
-Unlike {{-ML-DSA-CERTS}}, which selected the expanded private key format to maximize interoperability with existing implementations, this document specifies ML-DSA private key information using only the seed format.
+Unlike {{-ML-DSA-CERTS}}, which supports the expanded private key format to maximize interoperability with existing implementations, this document specifies ML-DSA private key information using only the seed format.
 The seed format was chosen to provide a single, compact representation that is consistent across both COSE and JOSE, simplifying key management and reducing storage requirements.
 
 For the ML-DSA private keys described in this document, the `priv` parameter MUST be the seed, and MUST have a length of 32 bytes.
