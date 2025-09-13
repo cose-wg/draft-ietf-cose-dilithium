@@ -54,6 +54,7 @@ normative:
   IANA.cose: IANA.cose
   RFC7515: JWS
   RFC7517: JWK
+  RFC9052: COSE-1
   RFC9053: COSE
   RFC7638: JOSE-KID
   I-D.draft-ietf-cose-key-thumbprint: COSE-KID
@@ -79,6 +80,8 @@ This document describes JSON Object Signing and Encryption (JOSE) and CBOR Objec
 # Introduction
 
 This document describes how to use ML-DSA keys and signatures as described in {{FIPS-204}} with JOSE and COSE.
+A new key type named Algorithm Key Pair (AKP) is defined to express public and private keys for use with algorithms not limited to those registered in this document.
+Similarly, a new thumbprint algorithm is defined for AKP, to ensure these keys can be compared according the procedures defined in {{RFC7638}} and {{-COSE-KID}}.
 
 # Terminology
 
@@ -101,6 +104,7 @@ When registering new algorithms, use of multiple key type parameters for private
 Some algorithms might require or encourage additional structure or length checks for associated key type parameters.
 
 When AKP keys are expressed in JWK, key parameters are base64url encoded.
+When AKP keys are expressed as COSE keys, no encoding is needed.
 
 This document requests the registration of the following key types in {{-IANA.jose}}:
 
@@ -142,7 +146,6 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
 ~~~
 {: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
 
-The AKP key type and thumbprint computations are generic, and suitable for use with algorithms other than ML-DSA.
 
 # ML-DSA Private Keys
 
@@ -204,8 +207,11 @@ The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-8
 Signatures are encoded as bytestrings using the algorithms defined in Section 7.2 of FIPS-204.
 
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
+When producing COSE signatures, no encoding is needed, see {{Section 4 of RFC9052}} for more details on how COSE signatures are created.
 
 # AKP Thumbprints
+
+Although this document describes how to represent ML-DSA keys using AKP, the AKP key type and thumbprint computations are suitable for use with algorithms other than ML-DSA.
 
 When computing the COSE Key Thumbprint as described in {{-COSE-KID}}, the required parameters for algorithm key pairs are:
 
@@ -237,6 +243,12 @@ The security considerations of {{-JWS}}, {{-JWK}} and {{-COSE}} applies to this 
 
 A detailed security analysis of ML-DSA is beyond the scope of this specification, see {{FIPS-204}} for additional details.
 
+## Private key compromise
+
+The seed and the private key expanded from the seed require the same level of protection.
+If an unauthorized party obtains the seed, or the expanded private key, they can forge signatures.
+This undermines the authenticity and integrity guarantees provided by ML-DSA, as attackers could impersonate the legitimate signer or alter signed data without detection.
+
 ## Size of keys and signatures
 
 Table 2 of FIPS-204 describes the size of keys and signatures.
@@ -262,7 +274,7 @@ FIPS-204 notes, "skDecode should only be run on inputs that come from trusted so
 ## Mismatched AKP parameters
 
 When using an AKP key with an algorithm, it is possible that the public and private information class parameters have been tampered with or mismatched.
-Depending on the algorithm and implementation, the consequences of using mismatched parameters can range from operations failing to key compromise.
+Depending on the algorithm and implementation, the consequences of using mismatched parameters can range from operations failing to private key compromise.
 
 # IANA Considerations
 
