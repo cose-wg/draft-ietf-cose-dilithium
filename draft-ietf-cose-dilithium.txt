@@ -5,7 +5,7 @@
 CBOR Object Signing and Encryption                            M. Prorock
 Internet-Draft                                                 O. Steele
 Intended status: Standards Track                            Tradeverifyd
-Expires: 8 January 2026                                      7 July 2025
+Expires: 17 March 2026                                 13 September 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 17 March 2026.
 
 Copyright Notice
 
@@ -75,10 +75,11 @@ Table of Contents
    5.  ML-DSA Algorithms
    6.  AKP Thumbprints
    7.  Security Considerations
-     7.1.  Size of keys and signatures
-     7.2.  Regarding HashML-DSA
-     7.3.  Validation of keys
-     7.4.  Mismatched AKP parameters
+     7.1.  Private key compromise
+     7.2.  Size of keys and signatures
+     7.3.  Regarding HashML-DSA
+     7.4.  Validation of keys
+     7.5.  Mismatched AKP parameters
    8.  IANA Considerations
      8.1.  Additions to Existing Registries
        8.1.1.  New COSE Algorithms
@@ -100,7 +101,12 @@ Table of Contents
 1.  Introduction
 
    This document describes how to use ML-DSA keys and signatures as
-   described in [FIPS-204] with JOSE and COSE.
+   described in [FIPS-204] with JOSE and COSE.  A new key type named
+   Algorithm Key Pair (AKP) is defined to express public and private
+   keys for use with algorithms not limited to those registered in this
+   document.  Similarly, a new thumbprint algorithm is defined for AKP,
+   to ensure these keys can be compared according the procedures defined
+   in [RFC7638] and [I-D.draft-ietf-cose-key-thumbprint].
 
 2.  Terminology
 
@@ -134,7 +140,8 @@ Table of Contents
    length checks for associated key type parameters.
 
    When AKP keys are expressed in JWK, key parameters are base64url
-   encoded.
+   encoded.  When AKP keys are expressed as COSE keys, no encoding is
+   needed.
 
    This document requests the registration of the following key types in
    [IANA.jose]:
@@ -185,9 +192,6 @@ Table of Contents
    }
 
                  Figure 2: The all zeros ML-DSA-44 COSE Key
-
-   The AKP key type and thumbprint computations are generic, and
-   suitable for use with algorithms other than ML-DSA.
 
 4.  ML-DSA Private Keys
 
@@ -293,9 +297,15 @@ Table of Contents
 
    When producing JSON Web Signatures, the signature bytestrings are
    base64url encoded, and the encoded signature size is larger than
-   described in the table above.
+   described in the table above.  When producing COSE signatures, no
+   encoding is needed, see Section 4 of [RFC9052] for more details on
+   how COSE signatures are created.
 
 6.  AKP Thumbprints
+
+   Although this document describes how to represent ML-DSA keys using
+   AKP, the AKP key type and thumbprint computations are suitable for
+   use with algorithms other than ML-DSA.
 
    When computing the COSE Key Thumbprint as described in
    [I-D.draft-ietf-cose-key-thumbprint], the required parameters for
@@ -341,7 +351,16 @@ Table of Contents
    A detailed security analysis of ML-DSA is beyond the scope of this
    specification, see [FIPS-204] for additional details.
 
-7.1.  Size of keys and signatures
+7.1.  Private key compromise
+
+   The seed and the private key expanded from the seed require the same
+   level of protection.  If an unauthorized party obtains the seed, or
+   the expanded private key, they can forge signatures.  This undermines
+   the authenticity and integrity guarantees provided by ML-DSA, as
+   attackers could impersonate the legitimate signer or alter signed
+   data without detection.
+
+7.2.  Size of keys and signatures
 
    Table 2 of FIPS-204 describes the size of keys and signatures.  ML-
    DSA might not be the best choice for use cases that require small
@@ -349,12 +368,12 @@ Table of Contents
    [I-D.draft-ietf-cose-key-thumbprint] can reduce the need to repeat
    public key representations.
 
-7.2.  Regarding HashML-DSA
+7.3.  Regarding HashML-DSA
 
    This document does not specify algorithms for use with HashML-DSA as
    described in Section 5.4 of FIPS-204.
 
-7.3.  Validation of keys
+7.4.  Validation of keys
 
    When an AKP algorithm requires or encourages that a key be validated
    before being used, all algorithm related key parameters MUST be
@@ -372,13 +391,13 @@ Table of Contents
    the seed can be used to compute the private key, it is sensitive data
    and shall be treated with the same safeguards as a private key".
 
-7.4.  Mismatched AKP parameters
+7.5.  Mismatched AKP parameters
 
    When using an AKP key with an algorithm, it is possible that the
    public and private information class parameters have been tampered
    with or mismatched.  Depending on the algorithm and implementation,
    the consequences of using mismatched parameters can range from
-   operations failing to key compromise.
+   operations failing to private key compromise.
 
 8.  IANA Considerations
 
@@ -640,6 +659,11 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Structures and Process", STD 96, RFC 9052,
+              DOI 10.17487/RFC9052, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9052>.
 
    [RFC9053]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Initial Algorithms", RFC 9053, DOI 10.17487/RFC9053,
