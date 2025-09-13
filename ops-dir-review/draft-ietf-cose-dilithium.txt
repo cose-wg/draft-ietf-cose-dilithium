@@ -197,7 +197,7 @@ Table of Contents
    Note that FIPS 204 defines 2 expressions for private keys: a seed,
    and a private key that is expanded from the seed.
 
-   Unlike [I-D.draft-ietf-lamps-dilithium-certificates], which selected
+   Unlike [I-D.draft-ietf-lamps-dilithium-certificates], which supports
    the expanded private key format to maximize interoperability with
    existing implementations, this document specifies ML-DSA private key
    information using only the seed format.  The seed format was chosen
