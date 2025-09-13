@@ -124,7 +124,7 @@ An example truncated private key for use with ML-DSA-44 in JWK format is provide
    "priv": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 }
 ~~~
-{: #json-web-key-example align="left" title="The all zeros ML-DSA-44 JSON Web Key"}
+{: #json-web-key-example align="left" title="The all-zeros ML-DSA-44 JSON Web Key"}
 
 This document requests the registration of the following key type in {{-IANA.cose}}:
 
@@ -144,7 +144,7 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
    / priv / -2: h'00000000000000...0000000000000000'
 }
 ~~~
-{: #cose-key-example align="left" title="The all zeros ML-DSA-44 COSE Key"}
+{: #cose-key-example align="left" title="The all-zeros ML-DSA-44 COSE Key"}
 
 
 # ML-DSA Private Keys
@@ -209,6 +209,10 @@ Signatures are encoded as bytestrings using the algorithms defined in Section 7.
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
 When producing COSE signatures, no encoding is needed, see {{Section 4 of RFC9052}} for more details on how COSE signatures are created.
 
+Table 2 of FIPS-204 describes the ML-DSA key and signature sizes.
+ML-DSA might not be the best choice for use cases that require small keys or signatures.
+Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
+
 # AKP Thumbprints
 
 Although this document describes how to represent ML-DSA keys using AKP, the AKP key type and thumbprint computations are suitable for use with algorithms other than ML-DSA.
@@ -239,7 +243,7 @@ See the `kid` values in the JSON Web Key and COSE Key examples in the appendix f
 
 # Security Considerations
 
-The security considerations of {{-JWS}}, {{-JWK}} and {{-COSE}} applies to this specification as well.
+The security considerations of {{-JWS}}, {{-JWK}}, and {{-COSE}} apply to this specification as well.
 
 A detailed security analysis of ML-DSA is beyond the scope of this specification, see {{FIPS-204}} for additional details.
 
@@ -249,27 +253,22 @@ The seed and the private key expanded from the seed require the same level of pr
 If an unauthorized party obtains the seed, or the expanded private key, they can forge signatures.
 This undermines the authenticity and integrity guarantees provided by ML-DSA, as attackers could impersonate the legitimate signer or alter signed data without detection.
 
-## Size of keys and signatures
-
-Table 2 of FIPS-204 describes the size of keys and signatures.
-ML-DSA might not be the best choice for use cases that require small keys or signatures.
-Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
-
-## Regarding HashML-DSA
+## Rationale for not supporting HashML-DSA
 
 This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of FIPS-204.
+As the verify routines are different, future support for HashML-DSA would require the registration of additional algorithms.
+See {{Section 8.3 of -ML-DSA-CERTS}} for discussion regarding HashML-DSA in the context of certificates.
 
 ## Validation of keys
 
-When an AKP algorithm requires or encourages that a key be validated before being used, all algorithm related key parameters MUST be validated.
+When an AKP algorithm requires or encourages that a key be validated before being used, all algorithm-related key parameters MUST be validated.
 
 Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
-The "pub" key parameter MUST be validated according to the pkEncode and pkDecode algorithms before being used.
+For Algorithms 22 and 23 (pkEncode and pkDecode), the inputs need to be within the ranges given in the algorithms.
 For the ML-DSA algorithms registered in this document, the `priv` key parameter is the seed, and therefore, only a length check MUST be performed.
 The length of the seed is 256 bits, which is 32 bytes.
 However, when the `priv` parameter is expanded using KeyGen_internal, the skEncode and skDecode algorithms MUST be used.
 FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive data and shall be treated with the same safeguards as a private key".
-
 
 ## Mismatched AKP parameters
 
@@ -283,7 +282,7 @@ Depending on the algorithm and implementation, the consequences of using mismatc
 ### New COSE Algorithms
 
 IANA is requested to add the following entries to the COSE Algorithms Registry.
-The following completed registration templates are provided as described in RFC9053 and RFC9054.
+The following completed registration templates are provided as described in RFC 9053 and RFC 9054.
 
 #### ML-DSA-44
 
@@ -316,7 +315,7 @@ The following completed registration templates are provided as described in RFC9
 ### New COSE Key Types
 
 IANA is requested to add the following entries to the COSE Key Types Registry.
-The following completed registration templates are provided as described in RFC9053.
+The following completed registration templates are provided as described in RFC 9053.
 
 #### AKP
 
@@ -329,7 +328,7 @@ The following completed registration templates are provided as described in RFC9
 ### New COSE Key Type Parameters
 
 IANA is requested to add the following entries to the COSE Key Type Parameters.
-The following completed registration templates are provided as described in RFC9053.
+The following completed registration templates are provided as described in RFC 9053.
 
 #### AKP Public Key
 
@@ -352,7 +351,7 @@ The following completed registration templates are provided as described in RFC9
 ### New JOSE Algorithms
 
 IANA is requested to add the following entries to the JSON Web Signature and Encryption Algorithms Registry.
-The following completed registration templates are provided as described in RFC7518.
+The following completed registration templates are provided as described in RFC 7518.
 
 #### ML-DSA-44
 
@@ -390,7 +389,7 @@ The following completed registration templates are provided as described in RFC7
 ### New JOSE Key Types
 
 IANA is requested to add the following entries to the JSON Web Key Types Registry.
-The following completed registration templates are provided as described in RFC7518 RFC7638.
+The following completed registration templates are provided as described in RFC 7518 and RFC 7638.
 
 #### AKP
 
@@ -403,7 +402,7 @@ The following completed registration templates are provided as described in RFC7
 ### New JSON Web Key Parameters
 
 IANA is requested to add the following entries to the JSON Web Key Parameters Registry.
-The following completed registration templates are provided as described in RFC7517, and RFC7638.
+The following completed registration templates are provided as described in RFC 7517 and RFC 7638.
 
 #### AKP Public Key
 
@@ -464,4 +463,4 @@ The following completed registration templates are provided as described in RFC7
 # Acknowledgments
 {:numbered="false"}
 
-We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite, Russ Housley, Filip Skokan, and Lucas Prabel for their comments and reviews of this document.
+We would like to thank Simo Sorce, Ilari Liusvaara, Neil Madden, Anders Rundgren, David Waite, Russ Housley, Filip Skokan, Peter Yee, and Lucas Prabel for their comments and reviews of this document.
