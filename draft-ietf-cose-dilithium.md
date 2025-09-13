@@ -151,7 +151,8 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
 
 Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 
-Unlike {{-ML-DSA-CERTS}}, this document specifies ML-DSA private key information using only the seed.
+Unlike {{-ML-DSA-CERTS}}, which selected the expanded private key format to maximize interoperability with existing implementations, this document specifies ML-DSA private key information using only the seed format.
+The seed format was chosen to provide a single, compact representation that is consistent across both COSE and JOSE, simplifying key management and reducing storage requirements.
 
 For the ML-DSA private keys described in this document, the `priv` parameter MUST be the seed, and MUST have a length of 32 bytes.
 
@@ -210,6 +211,8 @@ When producing JSON Web Signatures, the signature bytestrings are base64url enco
 When producing COSE signatures, no encoding is needed, see {{Section 4 of RFC9052}} for more details on how COSE signatures are created.
 
 Table 2 of FIPS-204 describes the ML-DSA key and signature sizes.
+ML-DSA produces significantly larger public keys and signatures compared to traditional algorithms.
+This size increase can create challenges for deployments with limited bandwidth, memory, or processing capacity.
 ML-DSA might not be the best choice for use cases that require small keys or signatures.
 Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
 
@@ -246,6 +249,7 @@ See the `kid` values in the JSON Web Key and COSE Key examples in the appendix f
 The security considerations of {{-JWS}}, {{-JWK}}, and {{-COSE}} apply to this specification as well.
 
 A detailed security analysis of ML-DSA is beyond the scope of this specification, see {{FIPS-204}} for additional details.
+Implementers should also refer to the security considerations in {{-ML-DSA-CERTS}} for additional guidance on ML-DSA deployment considerations, including discussions on randomized versus deterministic signing approaches.
 
 ## Private key compromise
 
@@ -257,7 +261,7 @@ This undermines the authenticity and integrity guarantees provided by ML-DSA, as
 
 This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of FIPS-204.
 As the verify routines are different, future support for HashML-DSA would require the registration of additional algorithms.
-See {{Section 8.3 of -ML-DSA-CERTS}} for discussion regarding HashML-DSA in the context of certificates.
+{{Section 8.3 of -ML-DSA-CERTS}} explains the rationale for disallowing HashML-DSA, including the increased complexity and compatibility concerns with existing implementations.
 
 ## Validation of keys
 
