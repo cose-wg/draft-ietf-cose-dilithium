@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-28T01:19:52.612220+00:00",
+  "timestamp": "2025-09-14T01:22:53.550224+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -251,6 +251,24 @@
           "updatedAt": "2025-04-01T17:00:29Z"
         }
       ]
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOLEMDO87LdvRa",
+      "title": "OPS DIR Review",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/24",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "OR13"
+      ],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/cose/1-yzyM7d5Z18hzNjT12efw9y-qM/\n\nHi,\n\nI have reviewed this document as part of the Ops Area Directorate's ongoing\neffort to review all IETF documents being processed by the IESG. These\ncomments are written primarily for the benefit of the Ops Area Directors.\nDocument editors and WG chairs should treat them like any other Last Call\ncomments.\n\nThe draft is well-written and addresses an important need for PQC\nmigration.  I have a few operational and deployment-related observations\nthat may help improve the document:\n\n1. ML-DSA produces significantly larger public keys and signatures compared\nto traditional algorithms. This size increase can create challenges for\ndeployments with limited bandwidth, memory, or processing capacity.  I\nsuggest adding text to highlight it.\n\n2. I suggest adding a reference to Section 8.3 of\ndraft-ietf-lamps-dilithium-certificates, which explains the rationale for\ndisallowing HashML-DSA.\n\n3. It may be useful to add a note to explain why only the seed format was\nchosen for private keys, given that the LAMPS WG selected the expanded\nprivate key format to maximize interoperability with existing\nimplementations.\n\n4. You may want to refer to the security considerations in\nhttps://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates/\nand discuss if randomized signing is preferred over deterministic signing.\n\nCheers,\n-Tiru\n",
+      "createdAt": "2025-09-13T14:11:59Z",
+      "updatedAt": "2025-09-13T14:12:05Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -1547,24 +1565,26 @@
       "id": "PR_kwDOLEMDO86lB-hL",
       "title": "GENART Review",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/22",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR is towards the GENART Review:\r\n\r\n- https://datatracker.ietf.org/doc/review-ietf-cose-dilithium-08-genart-lc-housley-2025-07-09/",
       "createdAt": "2025-08-23T12:59:21Z",
-      "updatedAt": "2025-08-26T20:35:39Z",
+      "updatedAt": "2025-09-13T01:39:35Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "630bbc914a5993d1f934af4d2d087d8943f38368",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "genart-review",
       "headRefOid": "6133578d0c44bea820e8dff5820e39c07a802656",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-13T01:39:35Z",
+      "mergedAt": "2025-09-13T01:39:35Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "c62ef06efc760851605dcece8af53b99128f4fc1"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1587,24 +1607,26 @@
       "id": "PR_kwDOLEMDO86lCFCg",
       "title": "SECDIR Review",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/23",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Towards https://datatracker.ietf.org/doc/review-ietf-cose-dilithium-08-secdir-lc-yee-2025-08-16/\r\n\r\nThis PR build on #22 ",
       "createdAt": "2025-08-23T13:28:34Z",
-      "updatedAt": "2025-08-26T20:36:46Z",
+      "updatedAt": "2025-09-13T01:39:43Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "630bbc914a5993d1f934af4d2d087d8943f38368",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "secdir-review",
       "headRefOid": "8e4c2a1f6c6a0008c167540ff0e8bd7a0655c967",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-13T01:39:43Z",
+      "mergedAt": "2025-09-13T01:39:42Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "7f2084bec51d2ddeb40f4b6918257bf278dcd268"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1619,6 +1641,53 @@
           "createdAt": "2025-08-26T20:36:46Z",
           "updatedAt": "2025-08-26T20:36:46Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOLEMDO86oaPGk",
+      "title": "OPS DIR Review",
+      "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/25",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Towards #24 ",
+      "createdAt": "2025-09-13T14:17:42Z",
+      "updatedAt": "2025-09-13T14:21:49Z",
+      "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "baseRefName": "main",
+      "baseRefOid": "7f2084bec51d2ddeb40f4b6918257bf278dcd268",
+      "headRepository": "cose-wg/draft-ietf-cose-dilithium",
+      "headRefName": "ops-dir-review",
+      "headRefOid": "6cab5605a523c82f845b7af6d8b8613ab42b4044",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO86_-s82",
+          "commit": {
+            "abbreviatedOid": "5433c69"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-13T14:21:42Z",
+          "updatedAt": "2025-09-13T14:21:42Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nUnlike {{-ML-DSA-CERTS}}, which supports the expanded private key format to maximize interoperability with existing implementations, this document specifies ML-DSA private key information using only the seed format.\r\n```",
+              "createdAt": "2025-09-13T14:21:42Z",
+              "updatedAt": "2025-09-13T14:21:42Z"
+            }
+          ]
         }
       ]
     }
