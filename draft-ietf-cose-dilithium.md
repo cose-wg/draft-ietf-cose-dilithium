@@ -81,7 +81,7 @@ This document describes JSON Object Signing and Encryption (JOSE) and CBOR Objec
 
 This document describes how to use ML-DSA keys and signatures as described in {{FIPS-204}} with JOSE and COSE.
 A new key type named Algorithm Key Pair (AKP) is defined to express public and private keys for use with algorithms not limited to those registered in this document.
-Similarly, a new thumbprint algorithm is defined for AKP, to ensure these keys can be compared according the procedures defined in {{RFC7638}} and {{-COSE-KID}}.
+Similarly, a new thumbprint algorithm is defined for AKP, to ensure these keys can be compared according to the procedures defined in {{RFC7638}} and {{-COSE-KID}}.
 
 # Terminology
 
@@ -99,14 +99,14 @@ The "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED for al
 The "pub" parameter contains public information and is REQUIRED.
 The "priv" parameter contains private information and MUST NOT be present in public keys.
 
-When registering new algorithms, use of multiple key type parameters for private information is NOT RECOMMENDED.
+When registering new algorithms, the use of multiple key type parameters for private information is NOT RECOMMENDED.
 
-Some algorithms might require or encourage additional structure or length checks for associated key type parameters.
+Some algorithms may require or recommend additional structure or length checks for associated key type parameters.
 
-When AKP keys are expressed in JWK, key parameters are base64url encoded.
+When AKP keys are expressed in JWK, the key parameters are base64url encoded.
 When AKP keys are expressed as COSE keys, no encoding is needed.
 
-This document requests the registration of the following key types in {{-IANA.jose}}:
+This document introduces the following key types in {{-IANA.jose}}:
 
 | Name    | kty | Description
 |---
@@ -126,7 +126,7 @@ An example truncated private key for use with ML-DSA-44 in JWK format is provide
 ~~~
 {: #json-web-key-example align="left" title="The all-zeros ML-DSA-44 JSON Web Key"}
 
-This document requests the registration of the following key type in {{-IANA.cose}}:
+This document introduces the following key type in {{-IANA.cose}}:
 
 | Name       | kty | Description
 |---
@@ -149,14 +149,14 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
 
 # ML-DSA Private Keys
 
-Note that FIPS 204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
+Note that US NIST FIPS-204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 
 Unlike {{-ML-DSA-CERTS}}, which supports the expanded private key format to maximize interoperability with existing implementations, this document specifies ML-DSA private key information using only the seed format.
 The seed format was chosen to provide a single, compact representation that is consistent across both COSE and JOSE, simplifying key management and reducing storage requirements.
 
 For the ML-DSA private keys described in this document, the `priv` parameter MUST be the seed, and MUST have a length of 32 bytes.
 
-This specification intentionally does not define a means of utilizing the expanded private key representation defined by NIST so as to increase interoperability by having a single ML-DSA private key representation for COSE and JOSE.
+This specification intentionally does not define a means of utilizing the expanded private key representation defined by US NIST FIPS so as to increase interoperability by having a single ML-DSA private key representation for COSE and JOSE.
 
 See Security Considerations of this document for details.
 
@@ -186,9 +186,9 @@ This document has registered the following algorithms in {{-IANA.cose}}:
 
 In accordance with Algorithm Key Pair Type section of this document, ML-DSA key parameters have the following additional constraints:
 
-The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of FIPS-204.
+The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of US NIST FIPS-204.
 
-The size of "pub", and the associated signature for each of these algorithms is defined in Table 2 of FIPS-204, and repeated here for convenience:
+The size of "pub", and the associated signature for each of these algorithms is defined in Table 2 of US NIST FIPS-204, and repeated here for convenience:
 
 | Algorithm | Private Key | Public Key | Signature Size
 |---
@@ -199,13 +199,13 @@ The size of "pub", and the associated signature for each of these algorithms is 
 
 Note that `priv` size is always 32 bytes, and that KeyGen_internal is called to produce the expanded private keys for "Private Key" in the table above.
 
-See the ML-DSA Private Keys section of this document for more details.
+See Section 4, ML-DSA Private Keys, for further details.
 
-These algorithms are used to produce signatures as described in Algorithm 2 of FIPS-204.
+These algorithms are used to produce signatures as described in Algorithm 2 of US NIST FIPS-204.
 
 The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.
 
-Signatures are encoded as bytestrings using the algorithms defined in Section 7.2 of FIPS-204.
+Signatures are encoded as bytestrings using the algorithms defined in Section 7.2 of US NIST FIPS-204.
 
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
 When producing COSE signatures, no encoding is needed, see {{Section 4 of RFC9052}} for more details on how COSE signatures are created.
@@ -213,7 +213,7 @@ When producing COSE signatures, no encoding is needed, see {{Section 4 of RFC905
 Table 2 of FIPS-204 describes the ML-DSA key and signature sizes.
 ML-DSA produces significantly larger public keys and signatures compared to traditional algorithms.
 This size increase can create challenges for deployments with limited bandwidth, memory, or processing capacity.
-ML-DSA might not be the best choice for use cases that require small keys or signatures.
+ML-DSA may not be suitable for use cases requiring small keys or signatures.
 Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
 
 # AKP Thumbprints
