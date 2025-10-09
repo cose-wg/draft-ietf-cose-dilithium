@@ -5,7 +5,7 @@
 CBOR Object Signing and Encryption                            M. Prorock
 Internet-Draft                                                 O. Steele
 Intended status: Standards Track                            Tradeverifyd
-Expires: 17 March 2026                                 13 September 2025
+Expires: 12 April 2026                                    9 October 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 March 2026.
+   This Internet-Draft will expire on 12 April 2026.
 
 Copyright Notice
 
@@ -197,8 +197,13 @@ Table of Contents
    Note that FIPS 204 defines 2 expressions for private keys: a seed,
    and a private key that is expanded from the seed.
 
-   Unlike [I-D.draft-ietf-lamps-dilithium-certificates], this document
-   specifies ML-DSA private key information using only the seed.
+   Unlike [I-D.draft-ietf-lamps-dilithium-certificates], which supports
+   the expanded private key format to maximize interoperability with
+   existing implementations, this document specifies ML-DSA private key
+   information using only the seed format.  The seed format was chosen
+   to provide a single, compact representation that is consistent across
+   both COSE and JOSE, simplifying key management and reducing storage
+   requirements.
 
    For the ML-DSA private keys described in this document, the priv
    parameter MUST be the seed, and MUST have a length of 32 bytes.
@@ -301,10 +306,13 @@ Table of Contents
    how COSE signatures are created.
 
    Table 2 of FIPS-204 describes the ML-DSA key and signature sizes.
-   ML-DSA might not be the best choice for use cases that require small
-   keys or signatures.  Use of thumbprints as described in [RFC7638] and
-   [I-D.draft-ietf-cose-key-thumbprint] can reduce the need to repeat
-   public key representations.
+   ML-DSA produces significantly larger public keys and signatures
+   compared to traditional algorithms.  This size increase can create
+   challenges for deployments with limited bandwidth, memory, or
+   processing capacity.  ML-DSA might not be the best choice for use
+   cases that require small keys or signatures.  Use of thumbprints as
+   described in [RFC7638] and [I-D.draft-ietf-cose-key-thumbprint] can
+   reduce the need to repeat public key representations.
 
 6.  AKP Thumbprints
 
@@ -354,7 +362,11 @@ Table of Contents
    apply to this specification as well.
 
    A detailed security analysis of ML-DSA is beyond the scope of this
-   specification, see [FIPS-204] for additional details.
+   specification, see [FIPS-204] for additional details.  Implementers
+   should also refer to the security considerations in
+   [I-D.draft-ietf-lamps-dilithium-certificates] for additional guidance
+   on ML-DSA deployment considerations, including discussions on
+   randomized versus deterministic signing approaches.
 
 7.1.  Private key compromise
 
@@ -370,9 +382,10 @@ Table of Contents
    This document does not specify algorithms for use with HashML-DSA as
    described in Section 5.4 of FIPS-204.  As the verify routines are
    different, future support for HashML-DSA would require the
-   registration of additional algorithms.  See Section 8.3 of
-   [I-D.draft-ietf-lamps-dilithium-certificates] for discussion
-   regarding HashML-DSA in the context of certificates.
+   registration of additional algorithms.  Section 8.3 of
+   [I-D.draft-ietf-lamps-dilithium-certificates] explains the rationale
+   for disallowing HashML-DSA, including the increased complexity and
+   compatibility concerns with existing implementations.
 
 7.3.  Validation of keys
 
@@ -677,9 +690,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Digital
               Signature Algorithm (ML-DSA)", Work in Progress, Internet-
-              Draft, draft-ietf-lamps-dilithium-certificates-12, 26 June
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-dilithium-certificates-12>.
+              Draft, draft-ietf-lamps-dilithium-certificates-13, 30
+              September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-dilithium-certificates-13>.
 
    [NIST-PQC-2022]
               "Selected Algorithms 2022", n.d.,
