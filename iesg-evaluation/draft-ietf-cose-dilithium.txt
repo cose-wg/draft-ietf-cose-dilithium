@@ -104,8 +104,8 @@ Table of Contents
    Algorithm Key Pair (AKP) is defined to express public and private
    keys for use with algorithms not limited to those registered in this
    document.  Similarly, a new thumbprint algorithm is defined for AKP,
-   to ensure these keys can be compared according the procedures defined
-   in [RFC7638] and [I-D.draft-ietf-cose-key-thumbprint].
+   to ensure these keys can be compared according to the procedures
+   defined in [RFC7638] and [I-D.draft-ietf-cose-key-thumbprint].
 
 2.  Terminology
 
@@ -132,18 +132,17 @@ Table of Contents
    information and is REQUIRED.  The "priv" parameter contains private
    information and MUST NOT be present in public keys.
 
-   When registering new algorithms, use of multiple key type parameters
-   for private information is NOT RECOMMENDED.
+   When registering new algorithms, the use of multiple key type
+   parameters for private information is NOT RECOMMENDED.
 
-   Some algorithms might require or encourage additional structure or
+   Some algorithms may require or recommend additional structure or
    length checks for associated key type parameters.
 
-   When AKP keys are expressed in JWK, key parameters are base64url
+   When AKP keys are expressed in JWK, the key parameters are base64url
    encoded.  When AKP keys are expressed as COSE keys, no encoding is
    needed.
 
-   This document requests the registration of the following key types in
-   [IANA.jose]:
+   This document introduces the following key types in [IANA.jose]:
 
    +====================+=====+=========================+
    | Name               | kty | Description             |
@@ -167,8 +166,7 @@ Table of Contents
 
                Figure 1: The all-zeros ML-DSA-44 JSON Web Key
 
-   This document requests the registration of the following key type in
-   [IANA.cose]:
+   This document introduces the following key type in [IANA.cose]:
 
    +======+==============================+=======================+
    | Name | kty                          | Description           |
@@ -194,8 +192,8 @@ Table of Contents
 
 4.  ML-DSA Private Keys
 
-   Note that FIPS 204 defines 2 expressions for private keys: a seed,
-   and a private key that is expanded from the seed.
+   Note that US NIST FIPS-204 defines 2 expressions for private keys: a
+   seed, and a private key that is expanded from the seed.
 
    Unlike [I-D.draft-ietf-lamps-dilithium-certificates], which supports
    the expanded private key format to maximize interoperability with
@@ -209,8 +207,8 @@ Table of Contents
    parameter MUST be the seed, and MUST have a length of 32 bytes.
 
    This specification intentionally does not define a means of utilizing
-   the expanded private key representation defined by NIST so as to
-   increase interoperability by having a single ML-DSA private key
+   the expanded private key representation defined by US NIST FIPS so as
+   to increase interoperability by having a single ML-DSA private key
    representation for COSE and JOSE.
 
    See Security Considerations of this document for details.
@@ -262,11 +260,11 @@ Table of Contents
    ML-DSA key parameters have the following additional constraints:
 
    The "pub" parameter is the ML-DSA public key, as described in
-   Section 5.3 of FIPS-204.
+   Section 5.3 of US NIST FIPS-204.
 
    The size of "pub", and the associated signature for each of these
-   algorithms is defined in Table 2 of FIPS-204, and repeated here for
-   convenience:
+   algorithms is defined in Table 2 of US NIST FIPS-204, and repeated
+   here for convenience:
 
    +===========+=============+============+================+
    | Algorithm | Private Key | Public Key | Signature Size |
@@ -285,17 +283,16 @@ Table of Contents
    called to produce the expanded private keys for "Private Key" in the
    table above.
 
-   See the ML-DSA Private Keys section of this document for more
-   details.
+   See Section 4, ML-DSA Private Keys, for further details.
 
    These algorithms are used to produce signatures as described in
-   Algorithm 2 of FIPS-204.
+   Algorithm 2 of US NIST FIPS-204.
 
    The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65
    and ML-DSA-87.
 
    Signatures are encoded as bytestrings using the algorithms defined in
-   Section 7.2 of FIPS-204.
+   Section 7.2 of US NIST FIPS-204.
 
    When producing JSON Web Signatures, the signature bytestrings are
    base64url encoded, and the encoded signature size is larger than
@@ -307,10 +304,10 @@ Table of Contents
    ML-DSA produces significantly larger public keys and signatures
    compared to traditional algorithms.  This size increase can create
    challenges for deployments with limited bandwidth, memory, or
-   processing capacity.  ML-DSA might not be the best choice for use
-   cases that require small keys or signatures.  Use of thumbprints as
-   described in [RFC7638] and [I-D.draft-ietf-cose-key-thumbprint] can
-   reduce the need to repeat public key representations.
+   processing capacity.  ML-DSA may not be suitable for use cases
+   requiring small keys or signatures.  Use of thumbprints as described
+   in [RFC7638] and [I-D.draft-ietf-cose-key-thumbprint] can reduce the
+   need to repeat public key representations.
 
 6.  AKP Thumbprints
 
