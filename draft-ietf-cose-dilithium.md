@@ -50,8 +50,6 @@ contributor:
     email: "christine.cloostermans@nxp.com"
 
 normative:
-  IANA.jose: IANA.jose
-  IANA.cose: IANA.cose
   RFC7515: JWS
   RFC7517: JWK
   RFC9052: COSE-1
@@ -64,6 +62,8 @@ normative:
 
 
 informative:
+  IANA.jose: IANA.jose
+  IANA.cose: IANA.cose
   I-D.draft-ietf-lamps-dilithium-certificates:  ML-DSA-CERTS
 
   NIST-PQC-2022:
