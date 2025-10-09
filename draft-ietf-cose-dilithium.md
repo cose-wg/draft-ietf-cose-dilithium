@@ -166,7 +166,7 @@ The ML-DSA Signature Scheme is parameterized to support different security level
 
 In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA with the parameter choices given in Table 1 of FIPS-204.
 
-This document requests the registration of the following algorithms in {{-IANA.jose}}:
+This document has registered the following algorithms in {{-IANA.jose}}:
 
 | Name       | value | Description
 |---
@@ -175,7 +175,7 @@ This document requests the registration of the following algorithms in {{-IANA.j
 | ML-DSA-87  | ML-DSA-87     | JSON Web Signature Algorithm for ML-DSA-87
 {: #jose-algorithms align="left" title="JOSE algorithms for ML-DSA"}
 
-This document requests the registration of the following algorithms in {{-IANA.cose}}:
+This document has registered the following algorithms in {{-IANA.cose}}:
 
 | Name       | value | Description
 |---
