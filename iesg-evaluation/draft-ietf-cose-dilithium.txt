@@ -5,7 +5,7 @@
 CBOR Object Signing and Encryption                            M. Prorock
 Internet-Draft                                                 O. Steele
 Intended status: Standards Track                            Tradeverifyd
-Expires: 12 April 2026                                    9 October 2025
+Expires: 14 April 2026                                   11 October 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -13,10 +13,11 @@ Expires: 12 April 2026                                    9 October 2025
 
 Abstract
 
-   This document describes JSON Object Signing and Encryption (JOSE) and
+   This document specifies JSON Object Signing and Encryption (JOSE) and
    CBOR Object Signing and Encryption (COSE) serializations for Module-
    Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum
-   Cryptography (PQC) digital signature scheme defined in FIPS 204.
+   Cryptography (PQC) digital signature scheme defined in US NIST FIPS
+   204.
 
 About This Document
 
@@ -50,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2026.
+   This Internet-Draft will expire on 14 April 2026.
 
 Copyright Notice
 
@@ -100,12 +101,12 @@ Table of Contents
 1.  Introduction
 
    This document describes how to use ML-DSA keys and signatures as
-   described in [FIPS-204] with JOSE and COSE.  A new key type named
-   Algorithm Key Pair (AKP) is defined to express public and private
-   keys for use with algorithms not limited to those registered in this
-   document.  Similarly, a new thumbprint algorithm is defined for AKP,
-   to ensure these keys can be compared according to the procedures
-   defined in [RFC7638] and [I-D.draft-ietf-cose-key-thumbprint].
+   described in [FIPS-204], in conjunction with JOSE and COSE.  A new
+   key type named Algorithm Key Pair (AKP) is defined to express public
+   and private keys for use with algorithms not limited to those
+   registered in this document.  Similarly, a new thumbprint algorithm
+   is defined for AKP, to ensure these keys can be compared according to
+   the procedures defined in [RFC7638] and [RFC9679].
 
 2.  Terminology
 
@@ -126,10 +127,10 @@ Table of Contents
    Private Keys for use with Algorithms.  The concept of public and
    private information classes for key pairs originates from Section 8.1
    of [RFC7517].  The parameters for public and private information
-   classes contain byte strings in a format specified by the "alg"
-   value.  The "alg" JSON Web Key Parameter or COSE Key Common Parameter
-   is REQUIRED for all AKP keys.  The "pub" parameter contains public
-   information and is REQUIRED.  The "priv" parameter contains private
+   classes contain byte strings in a format specified by the alg value.
+   The alg JSON Web Key Parameter or COSE Key Common Parameter is
+   REQUIRED for all AKP keys.  The pub parameter contains public
+   information and is REQUIRED.  The priv parameter contains private
    information and MUST NOT be present in public keys.
 
    When registering new algorithms, the use of multiple key type
@@ -138,9 +139,9 @@ Table of Contents
    Some algorithms may require or recommend additional structure or
    length checks for associated key type parameters.
 
-   When AKP keys are expressed in JWK, the key parameters are base64url
-   encoded.  When AKP keys are expressed as COSE keys, no encoding is
-   needed.
+   When AKP keys are expressed as JSON Web Keys (JWK), the key
+   parameters are base64url encoded.  When AKP keys are expressed as
+   COSE keys, no encoding is needed.
 
    This document introduces the following key types in [IANA.jose]:
 
@@ -192,8 +193,8 @@ Table of Contents
 
 4.  ML-DSA Private Keys
 
-   Note that US NIST FIPS-204 defines 2 expressions for private keys: a
-   seed, and a private key that is expanded from the seed.
+   Note that US NIST [FIPS-204] defines 2 expressions for private keys:
+   a seed, and a private key that is expanded from the seed.
 
    Unlike [I-D.draft-ietf-lamps-dilithium-certificates], which supports
    the expanded private key format to maximize interoperability with
@@ -220,7 +221,7 @@ Table of Contents
 
    In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-
    DSA-87 are used to refer to ML-DSA with the parameter choices given
-   in Table 1 of FIPS-204.
+   in Table 1 of [FIPS-204].
 
    This document has registered the following algorithms in [IANA.jose]:
 
@@ -259,11 +260,11 @@ Table of Contents
    In accordance with Algorithm Key Pair Type section of this document,
    ML-DSA key parameters have the following additional constraints:
 
-   The "pub" parameter is the ML-DSA public key, as described in
-   Section 5.3 of US NIST FIPS-204.
+   The pub parameter is the ML-DSA public key, as described in
+   Section 5.3 of US NIST [FIPS-204].
 
-   The size of "pub", and the associated signature for each of these
-   algorithms is defined in Table 2 of US NIST FIPS-204, and repeated
+   The size of pub, and the associated signature for each of these
+   algorithms is defined in Table 2 of US NIST [FIPS-204], and repeated
    here for convenience:
 
    +===========+=============+============+================+
@@ -286,28 +287,28 @@ Table of Contents
    See Section 4, ML-DSA Private Keys, for further details.
 
    These algorithms are used to produce signatures as described in
-   Algorithm 2 of US NIST FIPS-204.
+   Algorithm 2 of US NIST [FIPS-204].
 
    The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65
    and ML-DSA-87.
 
    Signatures are encoded as bytestrings using the algorithms defined in
-   Section 7.2 of US NIST FIPS-204.
+   Section 7.2 of US NIST [FIPS-204].
 
    When producing JSON Web Signatures, the signature bytestrings are
    base64url encoded, and the encoded signature size is larger than
    described in the table above.  When producing COSE signatures, no
-   encoding is needed, see Section 4 of [RFC9052] for more details on
+   encoding is needed; see Section 4 of [RFC9052] for more details on
    how COSE signatures are created.
 
-   Table 2 of FIPS-204 describes the ML-DSA key and signature sizes.
+   Table 2 of [FIPS-204] describes the ML-DSA key and signature sizes.
    ML-DSA produces significantly larger public keys and signatures
    compared to traditional algorithms.  This size increase can create
    challenges for deployments with limited bandwidth, memory, or
    processing capacity.  ML-DSA may not be suitable for use cases
    requiring small keys or signatures.  Use of thumbprints as described
-   in [RFC7638] and [I-D.draft-ietf-cose-key-thumbprint] can reduce the
-   need to repeat public key representations.
+   in [RFC7638] and [RFC9679] can reduce the need to repeat public key
+   representations.
 
 6.  AKP Thumbprints
 
@@ -315,9 +316,8 @@ Table of Contents
    AKP, the AKP key type and thumbprint computations are suitable for
    use with algorithms other than ML-DSA.
 
-   When computing the COSE Key Thumbprint as described in
-   [I-D.draft-ietf-cose-key-thumbprint], the required parameters for
-   algorithm key pairs are:
+   When computing the COSE Key Thumbprint as described in [RFC9679], the
+   required parameters for algorithm key pairs are:
 
    *  "kty" (label: 1, data type: int, value: 7)
 
@@ -326,7 +326,7 @@ Table of Contents
    *  "pub" (label: -1, value: bstr)
 
    The COSE Key Thumbprint is produced according to the process
-   described in Section 3 of [I-D.draft-ietf-cose-key-thumbprint].
+   described in Section 3 of [RFC9679].
 
    When computing the JWK Thumbprint as described in [RFC7638], the
    required parameters for algorithm key pairs are:
@@ -357,7 +357,7 @@ Table of Contents
    apply to this specification as well.
 
    A detailed security analysis of ML-DSA is beyond the scope of this
-   specification, see [FIPS-204] for additional details.  Implementers
+   specification; see [FIPS-204] for additional details.  Implementers
    should also refer to the security considerations in
    [I-D.draft-ietf-lamps-dilithium-certificates] for additional guidance
    on ML-DSA deployment considerations, including discussions on
@@ -375,7 +375,7 @@ Table of Contents
 7.2.  Rationale for not supporting HashML-DSA
 
    This document does not specify algorithms for use with HashML-DSA as
-   described in Section 5.4 of FIPS-204.  As the verify routines are
+   described in Section 5.4 of [FIPS-204].  As the verify routines are
    different, future support for HashML-DSA would require the
    registration of additional algorithms.  Section 8.3 of
    [I-D.draft-ietf-lamps-dilithium-certificates] explains the rationale
@@ -388,14 +388,14 @@ Table of Contents
    before being used, all algorithm-related key parameters MUST be
    validated.
 
-   Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and
+   Section 7.2 of [FIPS-204] describes the encoding of ML-DSA keys and
    signatures.  For Algorithms 22 and 23 (pkEncode and pkDecode), the
    inputs need to be within the ranges given in the algorithms.  For the
    ML-DSA algorithms registered in this document, the priv key parameter
-   is the seed, and therefore, only a length check MUST be performed.
+   is the seed, and therefore, the seed length check MUST be performed.
    The length of the seed is 256 bits, which is 32 bytes.  However, when
    the priv parameter is expanded using KeyGen_internal, the skEncode
-   and skDecode algorithms MUST be used.  FIPS-204 notes, "skDecode
+   and skDecode algorithms MUST be used.  [FIPS-204] notes, "skDecode
    should only be run on inputs that come from trusted sources" and that
    "as the seed can be used to compute the private key, it is sensitive
    data and shall be treated with the same safeguards as a private key".
@@ -416,7 +416,7 @@ Table of Contents
 
    IANA is requested to add the following entries to the COSE Algorithms
    Registry.  The following completed registration templates are
-   provided as described in RFC 9053 and RFC 9054.
+   provided as described in [RFC9053] and [RFC9054].
 
 8.1.1.1.  ML-DSA-44
 
@@ -427,6 +427,8 @@ Table of Contents
    *  Description: CBOR Object Signing Algorithm for ML-DSA-44
 
    *  Capabilities: [kty]
+
+   *  Change Controller: IETF
 
    *  Reference: RFC XXXX
 
@@ -442,6 +444,8 @@ Table of Contents
 
    *  Capabilities: [kty]
 
+   *  Change Controller: IETF
+
    *  Reference: RFC XXXX
 
    *  Recommended: Yes
@@ -455,6 +459,8 @@ Table of Contents
    *  Description: CBOR Object Signing Algorithm for ML-DSA-87
 
    *  Capabilities: [kty]
+
+   *  Change Controller: IETF
 
    *  Reference: RFC XXXX
 
@@ -475,6 +481,8 @@ Table of Contents
    *  Description: COSE Key Type for Algorithm Key Pairs
 
    *  Capabilities: [kty(7)]
+
+   *  Change Controller: IETF
 
    *  Reference: RFC XXXX
 
@@ -516,22 +524,20 @@ Table of Contents
 
    IANA is requested to add the following entries to the JSON Web
    Signature and Encryption Algorithms Registry.  The following
-   completed registration templates are provided as described in RFC
-   7518.
+   completed registration templates are provided as described in
+   [RFC7518].
 
 8.1.4.1.  ML-DSA-44
 
    *  Algorithm Name: ML-DSA-44
 
-   *  Algorithm Description: ML-DSA-44 as described in FIPS 204.
+   *  Algorithm Description: ML-DSA-44 as described in US NIST FIPS 204.
 
    *  Algorithm Usage Location(s): alg
 
    *  JOSE Implementation Requirements: Optional
 
    *  Change Controller: IETF
-
-   *  Value registry: [IANA.jose] Algorithms
 
    *  Specification Document(s): RFC XXXX
 
@@ -541,15 +547,13 @@ Table of Contents
 
    *  Algorithm Name: ML-DSA-65
 
-   *  Algorithm Description: ML-DSA-65 as described in FIPS 204.
+   *  Algorithm Description: ML-DSA-65 as described in US NIST FIPS 204.
 
    *  Algorithm Usage Location(s): alg
 
    *  JOSE Implementation Requirements: Optional
 
    *  Change Controller: IETF
-
-   *  Value registry: [IANA.jose] Algorithms
 
    *  Specification Document(s): RFC XXXX
 
@@ -559,15 +563,13 @@ Table of Contents
 
    *  Algorithm Name: ML-DSA-87
 
-   *  Algorithm Description: ML-DSA-87 as described in FIPS 204.
+   *  Algorithm Description: ML-DSA-87 as described in US NIST FIPS 204.
 
    *  Algorithm Usage Location(s): alg
 
    *  JOSE Implementation Requirements: Optional
 
    *  Change Controller: IETF
-
-   *  Value registry: [IANA.jose] Algorithms
 
    *  Specification Document(s): RFC XXXX
 
@@ -577,7 +579,7 @@ Table of Contents
 
    IANA is requested to add the following entries to the JSON Web Key
    Types Registry.  The following completed registration templates are
-   provided as described in RFC 7518 and RFC 7638.
+   provided as described in [RFC7518] and [RFC7638].
 
 8.1.5.1.  AKP
 
@@ -595,7 +597,7 @@ Table of Contents
 
    IANA is requested to add the following entries to the JSON Web Key
    Parameters Registry.  The following completed registration templates
-   are provided as described in RFC 7517 and RFC 7638.
+   are provided as described in [RFC7517] and [RFC7638].
 
 8.1.6.1.  AKP Public Key
 
@@ -632,14 +634,6 @@ Table of Contents
    [FIPS-204] "Module-Lattice-Based Digital Signature Standard", n.d.,
               <https://doi.org/10.6028/NIST.FIPS.204>.
 
-   [I-D.draft-ietf-cose-key-thumbprint]
-              Isobe, K., Tschofenig, H., and O. Steele, "CBOR Object
-              Signing and Encryption (COSE) Key Thumbprint", Work in
-              Progress, Internet-Draft, draft-ietf-cose-key-thumbprint-
-              06, 6 September 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              key-thumbprint-06>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -652,6 +646,10 @@ Table of Contents
    [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
               DOI 10.17487/RFC7517, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7517>.
+
+   [RFC7518]  Jones, M., "JSON Web Algorithms (JWA)", RFC 7518,
+              DOI 10.17487/RFC7518, May 2015,
+              <https://www.rfc-editor.org/rfc/rfc7518>.
 
    [RFC7638]  Jones, M. and N. Sakimura, "JSON Web Key (JWK)
               Thumbprint", RFC 7638, DOI 10.17487/RFC7638, September
@@ -669,6 +667,15 @@ Table of Contents
    [RFC9053]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Initial Algorithms", RFC 9053, DOI 10.17487/RFC9053,
               August 2022, <https://www.rfc-editor.org/rfc/rfc9053>.
+
+   [RFC9054]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Hash Algorithms", RFC 9054, DOI 10.17487/RFC9054, August
+              2022, <https://www.rfc-editor.org/rfc/rfc9054>.
+
+   [RFC9679]  Isobe, K., Tschofenig, H., and O. Steele, "CBOR Object
+              Signing and Encryption (COSE) Key Thumbprint", RFC 9679,
+              DOI 10.17487/RFC9679, December 2024,
+              <https://www.rfc-editor.org/rfc/rfc9679>.
 
 9.2.  Informative References
 
@@ -688,11 +695,6 @@ Table of Contents
    [IANA.jose]
               IANA, "JSON Object Signing and Encryption (JOSE)",
               <https://www.iana.org/assignments/jose>.
-
-   [NIST-PQC-2022]
-              "Selected Algorithms 2022", n.d.,
-              <https://csrc.nist.gov/Projects/post-quantum-cryptography/
-              selected-algorithms-2022>.
 
 Appendix A.  Examples
 
