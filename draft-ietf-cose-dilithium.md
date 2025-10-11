@@ -52,12 +52,12 @@ contributor:
 normative:
   RFC7515: JWS
   RFC7517: JWK
-  RFC9052: COSE-1
-  RFC9053: COSE
+  RFC9052:
+  RFC9053:
   RFC9054:
   RFC7518:
   RFC7638:
-  I-D.draft-ietf-cose-key-thumbprint: COSE-KID
+  RFC9679:
   FIPS-204:
     title: "Module-Lattice-Based Digital Signature Standard"
     target: https://doi.org/10.6028/NIST.FIPS.204
@@ -75,7 +75,7 @@ informative:
 
 --- abstract
 
-This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC) digital signature scheme defined in FIPS 204.
+This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC) digital signature scheme defined in US NIST FIPS 204.
 
 --- middle
 
@@ -83,7 +83,7 @@ This document describes JSON Object Signing and Encryption (JOSE) and CBOR Objec
 
 This document describes how to use ML-DSA keys and signatures as described in {{FIPS-204}}, in conjunction with JOSE and COSE.
 A new key type named Algorithm Key Pair (AKP) is defined to express public and private keys for use with algorithms not limited to those registered in this document.
-Similarly, a new thumbprint algorithm is defined for AKP, to ensure these keys can be compared according to the procedures defined in {{RFC7638}} and {{-COSE-KID}}.
+Similarly, a new thumbprint algorithm is defined for AKP, to ensure these keys can be compared according to the procedures defined in {{RFC7638}} and {{RFC9679}}.
 
 # Terminology
 
@@ -216,19 +216,19 @@ Table 2 of {{FIPS-204}} describes the ML-DSA key and signature sizes.
 ML-DSA produces significantly larger public keys and signatures compared to traditional algorithms.
 This size increase can create challenges for deployments with limited bandwidth, memory, or processing capacity.
 ML-DSA may not be suitable for use cases requiring small keys or signatures.
-Use of thumbprints as described in {{RFC7638}} and {{-COSE-KID}} can reduce the need to repeat public key representations.
+Use of thumbprints as described in {{RFC7638}} and {{RFC9679}} can reduce the need to repeat public key representations.
 
 # AKP Thumbprints
 
 Although this document describes how to represent ML-DSA keys using AKP, the AKP key type and thumbprint computations are suitable for use with algorithms other than ML-DSA.
 
-When computing the COSE Key Thumbprint as described in {{-COSE-KID}}, the required parameters for algorithm key pairs are:
+When computing the COSE Key Thumbprint as described in {{RFC9679}}, the required parameters for algorithm key pairs are:
 
 - "kty" (label: 1, data type: int, value: 7)
 - "alg" (label: 3, data type: int, value: int)
 - "pub" (label: -1, value: bstr)
 
-The COSE Key Thumbprint is produced according to the process described in {{Section 3 of -COSE-KID}}.
+The COSE Key Thumbprint is produced according to the process described in {{Section 3 of RFC9679}}.
 
 When computing the JWK Thumbprint as described in {{RFC7638}}, the required parameters for algorithm key pairs are:
 
@@ -248,7 +248,7 @@ See the `kid` values in the JSON Web Key and COSE Key examples in the appendix f
 
 # Security Considerations
 
-The security considerations of {{-JWS}}, {{-JWK}}, and {{-COSE}} apply to this specification as well.
+The security considerations of {{-JWS}}, {{-JWK}}, and {{RFC9053}} apply to this specification as well.
 
 A detailed security analysis of ML-DSA is beyond the scope of this specification; see {{FIPS-204}} for additional details.
 Implementers should also refer to the security considerations in {{-ML-DSA-CERTS}} for additional guidance on ML-DSA deployment considerations, including discussions on randomized versus deterministic signing approaches.
