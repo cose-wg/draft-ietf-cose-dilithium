@@ -79,7 +79,7 @@ This document describes JSON Object Signing and Encryption (JOSE) and CBOR Objec
 
 # Introduction
 
-This document describes how to use ML-DSA keys and signatures as described in {{FIPS-204}} with JOSE and COSE.
+This document describes how to use ML-DSA keys and signatures as described in {{FIPS-204}}, in conjunction with JOSE and COSE.
 A new key type named Algorithm Key Pair (AKP) is defined to express public and private keys for use with algorithms not limited to those registered in this document.
 Similarly, a new thumbprint algorithm is defined for AKP, to ensure these keys can be compared according to the procedures defined in {{RFC7638}} and {{-COSE-KID}}.
 
@@ -208,7 +208,7 @@ The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-8
 Signatures are encoded as bytestrings using the algorithms defined in Section 7.2 of US NIST {{FIPS-204}}.
 
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
-When producing COSE signatures, no encoding is needed, see {{Section 4 of RFC9052}} for more details on how COSE signatures are created.
+When producing COSE signatures, no encoding is needed; see {{Section 4 of RFC9052}} for more details on how COSE signatures are created.
 
 Table 2 of {{FIPS-204}} describes the ML-DSA key and signature sizes.
 ML-DSA produces significantly larger public keys and signatures compared to traditional algorithms.
@@ -248,7 +248,7 @@ See the `kid` values in the JSON Web Key and COSE Key examples in the appendix f
 
 The security considerations of {{-JWS}}, {{-JWK}}, and {{-COSE}} apply to this specification as well.
 
-A detailed security analysis of ML-DSA is beyond the scope of this specification, see {{FIPS-204}} for additional details.
+A detailed security analysis of ML-DSA is beyond the scope of this specification; see {{FIPS-204}} for additional details.
 Implementers should also refer to the security considerations in {{-ML-DSA-CERTS}} for additional guidance on ML-DSA deployment considerations, including discussions on randomized versus deterministic signing approaches.
 
 ## Private key compromise
@@ -269,7 +269,7 @@ When an AKP algorithm requires or encourages that a key be validated before bein
 
 Section 7.2 of {{FIPS-204}} describes the encoding of ML-DSA keys and signatures.
 For Algorithms 22 and 23 (pkEncode and pkDecode), the inputs need to be within the ranges given in the algorithms.
-For the ML-DSA algorithms registered in this document, the `priv` key parameter is the seed, and therefore, only a length check MUST be performed.
+For the ML-DSA algorithms registered in this document, the `priv` key parameter is the seed, and therefore, the seed length check MUST be performed.
 The length of the seed is 256 bits, which is 32 bytes.
 However, when the `priv` parameter is expanded using KeyGen_internal, the skEncode and skDecode algorithms MUST be used.
 {{FIPS-204}} notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive data and shall be treated with the same safeguards as a private key".
