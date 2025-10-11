@@ -68,14 +68,11 @@ informative:
   IANA.cose: IANA.cose
   I-D.draft-ietf-lamps-dilithium-certificates:  ML-DSA-CERTS
 
-  NIST-PQC-2022:
-    title: "Selected Algorithms 2022"
-    target: https://csrc.nist.gov/Projects/post-quantum-cryptography/selected-algorithms-2022
 ---
 
 --- abstract
 
-This document describes JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC) digital signature scheme defined in US NIST FIPS 204.
+This document specifies JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE) serializations for Module-Lattice-Based Digital Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC) digital signature scheme defined in US NIST FIPS 204.
 
 --- middle
 
@@ -96,16 +93,16 @@ Some examples in this specification are truncated using "..." for readability.
 This section describes a generic cryptographic key structure for use with algorithms not limited to those registered in this document.
 The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
 The concept of public and private information classes for key pairs originates from {{Section 8.1 of RFC7517}}.
-The parameters for public and private information classes contain byte strings in a format specified by the "alg" value.
-The "alg" JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED for all AKP keys.
-The "pub" parameter contains public information and is REQUIRED.
-The "priv" parameter contains private information and MUST NOT be present in public keys.
+The parameters for public and private information classes contain byte strings in a format specified by the `alg` value.
+The `alg` JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED for all AKP keys.
+The `pub` parameter contains public information and is REQUIRED.
+The `priv` parameter contains private information and MUST NOT be present in public keys.
 
 When registering new algorithms, the use of multiple key type parameters for private information is NOT RECOMMENDED.
 
 Some algorithms may require or recommend additional structure or length checks for associated key type parameters.
 
-When AKP keys are expressed in JWK, the key parameters are base64url encoded.
+When AKP keys are expressed as JSON Web Keys (JWK), the key parameters are base64url encoded.
 When AKP keys are expressed as COSE keys, no encoding is needed.
 
 This document introduces the following key types in {{-IANA.jose}}:
@@ -188,9 +185,9 @@ This document has registered the following algorithms in {{-IANA.cose}}:
 
 In accordance with Algorithm Key Pair Type section of this document, ML-DSA key parameters have the following additional constraints:
 
-The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of US NIST {{FIPS-204}}.
+The `pub` parameter is the ML-DSA public key, as described in Section 5.3 of US NIST {{FIPS-204}}.
 
-The size of "pub", and the associated signature for each of these algorithms is defined in Table 2 of US NIST {{FIPS-204}}, and repeated here for convenience:
+The size of `pub`, and the associated signature for each of these algorithms is defined in Table 2 of US NIST {{FIPS-204}}, and repeated here for convenience:
 
 | Algorithm | Private Key | Public Key | Signature Size
 |---
