@@ -54,7 +54,9 @@ normative:
   RFC7517: JWK
   RFC9052: COSE-1
   RFC9053: COSE
-  RFC7638: JOSE-KID
+  RFC9054:
+  RFC7518:
+  RFC7638:
   I-D.draft-ietf-cose-key-thumbprint: COSE-KID
   FIPS-204:
     title: "Module-Lattice-Based Digital Signature Standard"
@@ -228,19 +230,19 @@ When computing the COSE Key Thumbprint as described in {{-COSE-KID}}, the requir
 
 The COSE Key Thumbprint is produced according to the process described in {{Section 3 of -COSE-KID}}.
 
-When computing the JWK Thumbprint as described in {{-JOSE-KID}}, the required parameters for algorithm key pairs are:
+When computing the JWK Thumbprint as described in {{RFC7638}}, the required parameters for algorithm key pairs are:
 
 - "kty"
 - "alg"
 - "pub"
 
-Their lexicographic order, per {{Section 3.3 of -JOSE-KID}}, is:
+Their lexicographic order, per {{Section 3.3 of RFC7638}}, is:
 
 - "alg"
 - "kty"
 - "pub"
 
-The JWK Key Thumbprint is produced according to the process described in {{Section 3 of -JOSE-KID}}.
+The JWK Key Thumbprint is produced according to the process described in {{Section 3 of RFC7638}}.
 
 See the `kid` values in the JSON Web Key and COSE Key examples in the appendix for examples of AKP thumbprints.
 
@@ -286,7 +288,7 @@ Depending on the algorithm and implementation, the consequences of using mismatc
 ### New COSE Algorithms
 
 IANA is requested to add the following entries to the COSE Algorithms Registry.
-The following completed registration templates are provided as described in RFC 9053 and RFC 9054.
+The following completed registration templates are provided as described in {{RFC9053}} and {{RFC9054}}.
 
 #### ML-DSA-44
 
@@ -294,6 +296,7 @@ The following completed registration templates are provided as described in RFC 
 * Value: TBD (requested assignment -48)
 * Description: CBOR Object Signing Algorithm for ML-DSA-44
 * Capabilities: `[kty]`
+* Change Controller: IETF
 * Reference: RFC XXXX
 * Recommended: Yes
 
@@ -303,6 +306,7 @@ The following completed registration templates are provided as described in RFC 
 * Value: TBD (requested assignment -49)
 * Description: CBOR Object Signing Algorithm for ML-DSA-65
 * Capabilities: `[kty]`
+* Change Controller: IETF
 * Reference: RFC XXXX
 * Recommended: Yes
 
@@ -313,6 +317,7 @@ The following completed registration templates are provided as described in RFC 
 * Value: TBD (requested assignment -50)
 * Description: CBOR Object Signing Algorithm for ML-DSA-87
 * Capabilities: `[kty]`
+* Change Controller: IETF
 * Reference: RFC XXXX
 * Recommended: Yes
 
@@ -327,6 +332,7 @@ The following completed registration templates are provided as described in RFC 
 * Value: TBD (requested assignment 7)
 * Description: COSE Key Type for Algorithm Key Pairs
 * Capabilities: `[kty(7)]`
+* Change Controller: IETF
 * Reference: RFC XXXX
 
 ### New COSE Key Type Parameters
@@ -355,45 +361,42 @@ The following completed registration templates are provided as described in RFC 
 ### New JOSE Algorithms
 
 IANA is requested to add the following entries to the JSON Web Signature and Encryption Algorithms Registry.
-The following completed registration templates are provided as described in RFC 7518.
+The following completed registration templates are provided as described in {{RFC7518}}.
 
 #### ML-DSA-44
 
 * Algorithm Name: ML-DSA-44
-* Algorithm Description: ML-DSA-44 as described in FIPS 204.
+* Algorithm Description: ML-DSA-44 as described in US NIST FIPS 204.
 * Algorithm Usage Location(s): alg
 * JOSE Implementation Requirements: Optional
 * Change Controller: IETF
-* Value registry: {{-IANA.jose}} Algorithms
 * Specification Document(s): RFC XXXX
 * Algorithm Analysis Documents(s): {{FIPS-204}}
 
 #### ML-DSA-65
 
 * Algorithm Name: ML-DSA-65
-* Algorithm Description: ML-DSA-65 as described in FIPS 204.
+* Algorithm Description: ML-DSA-65 as described in US NIST FIPS 204.
 * Algorithm Usage Location(s): alg
 * JOSE Implementation Requirements: Optional
 * Change Controller: IETF
-* Value registry: {{-IANA.jose}} Algorithms
 * Specification Document(s): RFC XXXX
 * Algorithm Analysis Documents(s): {{FIPS-204}}
 
 #### ML-DSA-87
 
 * Algorithm Name: ML-DSA-87
-* Algorithm Description: ML-DSA-87 as described in FIPS 204.
+* Algorithm Description: ML-DSA-87 as described in US NIST FIPS 204.
 * Algorithm Usage Location(s): alg
 * JOSE Implementation Requirements: Optional
 * Change Controller: IETF
-* Value registry: {{-IANA.jose}} Algorithms
 * Specification Document(s): RFC XXXX
 * Algorithm Analysis Documents(s): {{FIPS-204}}
 
 ### New JOSE Key Types
 
 IANA is requested to add the following entries to the JSON Web Key Types Registry.
-The following completed registration templates are provided as described in RFC 7518 and RFC 7638.
+The following completed registration templates are provided as described in {{RFC7518}} and {{RFC7638}}.
 
 #### AKP
 
@@ -406,7 +409,7 @@ The following completed registration templates are provided as described in RFC 
 ### New JSON Web Key Parameters
 
 IANA is requested to add the following entries to the JSON Web Key Parameters Registry.
-The following completed registration templates are provided as described in RFC 7517 and RFC 7638.
+The following completed registration templates are provided as described in {{RFC7517}} and {{RFC7638}}.
 
 #### AKP Public Key
 
