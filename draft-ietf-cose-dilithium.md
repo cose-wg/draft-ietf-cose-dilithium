@@ -51,7 +51,7 @@ contributor:
 
 normative:
   RFC7515: JWS
-  RFC7517: JWK
+  RFC7517:
   RFC9052:
   RFC9053:
   RFC9054:
@@ -248,7 +248,7 @@ See the `kid` values in the JSON Web Key and COSE Key examples in the appendix f
 
 # Security Considerations
 
-The security considerations of {{-JWS}}, {{-JWK}}, and {{RFC9053}} apply to this specification as well.
+The security considerations of {{RFC7515}}, {{RFC7517}}, and {{RFC9053}} apply to this specification as well.
 
 A detailed security analysis of ML-DSA is beyond the scope of this specification; see {{FIPS-204}} for additional details.
 Implementers should also refer to the security considerations in {{-ML-DSA-CERTS}} for additional guidance on ML-DSA deployment considerations, including discussions on randomized versus deterministic signing approaches.
