@@ -149,7 +149,7 @@ An example truncated private key for use with ML-DSA-44 in COSE_Key format is pr
 
 # ML-DSA Private Keys
 
-Note that US NIST FIPS-204 defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
+Note that US NIST {{FIPS-204}} defines 2 expressions for private keys: a seed, and a private key that is expanded from the seed.
 
 Unlike {{-ML-DSA-CERTS}}, which supports the expanded private key format to maximize interoperability with existing implementations, this document specifies ML-DSA private key information using only the seed format.
 The seed format was chosen to provide a single, compact representation that is consistent across both COSE and JOSE, simplifying key management and reducing storage requirements.
@@ -164,7 +164,7 @@ See Security Considerations of this document for details.
 
 The ML-DSA Signature Scheme is parameterized to support different security levels.
 
-In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA with the parameter choices given in Table 1 of FIPS-204.
+In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA with the parameter choices given in Table 1 of {{FIPS-204}}.
 
 This document has registered the following algorithms in {{-IANA.jose}}:
 
@@ -186,9 +186,9 @@ This document has registered the following algorithms in {{-IANA.cose}}:
 
 In accordance with Algorithm Key Pair Type section of this document, ML-DSA key parameters have the following additional constraints:
 
-The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of US NIST FIPS-204.
+The "pub" parameter is the ML-DSA public key, as described in Section 5.3 of US NIST {{FIPS-204}}.
 
-The size of "pub", and the associated signature for each of these algorithms is defined in Table 2 of US NIST FIPS-204, and repeated here for convenience:
+The size of "pub", and the associated signature for each of these algorithms is defined in Table 2 of US NIST {{FIPS-204}}, and repeated here for convenience:
 
 | Algorithm | Private Key | Public Key | Signature Size
 |---
@@ -201,16 +201,16 @@ Note that `priv` size is always 32 bytes, and that KeyGen_internal is called to 
 
 See Section 4, ML-DSA Private Keys, for further details.
 
-These algorithms are used to produce signatures as described in Algorithm 2 of US NIST FIPS-204.
+These algorithms are used to produce signatures as described in Algorithm 2 of US NIST {{FIPS-204}}.
 
 The ctx parameter MUST be the empty string for ML-DSA-44, ML-DSA-65 and ML-DSA-87.
 
-Signatures are encoded as bytestrings using the algorithms defined in Section 7.2 of US NIST FIPS-204.
+Signatures are encoded as bytestrings using the algorithms defined in Section 7.2 of US NIST {{FIPS-204}}.
 
 When producing JSON Web Signatures, the signature bytestrings are base64url encoded, and the encoded signature size is larger than described in the table above.
 When producing COSE signatures, no encoding is needed, see {{Section 4 of RFC9052}} for more details on how COSE signatures are created.
 
-Table 2 of FIPS-204 describes the ML-DSA key and signature sizes.
+Table 2 of {{FIPS-204}} describes the ML-DSA key and signature sizes.
 ML-DSA produces significantly larger public keys and signatures compared to traditional algorithms.
 This size increase can create challenges for deployments with limited bandwidth, memory, or processing capacity.
 ML-DSA may not be suitable for use cases requiring small keys or signatures.
@@ -259,7 +259,7 @@ This undermines the authenticity and integrity guarantees provided by ML-DSA, as
 
 ## Rationale for not supporting HashML-DSA
 
-This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of FIPS-204.
+This document does not specify algorithms for use with HashML-DSA as described in Section 5.4 of {{FIPS-204}}.
 As the verify routines are different, future support for HashML-DSA would require the registration of additional algorithms.
 {{Section 8.3 of -ML-DSA-CERTS}} explains the rationale for disallowing HashML-DSA, including the increased complexity and compatibility concerns with existing implementations.
 
@@ -267,12 +267,12 @@ As the verify routines are different, future support for HashML-DSA would requir
 
 When an AKP algorithm requires or encourages that a key be validated before being used, all algorithm-related key parameters MUST be validated.
 
-Section 7.2 of FIPS-204 describes the encoding of ML-DSA keys and signatures.
+Section 7.2 of {{FIPS-204}} describes the encoding of ML-DSA keys and signatures.
 For Algorithms 22 and 23 (pkEncode and pkDecode), the inputs need to be within the ranges given in the algorithms.
 For the ML-DSA algorithms registered in this document, the `priv` key parameter is the seed, and therefore, only a length check MUST be performed.
 The length of the seed is 256 bits, which is 32 bytes.
 However, when the `priv` parameter is expanded using KeyGen_internal, the skEncode and skDecode algorithms MUST be used.
-FIPS-204 notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive data and shall be treated with the same safeguards as a private key".
+{{FIPS-204}} notes, "skDecode should only be run on inputs that come from trusted sources" and that "as the seed can be used to compute the private key, it is sensitive data and shall be treated with the same safeguards as a private key".
 
 ## Mismatched AKP parameters
 
