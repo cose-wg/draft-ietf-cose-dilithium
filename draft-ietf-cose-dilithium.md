@@ -393,7 +393,7 @@ The following completed registrations are provided as described in {{RFC7518}}.
 ### New JOSE Key Types
 
 IANA is requested to add the following entries to the JSON Web Key Types Registry.
-The following completed registration templates are provided as described in {{RFC7518}} and {{RFC7638}}.
+The following completed registrations are provided as described in {{RFC7518}} and {{RFC7638}}.
 
 #### AKP
 
