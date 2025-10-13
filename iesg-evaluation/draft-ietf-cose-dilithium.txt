@@ -5,7 +5,7 @@
 CBOR Object Signing and Encryption                            M. Prorock
 Internet-Draft                                                 O. Steele
 Intended status: Standards Track                            Tradeverifyd
-Expires: 14 April 2026                                   11 October 2025
+Expires: 16 April 2026                                   13 October 2025
 
 
                         ML-DSA for JOSE and COSE
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 April 2026.
+   This Internet-Draft will expire on 16 April 2026.
 
 Copyright Notice
 
@@ -415,8 +415,8 @@ Table of Contents
 8.1.1.  New COSE Algorithms
 
    IANA is requested to add the following entries to the COSE Algorithms
-   Registry.  The following completed registration templates are
-   provided as described in [RFC9053] and [RFC9054].
+   Registry.  The following completed registration actions are provided
+   as described in [RFC9053] and [RFC9054].
 
 8.1.1.1.  ML-DSA-44
 
