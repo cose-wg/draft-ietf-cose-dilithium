@@ -358,7 +358,7 @@ The following completed registration templates are provided as described in RFC 
 ### New JOSE Algorithms
 
 IANA is requested to add the following entries to the JSON Web Signature and Encryption Algorithms Registry.
-The following completed registration templates are provided as described in {{RFC7518}}.
+The following completed registrations are provided as described in {{RFC7518}}.
 
 #### ML-DSA-44
 
