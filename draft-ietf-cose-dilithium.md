@@ -97,9 +97,6 @@ The parameters for public and private information classes contain byte strings i
 The `alg` JSON Web Key Parameter or COSE Key Common Parameter is REQUIRED for all AKP keys.
 The `pub` parameter contains public information and is REQUIRED.
 The `priv` parameter contains private information and MUST NOT be present in public keys.
-
-When registering new algorithms, the use of multiple key type parameters for private information is NOT RECOMMENDED.
-
 Some algorithms may require or recommend additional structure or length checks for associated key type parameters.
 
 When AKP keys are expressed as JSON Web Keys (JWK), the key parameters are base64url encoded.
@@ -165,23 +162,7 @@ The ML-DSA Signature Scheme is parameterized to support different security level
 
 In this document, the abbreviations ML-DSA-44, ML-DSA-65, and ML-DSA-87 are used to refer to ML-DSA with the parameter choices given in Table 1 of {{FIPS-204}}.
 
-This document has registered the following algorithms in {{-IANA.jose}}:
-
-| Name       | value | Description
-|---
-| ML-DSA-44  | ML-DSA-44     | JSON Web Signature Algorithm for ML-DSA-44
-| ML-DSA-65  | ML-DSA-65     | JSON Web Signature Algorithm for ML-DSA-65
-| ML-DSA-87  | ML-DSA-87     | JSON Web Signature Algorithm for ML-DSA-87
-{: #jose-algorithms align="left" title="JOSE algorithms for ML-DSA"}
-
-This document has registered the following algorithms in {{-IANA.cose}}:
-
-| Name       | value | Description
-|---
-| ML-DSA-44  | TBD (requested assignment -48)     | CBOR Object Signing Algorithm for ML-DSA-44
-| ML-DSA-65  | TBD (requested assignment -49)     | CBOR Object Signing Algorithm for ML-DSA-65
-| ML-DSA-87  | TBD (requested assignment -50)     | CBOR Object Signing Algorithm for ML-DSA-87
-{: #cose-algorithms align="left" title="COSE algorithms for ML-DSA"}
+This document has registered the ML-DSA-44, ML-DSA-65, and ML-DSA-87 algorithms in {{-IANA.jose}} and {{-IANA.cose}}.
 
 In accordance with Algorithm Key Pair Type section of this document, ML-DSA key parameters have the following additional constraints:
 
