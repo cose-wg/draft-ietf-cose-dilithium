@@ -102,12 +102,7 @@ Some algorithms may require or recommend additional structure or length checks f
 When AKP keys are expressed as JSON Web Keys (JWK), the key parameters are base64url encoded.
 When AKP keys are expressed as COSE keys, no encoding is needed.
 
-This document introduces the following key types in {{-IANA.jose}}:
-
-| Name    | kty | Description
-|---
-| Algorithm Key Pair  | AKP     | JSON Web Key Type for the Algorithm Key Pair.
-{: #jose-key-type align="left" title="Algorithm Key Pair Type for JOSE"}
+This document introduces the `AKP` key type in {{-IANA.jose}}:
 
 An example truncated private key for use with ML-DSA-44 in JWK format is provided below:
 
@@ -122,12 +117,7 @@ An example truncated private key for use with ML-DSA-44 in JWK format is provide
 ~~~
 {: #json-web-key-example align="left" title="The all-zeros ML-DSA-44 JSON Web Key"}
 
-This document introduces the following key type in {{-IANA.cose}}:
-
-| Name       | kty | Description
-|---
-| AKP  | TBD (requested assignment 7)     | COSE Key Type for the Algorithm Key Pair.
-{: #cose-key-type align="left" title="Algorithm Key Pair Type for COSE"}
+This document introduces the `AKP` key type in {{-IANA.cose}}:
 
 An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:
 
