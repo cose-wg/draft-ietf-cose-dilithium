@@ -78,7 +78,7 @@ This document specifies JSON Object Signing and Encryption (JOSE) and CBOR Objec
 
 # Introduction
 
-This document describes how to use ML-DSA keys and signatures as described in {{FIPS-204}}, in conjunction with JOSE and COSE.
+This document specifies how to use ML-DSA keys and signatures as described in {{FIPS-204}}, in conjunction with JOSE and COSE.
 A new key type named Algorithm Key Pair (AKP) is defined to express public and private keys for use with algorithms not limited to those registered in this document.
 Similarly, a new thumbprint algorithm is defined for AKP, to ensure these keys can be compared according to the procedures defined in {{RFC7638}} and {{RFC9679}}.
 
@@ -90,7 +90,7 @@ Some examples in this specification are truncated using "..." for readability.
 
 # Algorithm Key Pair Type
 
-This section describes a generic cryptographic key structure for use with algorithms not limited to those registered in this document.
+This section specifies a generic cryptographic key structure for use with algorithms not limited to those registered in this document.
 The Algorithm Key Pair (AKP) Type is used to express Public and Private Keys for use with Algorithms.
 The concept of public and private information classes for key pairs originates from {{Section 8.1 of RFC7517}}.
 The parameters for public and private information classes contain byte strings in a format specified by the `alg` value.
@@ -188,7 +188,7 @@ Use of thumbprints as described in {{RFC7638}} and {{RFC9679}} can reduce the ne
 
 # AKP Thumbprints
 
-Although this document describes how to represent ML-DSA keys using AKP, the AKP key type and thumbprint computations are suitable for use with algorithms other than ML-DSA.
+Although this document specifies how to represent ML-DSA keys using AKP, the AKP key type and thumbprint computations are suitable for use with algorithms other than ML-DSA.
 
 When computing the COSE Key Thumbprint as described in {{RFC9679}}, the required parameters for algorithm key pairs are:
 
