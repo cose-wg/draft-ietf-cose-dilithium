@@ -524,8 +524,7 @@ Table of Contents
 
    IANA is requested to add the following entries to the JSON Web
    Signature and Encryption Algorithms Registry.  The following
-   completed registration templates are provided as described in
-   [RFC7518].
+   completed registrations are provided as described in [RFC7518].
 
 8.1.4.1.  ML-DSA-44
 
@@ -578,8 +577,8 @@ Table of Contents
 8.1.5.  New JOSE Key Types
 
    IANA is requested to add the following entries to the JSON Web Key
-   Types Registry.  The following completed registration templates are
-   provided as described in [RFC7518] and [RFC7638].
+   Types Registry.  The following completed registrations are provided
+   as described in [RFC7518] and [RFC7638].
 
 8.1.5.1.  AKP
 
@@ -596,8 +595,8 @@ Table of Contents
 8.1.6.  New JSON Web Key Parameters
 
    IANA is requested to add the following entries to the JSON Web Key
-   Parameters Registry.  The following completed registration templates
-   are provided as described in [RFC7517] and [RFC7638].
+   Parameters Registry.  The following completed registrations are
+   provided as described in [RFC7517] and [RFC7638].
 
 8.1.6.1.  AKP Public Key
 
