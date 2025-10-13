@@ -285,7 +285,7 @@ Depending on the algorithm and implementation, the consequences of using mismatc
 ### New COSE Algorithms
 
 IANA is requested to add the following entries to the COSE Algorithms Registry.
-The following completed registration templates are provided as described in {{RFC9053}} and {{RFC9054}}.
+The following completed registration actions are provided as described in {{RFC9053}} and {{RFC9054}}.
 
 #### ML-DSA-44
 
