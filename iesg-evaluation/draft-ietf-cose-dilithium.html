@@ -1289,33 +1289,11 @@ The <code>priv</code> parameter contains private information and <span class="bc
 Some algorithms may require or recommend additional structure or length checks for associated key type parameters.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">When AKP keys are expressed as JSON Web Keys (JWK), the key parameters are base64url encoded.
 When AKP keys are expressed as COSE keys, no encoding is needed.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">This document introduces the following key types in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-3" class="pilcrow">¶</a></p>
-<span id="name-algorithm-key-pair-type-for"></span><div id="jose-key-type">
-<table class="left" id="table-1">
-        <caption>
-<a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-algorithm-key-pair-type-for" class="selfRef">Algorithm Key Pair Type for JOSE</a>
-        </caption>
-<thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Name</th>
-            <th class="text-left" rowspan="1" colspan="1">kty</th>
-            <th class="text-left" rowspan="1" colspan="1">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">Algorithm Key Pair</td>
-            <td class="text-left" rowspan="1" colspan="1">AKP</td>
-            <td class="text-left" rowspan="1" colspan="1">JSON Web Key Type for the Algorithm Key Pair.</td>
-          </tr>
-        </tbody>
-      </table>
-</div>
-<p id="section-3-5">An example truncated private key for use with ML-DSA-44 in JWK format is provided below:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-3">This document introduces the <code>AKP</code> key type in <span>[<a href="#IANA.jose" class="cite xref">IANA.jose</a>]</span>:<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">An example truncated private key for use with ML-DSA-44 in JWK format is provided below:<a href="#section-3-4" class="pilcrow">¶</a></p>
 <span id="name-the-all-zeros-ml-dsa-44-jso"></span><div id="json-web-key-example">
 <figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-3-6.1">
+        <div class="alignLeft art-text artwork" id="section-3-5.1">
 <pre>
 {
    "kid": "T4xl70S7MT6Zeq6r9V9fPJGVn76wfnXJ21-gyo0Gu6o",
@@ -1330,33 +1308,11 @@ When AKP keys are expressed as COSE keys, no encoding is needed.<a href="#sectio
 <a href="#name-the-all-zeros-ml-dsa-44-jso" class="selfRef">The all-zeros ML-DSA-44 JSON Web Key</a>
         </figcaption></figure>
 </div>
-<p id="section-3-7">This document introduces the following key type in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-3-7" class="pilcrow">¶</a></p>
-<span id="name-algorithm-key-pair-type-for-"></span><div id="cose-key-type">
-<table class="left" id="table-2">
-        <caption>
-<a href="#table-2" class="selfRef">Table 2</a>:
-<a href="#name-algorithm-key-pair-type-for-" class="selfRef">Algorithm Key Pair Type for COSE</a>
-        </caption>
-<thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Name</th>
-            <th class="text-left" rowspan="1" colspan="1">kty</th>
-            <th class="text-left" rowspan="1" colspan="1">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">AKP</td>
-            <td class="text-left" rowspan="1" colspan="1">TBD (requested assignment 7)</td>
-            <td class="text-left" rowspan="1" colspan="1">COSE Key Type for the Algorithm Key Pair.</td>
-          </tr>
-        </tbody>
-      </table>
-</div>
-<p id="section-3-9">An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-6">This document introduces the <code>AKP</code> key type in <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span>:<a href="#section-3-6" class="pilcrow">¶</a></p>
+<p id="section-3-7">An example truncated private key for use with ML-DSA-44 in COSE_Key format is provided below:<a href="#section-3-7" class="pilcrow">¶</a></p>
 <span id="name-the-all-zeros-ml-dsa-44-cos"></span><div id="cose-key-example">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="section-3-10.1">
+        <div class="alignLeft art-text artwork" id="section-3-8.1">
 <pre>
 {
    / kid /   2: h'b8969ab4b37da9f068...6f0583bf5b8d3a8059a',
@@ -1398,9 +1354,9 @@ The seed format was chosen to provide a single, compact representation that is c
 <p id="section-5-5">The <code>pub</code> parameter is the ML-DSA public key, as described in Section 5.3 of US NIST <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span>.<a href="#section-5-5" class="pilcrow">¶</a></p>
 <p id="section-5-6">The size of <code>pub</code>, and the associated signature for each of these algorithms is defined in Table 2 of US NIST <span>[<a href="#FIPS-204" class="cite xref">FIPS-204</a>]</span>, and repeated here for convenience:<a href="#section-5-6" class="pilcrow">¶</a></p>
 <span id="name-sizes-in-bytes-of-keys-and-"></span><div id="fips-204-table-2">
-<table class="left" id="table-3">
+<table class="left" id="table-1">
         <caption>
-<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#table-1" class="selfRef">Table 1</a>:
 <a href="#name-sizes-in-bytes-of-keys-and-" class="selfRef">Sizes (in bytes) of keys and signatures of ML-DSA</a>
         </caption>
 <thead>

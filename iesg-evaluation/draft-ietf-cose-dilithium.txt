@@ -139,16 +139,7 @@ Table of Contents
    parameters are base64url encoded.  When AKP keys are expressed as
    COSE keys, no encoding is needed.
 
-   This document introduces the following key types in [IANA.jose]:
-
-   +====================+=====+=========================+
-   | Name               | kty | Description             |
-   +====================+=====+=========================+
-   | Algorithm Key Pair | AKP | JSON Web Key Type for   |
-   |                    |     | the Algorithm Key Pair. |
-   +--------------------+-----+-------------------------+
-
-         Table 1: Algorithm Key Pair Type for JOSE
+   This document introduces the AKP key type in [IANA.jose]:
 
    An example truncated private key for use with ML-DSA-44 in JWK format
    is provided below:
@@ -163,16 +154,7 @@ Table of Contents
 
                Figure 1: The all-zeros ML-DSA-44 JSON Web Key
 
-   This document introduces the following key type in [IANA.cose]:
-
-   +======+==============================+=======================+
-   | Name | kty                          | Description           |
-   +======+==============================+=======================+
-   | AKP  | TBD (requested assignment 7) | COSE Key Type for the |
-   |      |                              | Algorithm Key Pair.   |
-   +------+------------------------------+-----------------------+
-
-              Table 2: Algorithm Key Pair Type for COSE
+   This document introduces the AKP key type in [IANA.cose]:
 
    An example truncated private key for use with ML-DSA-44 in COSE_Key
    format is provided below:
@@ -242,7 +224,7 @@ Table of Contents
    | ML-DSA-87 | 4896        | 2592       | 4627           |
    +-----------+-------------+------------+----------------+
 
-      Table 3: Sizes (in bytes) of keys and signatures of
+      Table 1: Sizes (in bytes) of keys and signatures of
                              ML-DSA
 
    Note that priv size is always 32 bytes, and that KeyGen_internal is
