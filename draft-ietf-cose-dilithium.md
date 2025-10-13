@@ -406,7 +406,7 @@ The following completed registrations are provided as described in {{RFC7518}} a
 ### New JSON Web Key Parameters
 
 IANA is requested to add the following entries to the JSON Web Key Parameters Registry.
-The following completed registration templates are provided as described in {{RFC7517}} and {{RFC7638}}.
+The following completed registrations are provided as described in {{RFC7517}} and {{RFC7638}}.
 
 #### AKP Public Key
 
