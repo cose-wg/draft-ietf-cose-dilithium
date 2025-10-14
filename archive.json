@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T01:21:53.919826+00:00",
+  "timestamp": "2025-10-14T01:18:30.609475+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1729,13 +1729,13 @@
       "labels": [],
       "body": "Towards  https://datatracker.ietf.org/doc/draft-ietf-cose-dilithium/ballot/",
       "createdAt": "2025-10-09T15:01:02Z",
-      "updatedAt": "2025-10-11T13:07:48Z",
+      "updatedAt": "2025-10-13T13:45:08Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "81ac7826c48381e2eb8aa3e96a92b0e2ab8ab5a2",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "iesg-evaluation",
-      "headRefOid": "e205ab7d20425cd5235cc244a988bed917056a84",
+      "headRefOid": "bb50bcd66dce9d34f3257d49ecef2bf55ca08f85",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1749,7 +1749,191 @@
           "updatedAt": "2025-10-11T13:07:47Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLEMDO87GfYxx",
+          "commit": {
+            "abbreviatedOid": "e205ab7"
+          },
+          "author": "boucadair",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks Orie for the changes.",
+          "createdAt": "2025-10-13T06:23:37Z",
+          "updatedAt": "2025-10-13T06:41:09Z",
+          "comments": [
+            {
+              "originalPosition": 75,
+              "body": "I would delete the table but point to the IANA section that registers the key. \r\n\r\nAlthough this is almost saying the same thing, the current text includes a \"description\" that is not matching the description of the key in the registry.\r\n\r\nThe same comment applies for other similar constructs in the doc.",
+              "createdAt": "2025-10-13T06:23:37Z",
+              "updatedAt": "2025-10-13T06:41:09Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "I was looking for text echoing this reply but failed to find it:\r\n\r\n> \"This guidance is directed towards specification authors who are using this key type with new algorithms (for example SPHINCS Plus / Falcon)... but really it's towards anyone considering making a private key format, optionality is dangerous there.\r\n> I did add some text to try to make this clearer.\"\r\n\r\nAlso, \"When registering new algorithms\" part is confusing as this may be interpreted as this is something done as part of registration.",
+              "createdAt": "2025-10-13T06:38:10Z",
+              "updatedAt": "2025-10-13T06:41:09Z"
+            },
+            {
+              "originalPosition": 239,
+              "body": "```suggestion\r\nThe following completed registration actions are provided as described in {{RFC9053}} and {{RFC9054}}.\r\n```\r\n\r\nThese are not templates but actual registration entries ;-)",
+              "createdAt": "2025-10-13T06:39:53Z",
+              "updatedAt": "2025-10-13T06:41:09Z"
+            },
+            {
+              "originalPosition": 280,
+              "body": "```suggestion\r\nThe following completed registrations are provided as described in {{RFC7518}}.\r\n```",
+              "createdAt": "2025-10-13T06:40:20Z",
+              "updatedAt": "2025-10-13T06:41:09Z"
+            },
+            {
+              "originalPosition": 322,
+              "body": "```suggestion\r\nThe following completed registrations are provided as described in {{RFC7518}} and {{RFC7638}}.\r\n```",
+              "createdAt": "2025-10-13T06:40:32Z",
+              "updatedAt": "2025-10-13T06:41:09Z"
+            },
+            {
+              "originalPosition": 331,
+              "body": "```suggestion\r\nThe following completed registrations are provided as described in {{RFC7517}} and {{RFC7638}}.\r\n```",
+              "createdAt": "2025-10-13T06:40:42Z",
+              "updatedAt": "2025-10-13T06:41:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO87GksjZ",
+          "commit": {
+            "abbreviatedOid": "64f2893"
+          },
+          "author": "evyncke",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T12:50:36Z",
+          "updatedAt": "2025-10-13T12:50:36Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "Should also s/describes/specifies/",
+              "createdAt": "2025-10-13T12:50:36Z",
+              "updatedAt": "2025-10-13T12:50:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO87Gk1hF",
+          "commit": {
+            "abbreviatedOid": "e205ab7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T12:59:10Z",
+          "updatedAt": "2025-10-13T12:59:11Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "I agree. The original reason was that lamps defined a private key format that contained both the seed and the expanded private key.... which are redundant to each other, and can be mismatched.\r\n\r\nI've opted to simply eliminate the sentence as its basically common sense to not do this.",
+              "createdAt": "2025-10-13T12:59:11Z",
+              "updatedAt": "2025-10-13T12:59:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO87Gk3TP",
+          "commit": {
+            "abbreviatedOid": "e205ab7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T13:01:23Z",
+          "updatedAt": "2025-10-13T13:01:23Z",
+          "comments": [
+            {
+              "originalPosition": 75,
+              "body": "I removed the tables from the body, but kept the links and examples",
+              "createdAt": "2025-10-13T13:01:23Z",
+              "updatedAt": "2025-10-13T13:01:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO87Gk9n-",
+          "commit": {
+            "abbreviatedOid": "542229b"
+          },
+          "author": "boucadair",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-13T13:09:09Z",
+          "updatedAt": "2025-10-13T13:09:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLEMDO87Glccu",
+          "commit": {
+            "abbreviatedOid": "542229b"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T13:43:49Z",
+          "updatedAt": "2025-10-13T13:43:49Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "```suggestion\r\nThis section specifies a generic cryptographic key structure for use with algorithms not limited to those registered in this document.\r\n```",
+              "createdAt": "2025-10-13T13:43:49Z",
+              "updatedAt": "2025-10-13T13:43:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO87GlcwF",
+          "commit": {
+            "abbreviatedOid": "542229b"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T13:44:09Z",
+          "updatedAt": "2025-10-13T13:44:10Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\nThis document specifies how to use ML-DSA keys and signatures as described in {{FIPS-204}}, in conjunction with JOSE and COSE.\r\n```",
+              "createdAt": "2025-10-13T13:44:10Z",
+              "updatedAt": "2025-10-13T13:44:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO87Glc-d",
+          "commit": {
+            "abbreviatedOid": "542229b"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T13:44:25Z",
+          "updatedAt": "2025-10-13T13:44:26Z",
+          "comments": [
+            {
+              "originalPosition": 180,
+              "body": "```suggestion\r\nAlthough this document specifies how to represent ML-DSA keys using AKP, the AKP key type and thumbprint computations are suitable for use with algorithms other than ML-DSA.\r\n```",
+              "createdAt": "2025-10-13T13:44:25Z",
+              "updatedAt": "2025-10-13T13:44:26Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
