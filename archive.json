@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-14T01:18:30.609475+00:00",
+  "timestamp": "2025-10-16T01:20:02.140930+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -1722,24 +1722,26 @@
       "id": "PR_kwDOLEMDO86s6t1J",
       "title": "IESG Evaluation",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/pull/26",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Towards  https://datatracker.ietf.org/doc/draft-ietf-cose-dilithium/ballot/",
       "createdAt": "2025-10-09T15:01:02Z",
-      "updatedAt": "2025-10-13T13:45:08Z",
+      "updatedAt": "2025-10-14T15:18:33Z",
       "baseRepository": "cose-wg/draft-ietf-cose-dilithium",
       "baseRefName": "main",
       "baseRefOid": "81ac7826c48381e2eb8aa3e96a92b0e2ab8ab5a2",
       "headRepository": "cose-wg/draft-ietf-cose-dilithium",
       "headRefName": "iesg-evaluation",
       "headRefOid": "bb50bcd66dce9d34f3257d49ecef2bf55ca08f85",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-14T15:18:33Z",
+      "mergedAt": "2025-10-14T15:18:33Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "84ccfffe4370f3380ae5264484d5ae2c1125be87"
+      },
       "comments": [
         {
           "author": "OR13",
@@ -1756,7 +1758,7 @@
             "abbreviatedOid": "e205ab7"
           },
           "author": "boucadair",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "CHANGES_REQUESTED",
           "body": "Thanks Orie for the changes.",
           "createdAt": "2025-10-13T06:23:37Z",
@@ -1866,7 +1868,7 @@
             "abbreviatedOid": "542229b"
           },
           "author": "boucadair",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2025-10-13T13:09:09Z",
@@ -1932,6 +1934,19 @@
               "updatedAt": "2025-10-13T13:44:26Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLEMDO87G2qDT",
+          "commit": {
+            "abbreviatedOid": "bb50bcd"
+          },
+          "author": "paulwouters",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-14T15:14:35Z",
+          "updatedAt": "2025-10-14T15:14:35Z",
+          "comments": []
         }
       ]
     }
