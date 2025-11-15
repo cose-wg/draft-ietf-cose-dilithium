@@ -1,0 +1,15 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "Orie Steele",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "jose": "^5.9.4"
+  }
+}
