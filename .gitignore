@@ -18,8 +18,8 @@
 /versioned/
 archive.json
 draft-ietf-cose-dilithium.xml
+examples /lib
 Gemfile.lock
 package-lock.json
 report.xml
 !requirements.txt
-examples 
