@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-16T01:20:02.140930+00:00",
+  "timestamp": "2025-11-16T01:37:15.563765+00:00",
   "repo": "cose-wg/draft-ietf-cose-dilithium",
   "labels": [
     {
@@ -283,15 +283,15 @@
       "id": "I_kwDOLEMDO87Qz9M0",
       "title": "Complete IESG Evaluation Feedback",
       "url": "https://github.com/cose-wg/draft-ietf-cose-dilithium/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This issue is to track that all IESG evaluation feedback has been addressed, including all directorate reviews, in case I missed any of them",
       "createdAt": "2025-10-10T14:53:19Z",
-      "updatedAt": "2025-10-10T14:53:19Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-15T19:37:42Z",
+      "closedAt": "2025-11-15T19:37:42Z",
       "comments": []
     }
   ],
