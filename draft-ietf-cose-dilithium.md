@@ -261,7 +261,7 @@ The following completed registration actions are provided as described in {{RFC9
 #### ML-DSA-44
 
 * Name: ML-DSA-44
-* Value: TBD (requested assignment -48)
+* Value: -48
 * Description: CBOR Object Signing Algorithm for ML-DSA-44
 * Capabilities: `[kty]`
 * Change Controller: IETF
@@ -271,7 +271,7 @@ The following completed registration actions are provided as described in {{RFC9
 #### ML-DSA-65
 
 * Name: ML-DSA-65
-* Value: TBD (requested assignment -49)
+* Value: -49
 * Description: CBOR Object Signing Algorithm for ML-DSA-65
 * Capabilities: `[kty]`
 * Change Controller: IETF
@@ -282,7 +282,7 @@ The following completed registration actions are provided as described in {{RFC9
 #### ML-DSA-87
 
 * Name: ML-DSA-87
-* Value: TBD (requested assignment -50)
+* Value: -50
 * Description: CBOR Object Signing Algorithm for ML-DSA-87
 * Capabilities: `[kty]`
 * Change Controller: IETF
@@ -297,7 +297,7 @@ The following completed registration templates are provided as described in RFC 
 #### AKP
 
 * Name: AKP
-* Value: TBD (requested assignment 7)
+* Value: 7
 * Description: COSE Key Type for Algorithm Key Pairs
 * Capabilities: `[kty(7)]`
 * Change Controller: IETF
@@ -310,7 +310,7 @@ The following completed registration templates are provided as described in RFC 
 
 #### AKP Public Key
 
-* Key Type: TBD (requested assignment 7)
+* Key Type: 7
 * Name: pub
 * Label: -1
 * CBOR Type: bstr
@@ -319,7 +319,7 @@ The following completed registration templates are provided as described in RFC 
 
 #### AKP Private Key
 
-* Key Type: TBD (requested assignment 7)
+* Key Type: 7
 * Name: priv
 * Label: -2
 * CBOR Type: bstr
@@ -401,37 +401,41 @@ The following completed registrations are provided as described in {{RFC7517}} a
 
 # Examples
 
+In the figures that follow, line breaks within string values are inserted
+solely to keep each line within the 72-character limit and are not part of
+the encoded data.
+
 ## JOSE
 
 ~~~~~~~~~~
-{::include ./examples/jose/examples/ML_DSA_44.jose.json}
+{::include ./examples/jose/examples/ML_DSA_44.jose.wrapped.txt}
 ~~~~~~~~~~
 {: #jose_example_ML_DSA_44 title="ML_DSA_44"}
 
 ~~~~~~~~~~
-{::include ./examples/jose/examples/ML_DSA_65.jose.json}
+{::include ./examples/jose/examples/ML_DSA_65.jose.wrapped.txt}
 ~~~~~~~~~~
 {: #jose_example_ML_DSA_65 title="ML_DSA_65"}
 
 ~~~~~~~~~~
-{::include ./examples/jose/examples/ML_DSA_87.jose.json}
+{::include ./examples/jose/examples/ML_DSA_87.jose.wrapped.txt}
 ~~~~~~~~~~
 {: #jose_example_ML_DSA_87 title="ML_DSA_87"}
 
 ## COSE
 
 ~~~~~~~~~~
-{::include ./examples/cose/examples/ML_DSA_44.cose.json}
+{::include ./examples/cose/examples/ML_DSA_44.cose.wrapped.txt}
 ~~~~~~~~~~
 {: #cose_example_ML_DSA_44 title="ML_DSA_44"}
 
 ~~~~~~~~~~
-{::include ./examples/cose/examples/ML_DSA_65.cose.json}
+{::include ./examples/cose/examples/ML_DSA_65.cose.wrapped.txt}
 ~~~~~~~~~~
 {: #cose_example_ML_DSA_65 title="ML_DSA_65"}
 
 ~~~~~~~~~~
-{::include ./examples/cose/examples/ML_DSA_87.cose.json}
+{::include ./examples/cose/examples/ML_DSA_87.cose.wrapped.txt}
 ~~~~~~~~~~
 {: #cose_example_ML_DSA_87 title="ML_DSA_87"}
 
