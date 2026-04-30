@@ -401,37 +401,41 @@ The following completed registrations are provided as described in {{RFC7517}} a
 
 # Examples
 
+In the figures that follow, line breaks within string values are inserted
+solely to keep each line within the 72-character limit and are not part of
+the encoded data.
+
 ## JOSE
 
 ~~~~~~~~~~
-{::include ./examples/jose/examples/ML_DSA_44.jose.json}
+{::include ./examples/jose/examples/ML_DSA_44.jose.wrapped.txt}
 ~~~~~~~~~~
 {: #jose_example_ML_DSA_44 title="ML_DSA_44"}
 
 ~~~~~~~~~~
-{::include ./examples/jose/examples/ML_DSA_65.jose.json}
+{::include ./examples/jose/examples/ML_DSA_65.jose.wrapped.txt}
 ~~~~~~~~~~
 {: #jose_example_ML_DSA_65 title="ML_DSA_65"}
 
 ~~~~~~~~~~
-{::include ./examples/jose/examples/ML_DSA_87.jose.json}
+{::include ./examples/jose/examples/ML_DSA_87.jose.wrapped.txt}
 ~~~~~~~~~~
 {: #jose_example_ML_DSA_87 title="ML_DSA_87"}
 
 ## COSE
 
 ~~~~~~~~~~
-{::include ./examples/cose/examples/ML_DSA_44.cose.json}
+{::include ./examples/cose/examples/ML_DSA_44.cose.wrapped.txt}
 ~~~~~~~~~~
 {: #cose_example_ML_DSA_44 title="ML_DSA_44"}
 
 ~~~~~~~~~~
-{::include ./examples/cose/examples/ML_DSA_65.cose.json}
+{::include ./examples/cose/examples/ML_DSA_65.cose.wrapped.txt}
 ~~~~~~~~~~
 {: #cose_example_ML_DSA_65 title="ML_DSA_65"}
 
 ~~~~~~~~~~
-{::include ./examples/cose/examples/ML_DSA_87.cose.json}
+{::include ./examples/cose/examples/ML_DSA_87.cose.wrapped.txt}
 ~~~~~~~~~~
 {: #cose_example_ML_DSA_87 title="ML_DSA_87"}
 
